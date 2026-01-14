@@ -1,0 +1,5012 @@
+
+;; Function LCD_Fill (LCD_Fill, funcdef_no=30, decl_uid=4980, cgraph_uid=30, symbol_order=38)
+
+
+;; Generating RTL for gimple basic block 2
+
+;; Generating RTL for gimple basic block 3
+
+;; Generating RTL for gimple basic block 4
+
+;; Generating RTL for gimple basic block 5
+
+;; Generating RTL for gimple basic block 6
+
+;; Generating RTL for gimple basic block 7
+Edge 6->4 redirected to 10
+
+
+try_optimize_cfg iteration 1
+
+Merging block 3 into block 2...
+Merged blocks 2 and 3.
+Merged 2 and 3 without moving.
+Forwarding edge 8->9 to 10 failed.
+Merging block 10 into block 9...
+Merged blocks 9 and 10.
+Merged 9 and 10 without moving.
+
+
+try_optimize_cfg iteration 2
+
+
+
+;;
+;; Full RTL generated for this function:
+;;
+(note 1 0 9 NOTE_INSN_DELETED)
+(note 9 1 2 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn 2 9 3 2 (set (reg/v:SI 75 [ xsta ])
+        (reg:SI 10 a0 [ xsta ])) "../Hardware/LCD.c":12 -1
+     (nil))
+(insn 3 2 4 2 (set (reg/v:SI 76 [ ysta ])
+        (reg:SI 11 a1 [ ysta ])) "../Hardware/LCD.c":12 -1
+     (nil))
+(insn 4 3 5 2 (set (reg/v:SI 77 [ xend ])
+        (reg:SI 12 a2 [ xend ])) "../Hardware/LCD.c":12 -1
+     (nil))
+(insn 5 4 6 2 (set (reg/v:SI 78 [ yend ])
+        (reg:SI 13 a3 [ yend ])) "../Hardware/LCD.c":12 -1
+     (nil))
+(insn 6 5 7 2 (set (reg/v:SI 79 [ color ])
+        (reg:SI 14 a4 [ color ])) "../Hardware/LCD.c":12 -1
+     (nil))
+(note 7 6 11 2 NOTE_INSN_FUNCTION_BEG)
+(debug_insn 11 7 12 2 (debug_marker) "../Hardware/LCD.c":13 -1
+     (nil))
+(debug_insn 12 11 13 2 (debug_marker) "../Hardware/LCD.c":14 -1
+     (nil))
+(insn 13 12 14 2 (set (reg:SI 80)
+        (plus:SI (reg/v:SI 78 [ yend ])
+            (const_int -1 [0xffffffffffffffff]))) "../Hardware/LCD.c":14 -1
+     (nil))
+(insn 14 13 15 2 (set (reg:SI 81)
+        (zero_extend:SI (subreg:HI (reg:SI 80) 0))) "../Hardware/LCD.c":14 -1
+     (nil))
+(insn 15 14 16 2 (set (reg:SI 82)
+        (plus:SI (reg/v:SI 77 [ xend ])
+            (const_int -1 [0xffffffffffffffff]))) "../Hardware/LCD.c":14 -1
+     (nil))
+(insn 16 15 17 2 (set (reg:SI 83)
+        (zero_extend:SI (subreg:HI (reg:SI 82) 0))) "../Hardware/LCD.c":14 -1
+     (nil))
+(insn 17 16 18 2 (set (reg:SI 13 a3)
+        (reg:SI 81)) "../Hardware/LCD.c":14 -1
+     (nil))
+(insn 18 17 19 2 (set (reg:SI 12 a2)
+        (reg:SI 83)) "../Hardware/LCD.c":14 -1
+     (nil))
+(insn 19 18 20 2 (set (reg:SI 11 a1)
+        (reg/v:SI 76 [ ysta ])) "../Hardware/LCD.c":14 -1
+     (nil))
+(insn 20 19 21 2 (set (reg:SI 10 a0)
+        (reg/v:SI 75 [ xsta ])) "../Hardware/LCD.c":14 -1
+     (nil))
+(call_insn 21 20 22 2 (parallel [
+            (call (mem:SI (symbol_ref:SI ("LCD_Address_Set") [flags 0x41] <function_decl 06874f78 LCD_Address_Set>) [0 LCD_Address_Set S4 A32])
+                (const_int 0 [0]))
+            (clobber (reg:SI 1 ra))
+        ]) "../Hardware/LCD.c":14 -1
+     (expr_list:REG_CALL_DECL (symbol_ref:SI ("LCD_Address_Set") [flags 0x41] <function_decl 06874f78 LCD_Address_Set>)
+        (nil))
+    (expr_list:HI (use (reg:SI 10 a0))
+        (expr_list:HI (use (reg:SI 11 a1))
+            (expr_list:HI (use (reg:SI 12 a2))
+                (expr_list:HI (use (reg:SI 13 a3))
+                    (nil))))))
+(debug_insn 22 21 23 2 (debug_marker) "../Hardware/LCD.c":15 -1
+     (nil))
+(debug_insn 23 22 24 2 (var_location:HI i (subreg:HI (reg/v:SI 76 [ ysta ]) 0)) "../Hardware/LCD.c":15 -1
+     (nil))
+(jump_insn 24 23 25 2 (set (pc)
+        (label_ref 41)) "../Hardware/LCD.c":15 -1
+     (nil)
+ -> 41)
+(barrier 25 24 35)
+(code_label 35 25 26 4 3 (nil) [1 uses])
+(note 26 35 27 4 [bb 4] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 27 26 28 4 (debug_marker) "../Hardware/LCD.c":19 -1
+     (nil))
+(insn 28 27 29 4 (set (reg:SI 10 a0)
+        (reg/v:SI 79 [ color ])) "../Hardware/LCD.c":19 -1
+     (nil))
+(call_insn 29 28 30 4 (parallel [
+            (call (mem:SI (symbol_ref:SI ("LCD_WR_DATA") [flags 0x41] <function_decl 06874e88 LCD_WR_DATA>) [0 LCD_WR_DATA S4 A32])
+                (const_int 0 [0]))
+            (clobber (reg:SI 1 ra))
+        ]) "../Hardware/LCD.c":19 -1
+     (expr_list:REG_CALL_DECL (symbol_ref:SI ("LCD_WR_DATA") [flags 0x41] <function_decl 06874e88 LCD_WR_DATA>)
+        (nil))
+    (expr_list:HI (use (reg:SI 10 a0))
+        (nil)))
+(insn 30 29 31 4 (set (reg:SI 84)
+        (plus:SI (reg/v:SI 74 [ j ])
+            (const_int 1 [0x1]))) "../Hardware/LCD.c":17 -1
+     (nil))
+(insn 31 30 32 4 (set (reg/v:SI 74 [ j ])
+        (zero_extend:SI (subreg:HI (reg:SI 84) 0))) "../Hardware/LCD.c":17 -1
+     (nil))
+(debug_insn 32 31 49 4 (var_location:HI j (subreg:HI (reg/v:SI 74 [ j ]) 0)) "../Hardware/LCD.c":17 -1
+     (nil))
+(jump_insn 49 32 50 4 (set (pc)
+        (label_ref 44)) -1
+     (nil)
+ -> 44)
+(barrier 50 49 52)
+(code_label 52 50 51 5 5 (nil) [1 uses])
+(note 51 52 8 5 [bb 5] NOTE_INSN_BASIC_BLOCK)
+(insn 8 51 44 5 (set (reg/v:SI 74 [ j ])
+        (reg/v:SI 75 [ xsta ])) "../Hardware/LCD.c":17 -1
+     (nil))
+(code_label 44 8 33 6 4 (nil) [1 uses])
+(note 33 44 34 6 [bb 6] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 34 33 36 6 (var_location:HI j (subreg:HI (reg/v:SI 74 [ j ]) 0)) -1
+     (nil))
+(jump_insn 36 34 37 6 (set (pc)
+        (if_then_else (ltu (reg/v:SI 74 [ j ])
+                (reg/v:SI 77 [ xend ]))
+            (label_ref 35)
+            (pc))) "../Hardware/LCD.c":17 -1
+     (int_list:REG_BR_PROB 955630228 (nil))
+ -> 35)
+(note 37 36 38 7 [bb 7] NOTE_INSN_BASIC_BLOCK)
+(insn 38 37 39 7 (set (reg:SI 85)
+        (plus:SI (reg/v:SI 76 [ ysta ])
+            (const_int 1 [0x1]))) "../Hardware/LCD.c":15 -1
+     (nil))
+(insn 39 38 40 7 (set (reg/v:SI 76 [ ysta ])
+        (zero_extend:SI (subreg:HI (reg:SI 85) 0))) "../Hardware/LCD.c":15 -1
+     (nil))
+(debug_insn 40 39 41 7 (var_location:HI i (subreg:HI (reg/v:SI 76 [ ysta ]) 0)) "../Hardware/LCD.c":15 -1
+     (nil))
+(code_label 41 40 42 8 2 (nil) [1 uses])
+(note 42 41 43 8 [bb 8] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 43 42 45 8 (var_location:HI i (subreg:HI (reg/v:SI 76 [ ysta ]) 0)) -1
+     (nil))
+(jump_insn 45 43 46 8 (set (pc)
+        (if_then_else (ltu (reg/v:SI 76 [ ysta ])
+                (reg/v:SI 78 [ yend ]))
+            (label_ref:SI 52)
+            (pc))) "../Hardware/LCD.c":15 180 {*branchsi}
+     (int_list:REG_BR_PROB 955630228 (nil))
+ -> 52)
+(note 46 45 0 9 [bb 9] NOTE_INSN_BASIC_BLOCK)
+
+;; Function LCD_DrawPoint (LCD_DrawPoint, funcdef_no=31, decl_uid=4984, cgraph_uid=31, symbol_order=39)
+
+
+;; Generating RTL for gimple basic block 2
+
+
+try_optimize_cfg iteration 1
+
+Merging block 3 into block 2...
+Merged blocks 2 and 3.
+Merged 2 and 3 without moving.
+Merging block 4 into block 2...
+Merged blocks 2 and 4.
+Merged 2 and 4 without moving.
+
+
+try_optimize_cfg iteration 2
+
+
+
+;;
+;; Full RTL generated for this function:
+;;
+(note 1 0 6 NOTE_INSN_DELETED)
+(note 6 1 2 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn 2 6 3 2 (set (reg/v:SI 72 [ x ])
+        (reg:SI 10 a0 [ x ])) "../Hardware/LCD.c":31 -1
+     (nil))
+(insn 3 2 4 2 (set (reg/v:SI 73 [ y ])
+        (reg:SI 11 a1 [ y ])) "../Hardware/LCD.c":31 -1
+     (nil))
+(insn 4 3 5 2 (set (reg/v:SI 74 [ color ])
+        (reg:SI 12 a2 [ color ])) "../Hardware/LCD.c":31 -1
+     (nil))
+(note 5 4 8 2 NOTE_INSN_FUNCTION_BEG)
+(debug_insn 8 5 9 2 (debug_marker) "../Hardware/LCD.c":32 -1
+     (nil))
+(insn 9 8 10 2 (set (reg:SI 13 a3)
+        (reg/v:SI 73 [ y ])) "../Hardware/LCD.c":32 -1
+     (nil))
+(insn 10 9 11 2 (set (reg:SI 12 a2)
+        (reg/v:SI 72 [ x ])) "../Hardware/LCD.c":32 -1
+     (nil))
+(insn 11 10 12 2 (set (reg:SI 11 a1)
+        (reg/v:SI 73 [ y ])) "../Hardware/LCD.c":32 -1
+     (nil))
+(insn 12 11 13 2 (set (reg:SI 10 a0)
+        (reg/v:SI 72 [ x ])) "../Hardware/LCD.c":32 -1
+     (nil))
+(call_insn 13 12 14 2 (parallel [
+            (call (mem:SI (symbol_ref:SI ("LCD_Address_Set") [flags 0x41] <function_decl 06874f78 LCD_Address_Set>) [0 LCD_Address_Set S4 A32])
+                (const_int 0 [0]))
+            (clobber (reg:SI 1 ra))
+        ]) "../Hardware/LCD.c":32 -1
+     (expr_list:REG_CALL_DECL (symbol_ref:SI ("LCD_Address_Set") [flags 0x41] <function_decl 06874f78 LCD_Address_Set>)
+        (nil))
+    (expr_list:HI (use (reg:SI 10 a0))
+        (expr_list:HI (use (reg:SI 11 a1))
+            (expr_list:HI (use (reg:SI 12 a2))
+                (expr_list:HI (use (reg:SI 13 a3))
+                    (nil))))))
+(debug_insn 14 13 15 2 (debug_marker) "../Hardware/LCD.c":33 -1
+     (nil))
+(insn 15 14 16 2 (set (reg:SI 10 a0)
+        (reg/v:SI 74 [ color ])) "../Hardware/LCD.c":33 -1
+     (nil))
+(call_insn 16 15 0 2 (parallel [
+            (call (mem:SI (symbol_ref:SI ("LCD_WR_DATA") [flags 0x41] <function_decl 06874e88 LCD_WR_DATA>) [0 LCD_WR_DATA S4 A32])
+                (const_int 0 [0]))
+            (clobber (reg:SI 1 ra))
+        ]) "../Hardware/LCD.c":33 -1
+     (expr_list:REG_CALL_DECL (symbol_ref:SI ("LCD_WR_DATA") [flags 0x41] <function_decl 06874e88 LCD_WR_DATA>)
+        (nil))
+    (expr_list:HI (use (reg:SI 10 a0))
+        (nil)))
+
+;; Function LCD_DrawLine (LCD_DrawLine, funcdef_no=32, decl_uid=4990, cgraph_uid=32, symbol_order=40)
+
+
+;; Generating RTL for gimple basic block 2
+
+;; Generating RTL for gimple basic block 3
+
+;; Generating RTL for gimple basic block 4
+
+;; Generating RTL for gimple basic block 5
+
+;; Generating RTL for gimple basic block 6
+
+;; Generating RTL for gimple basic block 7
+
+;; Generating RTL for gimple basic block 8
+
+;; Generating RTL for gimple basic block 9
+
+;; Generating RTL for gimple basic block 10
+
+;; Generating RTL for gimple basic block 11
+
+;; Generating RTL for gimple basic block 12
+
+;; Generating RTL for gimple basic block 13
+
+;; Generating RTL for gimple basic block 14
+
+;; Generating RTL for gimple basic block 15
+Edge 2->5 redirected to 18
+Edge 3->5 redirected to 19
+Edge 5->8 redirected to 20
+Edge 6->8 redirected to 21
+Predictions for insn 70 bb 8
+  no prediction heuristics: 50.0%  exec 118111601 (estimated locally) hit 236223201 (estimated locally) (200.0%)
+  combined heuristics: 50.0%  exec 118111601 (estimated locally) hit 236223201 (estimated locally) (200.0%)
+
+
+try_optimize_cfg iteration 1
+
+Merging block 3 into block 2...
+Merged blocks 2 and 3.
+Merged 2 and 3 without moving.
+Forwarding edge 21->22 to 23 failed.
+Merging block 23 into block 22...
+Merged blocks 22 and 23.
+Merged 22 and 23 without moving.
+
+
+try_optimize_cfg iteration 2
+
+
+
+;;
+;; Full RTL generated for this function:
+;;
+(note 1 0 17 NOTE_INSN_DELETED)
+(note 17 1 2 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn 2 17 3 2 (set (reg/v:SI 87 [ x1 ])
+        (reg:SI 10 a0 [ x1 ])) "../Hardware/LCD.c":44 -1
+     (nil))
+(insn 3 2 4 2 (set (reg/v:SI 88 [ y1 ])
+        (reg:SI 11 a1 [ y1 ])) "../Hardware/LCD.c":44 -1
+     (nil))
+(insn 4 3 5 2 (set (reg/v:SI 89 [ x2 ])
+        (reg:SI 12 a2 [ x2 ])) "../Hardware/LCD.c":44 -1
+     (nil))
+(insn 5 4 6 2 (set (reg/v:SI 90 [ y2 ])
+        (reg:SI 13 a3 [ y2 ])) "../Hardware/LCD.c":44 -1
+     (nil))
+(insn 6 5 7 2 (set (reg/v:SI 91 [ color ])
+        (reg:SI 14 a4 [ color ])) "../Hardware/LCD.c":44 -1
+     (nil))
+(note 7 6 19 2 NOTE_INSN_FUNCTION_BEG)
+(debug_insn 19 7 20 2 (debug_marker) "../Hardware/LCD.c":45 -1
+     (nil))
+(debug_insn 20 19 21 2 (debug_marker) "../Hardware/LCD.c":46 -1
+     (nil))
+(debug_insn 21 20 22 2 (var_location:SI xerr (const_int 0 [0])) "../Hardware/LCD.c":46 -1
+     (nil))
+(debug_insn 22 21 23 2 (var_location:SI yerr (const_int 0 [0])) "../Hardware/LCD.c":46 -1
+     (nil))
+(debug_insn 23 22 24 2 (debug_marker) "../Hardware/LCD.c":47 -1
+     (nil))
+(debug_insn 24 23 25 2 (debug_marker) "../Hardware/LCD.c":48 -1
+     (nil))
+(insn 25 24 26 2 (set (reg:SI 72 [ _1 ])
+        (reg/v:SI 89 [ x2 ])) "../Hardware/LCD.c":48 -1
+     (nil))
+(insn 26 25 27 2 (set (reg/v:SI 84 [ uRow ])
+        (reg/v:SI 87 [ x1 ])) "../Hardware/LCD.c":48 -1
+     (nil))
+(insn 27 26 28 2 (set (reg/v:SI 80 [ delta_x ])
+        (minus:SI (reg:SI 72 [ _1 ])
+            (reg/v:SI 84 [ uRow ]))) "../Hardware/LCD.c":48 -1
+     (nil))
+(debug_insn 28 27 29 2 (var_location:SI delta_x (reg/v:SI 80 [ delta_x ])) "../Hardware/LCD.c":48 -1
+     (nil))
+(debug_insn 29 28 30 2 (debug_marker) "../Hardware/LCD.c":49 -1
+     (nil))
+(insn 30 29 31 2 (set (reg:SI 73 [ _3 ])
+        (reg/v:SI 90 [ y2 ])) "../Hardware/LCD.c":49 -1
+     (nil))
+(insn 31 30 32 2 (set (reg/v:SI 85 [ uCol ])
+        (reg/v:SI 88 [ y1 ])) "../Hardware/LCD.c":49 -1
+     (nil))
+(insn 32 31 33 2 (set (reg/v:SI 81 [ delta_y ])
+        (minus:SI (reg:SI 73 [ _3 ])
+            (reg/v:SI 85 [ uCol ]))) "../Hardware/LCD.c":49 -1
+     (nil))
+(debug_insn 33 32 34 2 (var_location:SI delta_y (reg/v:SI 81 [ delta_y ])) "../Hardware/LCD.c":49 -1
+     (nil))
+(debug_insn 34 33 35 2 (debug_marker) "../Hardware/LCD.c":50 -1
+     (nil))
+(debug_insn 35 34 36 2 (var_location:SI uRow (reg/v:SI 84 [ uRow ])) "../Hardware/LCD.c":50 -1
+     (nil))
+(debug_insn 36 35 37 2 (debug_marker) "../Hardware/LCD.c":51 -1
+     (nil))
+(debug_insn 37 36 38 2 (var_location:SI uCol (reg/v:SI 85 [ uCol ])) "../Hardware/LCD.c":51 -1
+     (nil))
+(debug_insn 38 37 39 2 (debug_marker) "../Hardware/LCD.c":52 -1
+     (nil))
+(jump_insn 39 38 40 2 (set (pc)
+        (if_then_else (gt (reg/v:SI 80 [ delta_x ])
+                (const_int 0 [0]))
+            (label_ref:SI 136)
+            (pc))) "../Hardware/LCD.c":52 180 {*branchsi}
+     (int_list:REG_BR_PROB 633507684 (nil))
+ -> 136)
+(note 40 39 41 4 [bb 4] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 41 40 42 4 (debug_marker) "../Hardware/LCD.c":53 -1
+     (nil))
+(jump_insn 42 41 43 4 (set (pc)
+        (if_then_else (eq (reg/v:SI 80 [ delta_x ])
+                (const_int 0 [0]))
+            (label_ref:SI 140)
+            (pc))) "../Hardware/LCD.c":53 180 {*branchsi}
+     (int_list:REG_BR_PROB 536870916 (nil))
+ -> 140)
+(note 43 42 44 5 [bb 5] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 44 43 45 5 (debug_marker) "../Hardware/LCD.c":54 -1
+     (nil))
+(debug_insn 45 44 46 5 (var_location:SI incx (const_int -1 [0xffffffffffffffff])) "../Hardware/LCD.c":54 -1
+     (nil))
+(debug_insn 46 45 47 5 (debug_marker) "../Hardware/LCD.c":54 -1
+     (nil))
+(insn 47 46 48 5 (set (reg/v:SI 80 [ delta_x ])
+        (minus:SI (reg/v:SI 84 [ uRow ])
+            (reg:SI 72 [ _1 ]))) "../Hardware/LCD.c":54 -1
+     (nil))
+(debug_insn 48 47 8 5 (var_location:SI delta_x (reg/v:SI 80 [ delta_x ])) "../Hardware/LCD.c":54 -1
+     (nil))
+(insn 8 48 133 5 (set (reg/v:SI 82 [ incx ])
+        (const_int -1 [0xffffffffffffffff])) "../Hardware/LCD.c":54 -1
+     (nil))
+(jump_insn 133 8 134 5 (set (pc)
+        (label_ref 49)) -1
+     (nil)
+ -> 49)
+(barrier 134 133 136)
+(code_label 136 134 135 6 17 (nil) [1 uses])
+(note 135 136 9 6 [bb 6] NOTE_INSN_BASIC_BLOCK)
+(insn 9 135 137 6 (set (reg/v:SI 82 [ incx ])
+        (const_int 1 [0x1])) "../Hardware/LCD.c":52 -1
+     (nil))
+(jump_insn 137 9 138 6 (set (pc)
+        (label_ref 49)) -1
+     (nil)
+ -> 49)
+(barrier 138 137 140)
+(code_label 140 138 139 7 18 (nil) [1 uses])
+(note 139 140 10 7 [bb 7] NOTE_INSN_BASIC_BLOCK)
+(insn 10 139 49 7 (set (reg/v:SI 82 [ incx ])
+        (reg/v:SI 80 [ delta_x ])) "../Hardware/LCD.c":53 -1
+     (nil))
+(code_label 49 10 50 8 10 (nil) [2 uses])
+(note 50 49 51 8 [bb 8] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 51 50 52 8 (var_location:SI incx (reg/v:SI 82 [ incx ])) -1
+     (nil))
+(debug_insn 52 51 53 8 (var_location:SI delta_x (reg/v:SI 80 [ delta_x ])) -1
+     (nil))
+(debug_insn 53 52 54 8 (debug_marker) "../Hardware/LCD.c":55 -1
+     (nil))
+(jump_insn 54 53 55 8 (set (pc)
+        (if_then_else (gt (reg/v:SI 81 [ delta_y ])
+                (const_int 0 [0]))
+            (label_ref:SI 144)
+            (pc))) "../Hardware/LCD.c":55 180 {*branchsi}
+     (int_list:REG_BR_PROB 633507684 (nil))
+ -> 144)
+(note 55 54 56 9 [bb 9] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 56 55 57 9 (debug_marker) "../Hardware/LCD.c":56 -1
+     (nil))
+(jump_insn 57 56 58 9 (set (pc)
+        (if_then_else (eq (reg/v:SI 81 [ delta_y ])
+                (const_int 0 [0]))
+            (label_ref:SI 148)
+            (pc))) "../Hardware/LCD.c":56 180 {*branchsi}
+     (int_list:REG_BR_PROB 536870916 (nil))
+ -> 148)
+(note 58 57 59 10 [bb 10] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 59 58 60 10 (debug_marker) "../Hardware/LCD.c":57 -1
+     (nil))
+(debug_insn 60 59 61 10 (var_location:SI incy (const_int -1 [0xffffffffffffffff])) "../Hardware/LCD.c":57 -1
+     (nil))
+(debug_insn 61 60 62 10 (debug_marker) "../Hardware/LCD.c":57 -1
+     (nil))
+(insn 62 61 63 10 (set (reg/v:SI 81 [ delta_y ])
+        (minus:SI (reg/v:SI 85 [ uCol ])
+            (reg:SI 73 [ _3 ]))) "../Hardware/LCD.c":57 -1
+     (nil))
+(debug_insn 63 62 11 10 (var_location:SI delta_y (reg/v:SI 81 [ delta_y ])) "../Hardware/LCD.c":57 -1
+     (nil))
+(insn 11 63 141 10 (set (reg/v:SI 83 [ incy ])
+        (const_int -1 [0xffffffffffffffff])) "../Hardware/LCD.c":57 -1
+     (nil))
+(jump_insn 141 11 142 10 (set (pc)
+        (label_ref 64)) -1
+     (nil)
+ -> 64)
+(barrier 142 141 144)
+(code_label 144 142 143 11 19 (nil) [1 uses])
+(note 143 144 12 11 [bb 11] NOTE_INSN_BASIC_BLOCK)
+(insn 12 143 145 11 (set (reg/v:SI 83 [ incy ])
+        (const_int 1 [0x1])) "../Hardware/LCD.c":55 -1
+     (nil))
+(jump_insn 145 12 146 11 (set (pc)
+        (label_ref 64)) -1
+     (nil)
+ -> 64)
+(barrier 146 145 148)
+(code_label 148 146 147 12 20 (nil) [1 uses])
+(note 147 148 13 12 [bb 12] NOTE_INSN_BASIC_BLOCK)
+(insn 13 147 64 12 (set (reg/v:SI 83 [ incy ])
+        (reg/v:SI 81 [ delta_y ])) "../Hardware/LCD.c":56 -1
+     (nil))
+(code_label 64 13 65 13 11 (nil) [2 uses])
+(note 65 64 66 13 [bb 13] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 66 65 67 13 (var_location:SI incy (reg/v:SI 83 [ incy ])) -1
+     (nil))
+(debug_insn 67 66 68 13 (var_location:SI delta_y (reg/v:SI 81 [ delta_y ])) -1
+     (nil))
+(debug_insn 68 67 69 13 (debug_marker) "../Hardware/LCD.c":58 -1
+     (nil))
+(insn 69 68 70 13 (set (reg/v:SI 86 [ distance ])
+        (reg/v:SI 80 [ delta_x ])) -1
+     (nil))
+(jump_insn 70 69 149 13 (set (pc)
+        (if_then_else (ge (reg/v:SI 86 [ distance ])
+                (reg/v:SI 81 [ delta_y ]))
+            (label_ref 72)
+            (pc))) -1
+     (int_list:REG_BR_PROB 536870916 (nil))
+ -> 72)
+(note 149 70 71 14 [bb 14] NOTE_INSN_BASIC_BLOCK)
+(insn 71 149 72 14 (set (reg/v:SI 86 [ distance ])
+        (reg/v:SI 81 [ delta_y ])) -1
+     (nil))
+(code_label 72 71 150 15 12 (nil) [1 uses])
+(note 150 72 73 15 [bb 15] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 73 150 74 15 (var_location:SI distance (reg/v:SI 86 [ distance ])) -1
+     (nil))
+(debug_insn 74 73 75 15 (debug_marker) "../Hardware/LCD.c":60 -1
+     (nil))
+(debug_insn 75 74 14 15 (var_location:HI t (const_int 0 [0])) "../Hardware/LCD.c":60 -1
+     (nil))
+(insn 14 75 15 15 (set (reg/v:SI 79 [ yerr ])
+        (const_int 0 [0])) "../Hardware/LCD.c":46 -1
+     (nil))
+(insn 15 14 16 15 (set (reg/v:SI 78 [ xerr ])
+        (const_int 0 [0])) "../Hardware/LCD.c":46 -1
+     (nil))
+(insn 16 15 76 15 (set (reg/v:SI 77 [ t ])
+        (const_int 0 [0])) "../Hardware/LCD.c":60 -1
+     (nil))
+(jump_insn 76 16 77 15 (set (pc)
+        (label_ref 121)) "../Hardware/LCD.c":60 -1
+     (nil)
+ -> 121)
+(barrier 77 76 128)
+(code_label 128 77 78 16 16 (nil) [1 uses])
+(note 78 128 79 16 [bb 16] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 79 78 80 16 (debug_marker) "../Hardware/LCD.c":62 -1
+     (nil))
+(insn 80 79 81 16 (set (reg:SI 92)
+        (zero_extend:SI (subreg:HI (reg/v:SI 85 [ uCol ]) 0))) "../Hardware/LCD.c":62 -1
+     (nil))
+(insn 81 80 82 16 (set (reg:SI 93)
+        (zero_extend:SI (subreg:HI (reg/v:SI 84 [ uRow ]) 0))) "../Hardware/LCD.c":62 -1
+     (nil))
+(insn 82 81 83 16 (set (reg:SI 12 a2)
+        (reg/v:SI 91 [ color ])) "../Hardware/LCD.c":62 -1
+     (nil))
+(insn 83 82 84 16 (set (reg:SI 11 a1)
+        (reg:SI 92)) "../Hardware/LCD.c":62 -1
+     (nil))
+(insn 84 83 85 16 (set (reg:SI 10 a0)
+        (reg:SI 93)) "../Hardware/LCD.c":62 -1
+     (nil))
+(call_insn 85 84 86 16 (parallel [
+            (call (mem:SI (symbol_ref:SI ("LCD_DrawPoint") [flags 0x3] <function_decl 066890f0 LCD_DrawPoint>) [0 LCD_DrawPoint S4 A32])
+                (const_int 0 [0]))
+            (clobber (reg:SI 1 ra))
+        ]) "../Hardware/LCD.c":62 -1
+     (expr_list:REG_CALL_DECL (symbol_ref:SI ("LCD_DrawPoint") [flags 0x3] <function_decl 066890f0 LCD_DrawPoint>)
+        (expr_list:REG_EH_REGION (const_int 0 [0])
+            (nil)))
+    (expr_list:HI (use (reg:SI 10 a0))
+        (expr_list:HI (use (reg:SI 11 a1))
+            (expr_list:HI (use (reg:SI 12 a2))
+                (nil)))))
+(debug_insn 86 85 87 16 (debug_marker) "../Hardware/LCD.c":63 -1
+     (nil))
+(insn 87 86 88 16 (set (reg/v:SI 78 [ xerr ])
+        (plus:SI (reg/v:SI 78 [ xerr ])
+            (reg/v:SI 80 [ delta_x ]))) "../Hardware/LCD.c":63 -1
+     (nil))
+(debug_insn 88 87 89 16 (var_location:SI xerr (reg/v:SI 78 [ xerr ])) "../Hardware/LCD.c":63 -1
+     (nil))
+(debug_insn 89 88 90 16 (debug_marker) "../Hardware/LCD.c":64 -1
+     (nil))
+(insn 90 89 91 16 (set (reg/v:SI 79 [ yerr ])
+        (plus:SI (reg/v:SI 79 [ yerr ])
+            (reg/v:SI 81 [ delta_y ]))) "../Hardware/LCD.c":64 -1
+     (nil))
+(debug_insn 91 90 92 16 (var_location:SI yerr (reg/v:SI 79 [ yerr ])) "../Hardware/LCD.c":64 -1
+     (nil))
+(debug_insn 92 91 93 16 (debug_marker) "../Hardware/LCD.c":65 -1
+     (nil))
+(jump_insn 93 92 94 16 (set (pc)
+        (if_then_else (le (reg/v:SI 78 [ xerr ])
+                (reg/v:SI 86 [ distance ]))
+            (label_ref 101)
+            (pc))) "../Hardware/LCD.c":65 -1
+     (int_list:REG_BR_PROB 536870916 (nil))
+ -> 101)
+(note 94 93 95 17 [bb 17] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 95 94 96 17 (debug_marker) "../Hardware/LCD.c":67 -1
+     (nil))
+(insn 96 95 97 17 (set (reg/v:SI 78 [ xerr ])
+        (minus:SI (reg/v:SI 78 [ xerr ])
+            (reg/v:SI 86 [ distance ]))) "../Hardware/LCD.c":67 -1
+     (nil))
+(debug_insn 97 96 98 17 (var_location:SI xerr (reg/v:SI 78 [ xerr ])) "../Hardware/LCD.c":67 -1
+     (nil))
+(debug_insn 98 97 99 17 (debug_marker) "../Hardware/LCD.c":68 -1
+     (nil))
+(insn 99 98 100 17 (set (reg/v:SI 84 [ uRow ])
+        (plus:SI (reg/v:SI 84 [ uRow ])
+            (reg/v:SI 82 [ incx ]))) "../Hardware/LCD.c":68 -1
+     (nil))
+(debug_insn 100 99 101 17 (var_location:SI uRow (reg/v:SI 84 [ uRow ])) "../Hardware/LCD.c":68 -1
+     (nil))
+(code_label 101 100 102 18 14 (nil) [1 uses])
+(note 102 101 103 18 [bb 18] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 103 102 104 18 (var_location:SI uRow (reg/v:SI 84 [ uRow ])) -1
+     (nil))
+(debug_insn 104 103 105 18 (var_location:SI xerr (reg/v:SI 78 [ xerr ])) -1
+     (nil))
+(debug_insn 105 104 106 18 (debug_marker) "../Hardware/LCD.c":70 -1
+     (nil))
+(jump_insn 106 105 107 18 (set (pc)
+        (if_then_else (le (reg/v:SI 79 [ yerr ])
+                (reg/v:SI 86 [ distance ]))
+            (label_ref 114)
+            (pc))) "../Hardware/LCD.c":70 -1
+     (int_list:REG_BR_PROB 536870916 (nil))
+ -> 114)
+(note 107 106 108 19 [bb 19] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 108 107 109 19 (debug_marker) "../Hardware/LCD.c":72 -1
+     (nil))
+(insn 109 108 110 19 (set (reg/v:SI 79 [ yerr ])
+        (minus:SI (reg/v:SI 79 [ yerr ])
+            (reg/v:SI 86 [ distance ]))) "../Hardware/LCD.c":72 -1
+     (nil))
+(debug_insn 110 109 111 19 (var_location:SI yerr (reg/v:SI 79 [ yerr ])) "../Hardware/LCD.c":72 -1
+     (nil))
+(debug_insn 111 110 112 19 (debug_marker) "../Hardware/LCD.c":73 -1
+     (nil))
+(insn 112 111 113 19 (set (reg/v:SI 85 [ uCol ])
+        (plus:SI (reg/v:SI 85 [ uCol ])
+            (reg/v:SI 83 [ incy ]))) "../Hardware/LCD.c":73 -1
+     (nil))
+(debug_insn 113 112 114 19 (var_location:SI uCol (reg/v:SI 85 [ uCol ])) "../Hardware/LCD.c":73 -1
+     (nil))
+(code_label 114 113 115 20 15 (nil) [1 uses])
+(note 115 114 116 20 [bb 20] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 116 115 117 20 (var_location:SI uCol (reg/v:SI 85 [ uCol ])) -1
+     (nil))
+(debug_insn 117 116 118 20 (var_location:SI yerr (reg/v:SI 79 [ yerr ])) -1
+     (nil))
+(insn 118 117 119 20 (set (reg:SI 94)
+        (plus:SI (reg/v:SI 77 [ t ])
+            (const_int 1 [0x1]))) "../Hardware/LCD.c":60 -1
+     (nil))
+(insn 119 118 120 20 (set (reg/v:SI 77 [ t ])
+        (zero_extend:SI (subreg:HI (reg:SI 94) 0))) "../Hardware/LCD.c":60 -1
+     (nil))
+(debug_insn 120 119 121 20 (var_location:HI t (subreg:HI (reg/v:SI 77 [ t ]) 0)) "../Hardware/LCD.c":60 -1
+     (nil))
+(code_label 121 120 122 21 13 (nil) [1 uses])
+(note 122 121 123 21 [bb 21] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 123 122 124 21 (var_location:SI uCol (reg/v:SI 85 [ uCol ])) -1
+     (nil))
+(debug_insn 124 123 125 21 (var_location:SI uRow (reg/v:SI 84 [ uRow ])) -1
+     (nil))
+(debug_insn 125 124 126 21 (var_location:SI yerr (reg/v:SI 79 [ yerr ])) -1
+     (nil))
+(debug_insn 126 125 127 21 (var_location:SI xerr (reg/v:SI 78 [ xerr ])) -1
+     (nil))
+(debug_insn 127 126 129 21 (var_location:HI t (subreg:HI (reg/v:SI 77 [ t ]) 0)) -1
+     (nil))
+(jump_insn 129 127 130 21 (set (pc)
+        (if_then_else (le (reg/v:SI 77 [ t ])
+                (reg/v:SI 86 [ distance ]))
+            (label_ref 128)
+            (pc))) "../Hardware/LCD.c":60 -1
+     (int_list:REG_BR_PROB 955630228 (nil))
+ -> 128)
+(note 130 129 0 22 [bb 22] NOTE_INSN_BASIC_BLOCK)
+
+;; Function LCD_DrawRectangle (LCD_DrawRectangle, funcdef_no=33, decl_uid=4996, cgraph_uid=33, symbol_order=41)
+
+
+;; Generating RTL for gimple basic block 2
+
+
+try_optimize_cfg iteration 1
+
+Merging block 3 into block 2...
+Merged blocks 2 and 3.
+Merged 2 and 3 without moving.
+Merging block 4 into block 2...
+Merged blocks 2 and 4.
+Merged 2 and 4 without moving.
+
+
+try_optimize_cfg iteration 2
+
+
+
+;;
+;; Full RTL generated for this function:
+;;
+(note 1 0 8 NOTE_INSN_DELETED)
+(note 8 1 2 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn 2 8 3 2 (set (reg/v:SI 72 [ x1 ])
+        (reg:SI 10 a0 [ x1 ])) "../Hardware/LCD.c":86 -1
+     (nil))
+(insn 3 2 4 2 (set (reg/v:SI 73 [ y1 ])
+        (reg:SI 11 a1 [ y1 ])) "../Hardware/LCD.c":86 -1
+     (nil))
+(insn 4 3 5 2 (set (reg/v:SI 74 [ x2 ])
+        (reg:SI 12 a2 [ x2 ])) "../Hardware/LCD.c":86 -1
+     (nil))
+(insn 5 4 6 2 (set (reg/v:SI 75 [ y2 ])
+        (reg:SI 13 a3 [ y2 ])) "../Hardware/LCD.c":86 -1
+     (nil))
+(insn 6 5 7 2 (set (reg/v:SI 76 [ color ])
+        (reg:SI 14 a4 [ color ])) "../Hardware/LCD.c":86 -1
+     (nil))
+(note 7 6 10 2 NOTE_INSN_FUNCTION_BEG)
+(debug_insn 10 7 11 2 (debug_marker) "../Hardware/LCD.c":87 -1
+     (nil))
+(insn 11 10 12 2 (set (reg:SI 14 a4)
+        (reg/v:SI 76 [ color ])) "../Hardware/LCD.c":87 -1
+     (nil))
+(insn 12 11 13 2 (set (reg:SI 13 a3)
+        (reg/v:SI 73 [ y1 ])) "../Hardware/LCD.c":87 -1
+     (nil))
+(insn 13 12 14 2 (set (reg:SI 12 a2)
+        (reg/v:SI 74 [ x2 ])) "../Hardware/LCD.c":87 -1
+     (nil))
+(insn 14 13 15 2 (set (reg:SI 11 a1)
+        (reg/v:SI 73 [ y1 ])) "../Hardware/LCD.c":87 -1
+     (nil))
+(insn 15 14 16 2 (set (reg:SI 10 a0)
+        (reg/v:SI 72 [ x1 ])) "../Hardware/LCD.c":87 -1
+     (nil))
+(call_insn 16 15 17 2 (parallel [
+            (call (mem:SI (symbol_ref:SI ("LCD_DrawLine") [flags 0x3] <function_decl 06689168 LCD_DrawLine>) [0 LCD_DrawLine S4 A32])
+                (const_int 0 [0]))
+            (clobber (reg:SI 1 ra))
+        ]) "../Hardware/LCD.c":87 -1
+     (expr_list:REG_CALL_DECL (symbol_ref:SI ("LCD_DrawLine") [flags 0x3] <function_decl 06689168 LCD_DrawLine>)
+        (expr_list:REG_EH_REGION (const_int 0 [0])
+            (nil)))
+    (expr_list:HI (use (reg:SI 10 a0))
+        (expr_list:HI (use (reg:SI 11 a1))
+            (expr_list:HI (use (reg:SI 12 a2))
+                (expr_list:HI (use (reg:SI 13 a3))
+                    (expr_list:HI (use (reg:SI 14 a4))
+                        (nil)))))))
+(debug_insn 17 16 18 2 (debug_marker) "../Hardware/LCD.c":88 -1
+     (nil))
+(insn 18 17 19 2 (set (reg:SI 14 a4)
+        (reg/v:SI 76 [ color ])) "../Hardware/LCD.c":88 -1
+     (nil))
+(insn 19 18 20 2 (set (reg:SI 13 a3)
+        (reg/v:SI 75 [ y2 ])) "../Hardware/LCD.c":88 -1
+     (nil))
+(insn 20 19 21 2 (set (reg:SI 12 a2)
+        (reg/v:SI 72 [ x1 ])) "../Hardware/LCD.c":88 -1
+     (nil))
+(insn 21 20 22 2 (set (reg:SI 11 a1)
+        (reg/v:SI 73 [ y1 ])) "../Hardware/LCD.c":88 -1
+     (nil))
+(insn 22 21 23 2 (set (reg:SI 10 a0)
+        (reg/v:SI 72 [ x1 ])) "../Hardware/LCD.c":88 -1
+     (nil))
+(call_insn 23 22 24 2 (parallel [
+            (call (mem:SI (symbol_ref:SI ("LCD_DrawLine") [flags 0x3] <function_decl 06689168 LCD_DrawLine>) [0 LCD_DrawLine S4 A32])
+                (const_int 0 [0]))
+            (clobber (reg:SI 1 ra))
+        ]) "../Hardware/LCD.c":88 -1
+     (expr_list:REG_CALL_DECL (symbol_ref:SI ("LCD_DrawLine") [flags 0x3] <function_decl 06689168 LCD_DrawLine>)
+        (expr_list:REG_EH_REGION (const_int 0 [0])
+            (nil)))
+    (expr_list:HI (use (reg:SI 10 a0))
+        (expr_list:HI (use (reg:SI 11 a1))
+            (expr_list:HI (use (reg:SI 12 a2))
+                (expr_list:HI (use (reg:SI 13 a3))
+                    (expr_list:HI (use (reg:SI 14 a4))
+                        (nil)))))))
+(debug_insn 24 23 25 2 (debug_marker) "../Hardware/LCD.c":89 -1
+     (nil))
+(insn 25 24 26 2 (set (reg:SI 14 a4)
+        (reg/v:SI 76 [ color ])) "../Hardware/LCD.c":89 -1
+     (nil))
+(insn 26 25 27 2 (set (reg:SI 13 a3)
+        (reg/v:SI 75 [ y2 ])) "../Hardware/LCD.c":89 -1
+     (nil))
+(insn 27 26 28 2 (set (reg:SI 12 a2)
+        (reg/v:SI 74 [ x2 ])) "../Hardware/LCD.c":89 -1
+     (nil))
+(insn 28 27 29 2 (set (reg:SI 11 a1)
+        (reg/v:SI 75 [ y2 ])) "../Hardware/LCD.c":89 -1
+     (nil))
+(insn 29 28 30 2 (set (reg:SI 10 a0)
+        (reg/v:SI 72 [ x1 ])) "../Hardware/LCD.c":89 -1
+     (nil))
+(call_insn 30 29 31 2 (parallel [
+            (call (mem:SI (symbol_ref:SI ("LCD_DrawLine") [flags 0x3] <function_decl 06689168 LCD_DrawLine>) [0 LCD_DrawLine S4 A32])
+                (const_int 0 [0]))
+            (clobber (reg:SI 1 ra))
+        ]) "../Hardware/LCD.c":89 -1
+     (expr_list:REG_CALL_DECL (symbol_ref:SI ("LCD_DrawLine") [flags 0x3] <function_decl 06689168 LCD_DrawLine>)
+        (expr_list:REG_EH_REGION (const_int 0 [0])
+            (nil)))
+    (expr_list:HI (use (reg:SI 10 a0))
+        (expr_list:HI (use (reg:SI 11 a1))
+            (expr_list:HI (use (reg:SI 12 a2))
+                (expr_list:HI (use (reg:SI 13 a3))
+                    (expr_list:HI (use (reg:SI 14 a4))
+                        (nil)))))))
+(debug_insn 31 30 32 2 (debug_marker) "../Hardware/LCD.c":90 -1
+     (nil))
+(insn 32 31 33 2 (set (reg:SI 14 a4)
+        (reg/v:SI 76 [ color ])) "../Hardware/LCD.c":90 -1
+     (nil))
+(insn 33 32 34 2 (set (reg:SI 13 a3)
+        (reg/v:SI 75 [ y2 ])) "../Hardware/LCD.c":90 -1
+     (nil))
+(insn 34 33 35 2 (set (reg:SI 12 a2)
+        (reg/v:SI 74 [ x2 ])) "../Hardware/LCD.c":90 -1
+     (nil))
+(insn 35 34 36 2 (set (reg:SI 11 a1)
+        (reg/v:SI 73 [ y1 ])) "../Hardware/LCD.c":90 -1
+     (nil))
+(insn 36 35 37 2 (set (reg:SI 10 a0)
+        (reg/v:SI 74 [ x2 ])) "../Hardware/LCD.c":90 -1
+     (nil))
+(call_insn 37 36 0 2 (parallel [
+            (call (mem:SI (symbol_ref:SI ("LCD_DrawLine") [flags 0x3] <function_decl 06689168 LCD_DrawLine>) [0 LCD_DrawLine S4 A32])
+                (const_int 0 [0]))
+            (clobber (reg:SI 1 ra))
+        ]) "../Hardware/LCD.c":90 -1
+     (expr_list:REG_CALL_DECL (symbol_ref:SI ("LCD_DrawLine") [flags 0x3] <function_decl 06689168 LCD_DrawLine>)
+        (expr_list:REG_EH_REGION (const_int 0 [0])
+            (nil)))
+    (expr_list:HI (use (reg:SI 10 a0))
+        (expr_list:HI (use (reg:SI 11 a1))
+            (expr_list:HI (use (reg:SI 12 a2))
+                (expr_list:HI (use (reg:SI 13 a3))
+                    (expr_list:HI (use (reg:SI 14 a4))
+                        (nil)))))))
+
+;; Function Draw_Circle (Draw_Circle, funcdef_no=34, decl_uid=5001, cgraph_uid=34, symbol_order=42)
+
+
+;; Generating RTL for gimple basic block 2
+
+;; Generating RTL for gimple basic block 3
+
+;; Generating RTL for gimple basic block 4
+
+;; Generating RTL for gimple basic block 5
+
+;; Generating RTL for gimple basic block 6
+
+
+try_optimize_cfg iteration 1
+
+Merging block 3 into block 2...
+Merged blocks 2 and 3.
+Merged 2 and 3 without moving.
+Forwarding edge 6->7 to 8 failed.
+Merging block 8 into block 7...
+Merged blocks 7 and 8.
+Merged 7 and 8 without moving.
+
+
+try_optimize_cfg iteration 2
+
+
+
+;;
+;; Full RTL generated for this function:
+;;
+(note 1 0 8 NOTE_INSN_DELETED)
+(note 8 1 2 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn 2 8 3 2 (set (reg/v:SI 88 [ x0 ])
+        (reg:SI 10 a0 [ x0 ])) "../Hardware/LCD.c":101 -1
+     (nil))
+(insn 3 2 4 2 (set (reg/v:SI 89 [ y0 ])
+        (reg:SI 11 a1 [ y0 ])) "../Hardware/LCD.c":101 -1
+     (nil))
+(insn 4 3 5 2 (set (reg/v:SI 90 [ r ])
+        (reg:SI 12 a2 [ r ])) "../Hardware/LCD.c":101 -1
+     (nil))
+(insn 5 4 6 2 (set (reg/v:SI 91 [ color ])
+        (reg:SI 13 a3 [ color ])) "../Hardware/LCD.c":101 -1
+     (nil))
+(note 6 5 10 2 NOTE_INSN_FUNCTION_BEG)
+(debug_insn 10 6 11 2 (debug_marker) "../Hardware/LCD.c":102 -1
+     (nil))
+(debug_insn 11 10 12 2 (debug_marker) "../Hardware/LCD.c":103 -1
+     (nil))
+(debug_insn 12 11 13 2 (var_location:SI a (const_int 0 [0])) "../Hardware/LCD.c":103 -1
+     (nil))
+(debug_insn 13 12 14 2 (debug_marker) "../Hardware/LCD.c":103 -1
+     (nil))
+(insn 14 13 15 2 (set (reg/v:SI 76 [ b ])
+        (reg/v:SI 90 [ r ])) "../Hardware/LCD.c":103 -1
+     (nil))
+(debug_insn 15 14 16 2 (var_location:SI b (reg/v:SI 76 [ b ])) "../Hardware/LCD.c":103 -1
+     (nil))
+(debug_insn 16 15 17 2 (debug_marker) "../Hardware/LCD.c":104 -1
+     (nil))
+(debug_insn 17 16 18 2 (var_location:SI b (reg/v:SI 76 [ b ])) -1
+     (nil))
+(debug_insn 18 17 19 2 (var_location:SI a (const_int 0 [0])) -1
+     (nil))
+(insn 19 18 7 2 (set (reg:SI 82 [ _16 ])
+        (mult:SI (reg/v:SI 76 [ b ])
+            (reg/v:SI 76 [ b ]))) "../Hardware/LCD.c":115 -1
+     (nil))
+(insn 7 19 97 2 (set (reg/v:SI 83 [ a ])
+        (const_int 0 [0])) "../Hardware/LCD.c":103 -1
+     (nil))
+(code_label 97 7 20 4 28 (nil) [1 uses])
+(note 20 97 21 4 [bb 4] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 21 20 22 4 (var_location:SI b (reg/v:SI 76 [ b ])) -1
+     (nil))
+(debug_insn 22 21 23 4 (var_location:SI a (reg/v:SI 83 [ a ])) -1
+     (nil))
+(debug_insn 23 22 24 4 (debug_marker) "../Hardware/LCD.c":106 -1
+     (nil))
+(insn 24 23 25 4 (set (reg:SI 72 [ _1 ])
+        (zero_extend:SI (subreg:HI (reg/v:SI 76 [ b ]) 0))) "../Hardware/LCD.c":106 -1
+     (nil))
+(insn 25 24 26 4 (set (reg:SI 92)
+        (minus:SI (reg/v:SI 88 [ x0 ])
+            (reg:SI 72 [ _1 ]))) "../Hardware/LCD.c":106 -1
+     (nil))
+(insn 26 25 27 4 (set (reg:SI 73 [ _2 ])
+        (zero_extend:SI (subreg:HI (reg:SI 92) 0))) "../Hardware/LCD.c":106 -1
+     (nil))
+(insn 27 26 28 4 (set (reg:SI 87 [ _41 ])
+        (zero_extend:SI (subreg:HI (reg/v:SI 83 [ a ]) 0))) -1
+     (nil))
+(insn 28 27 29 4 (set (reg:SI 93)
+        (minus:SI (reg/v:SI 89 [ y0 ])
+            (reg:SI 87 [ _41 ]))) -1
+     (nil))
+(insn 29 28 30 4 (set (reg:SI 86 [ _39 ])
+        (zero_extend:SI (subreg:HI (reg:SI 93) 0))) -1
+     (nil))
+(insn 30 29 31 4 (set (reg:SI 12 a2)
+        (reg/v:SI 91 [ color ])) "../Hardware/LCD.c":106 -1
+     (nil))
+(insn 31 30 32 4 (set (reg:SI 11 a1)
+        (reg:SI 86 [ _39 ])) "../Hardware/LCD.c":106 -1
+     (nil))
+(insn 32 31 33 4 (set (reg:SI 10 a0)
+        (reg:SI 73 [ _2 ])) "../Hardware/LCD.c":106 -1
+     (nil))
+(call_insn 33 32 34 4 (parallel [
+            (call (mem:SI (symbol_ref:SI ("LCD_DrawPoint") [flags 0x3] <function_decl 066890f0 LCD_DrawPoint>) [0 LCD_DrawPoint S4 A32])
+                (const_int 0 [0]))
+            (clobber (reg:SI 1 ra))
+        ]) "../Hardware/LCD.c":106 -1
+     (expr_list:REG_CALL_DECL (symbol_ref:SI ("LCD_DrawPoint") [flags 0x3] <function_decl 066890f0 LCD_DrawPoint>)
+        (expr_list:REG_EH_REGION (const_int 0 [0])
+            (nil)))
+    (expr_list:HI (use (reg:SI 10 a0))
+        (expr_list:HI (use (reg:SI 11 a1))
+            (expr_list:HI (use (reg:SI 12 a2))
+                (nil)))))
+(debug_insn 34 33 35 4 (debug_marker) "../Hardware/LCD.c":107 -1
+     (nil))
+(insn 35 34 36 4 (set (reg:SI 94)
+        (plus:SI (reg:SI 72 [ _1 ])
+            (reg/v:SI 88 [ x0 ]))) "../Hardware/LCD.c":107 -1
+     (nil))
+(insn 36 35 37 4 (set (reg:SI 74 [ _5 ])
+        (zero_extend:SI (subreg:HI (reg:SI 94) 0))) "../Hardware/LCD.c":107 -1
+     (nil))
+(insn 37 36 38 4 (set (reg:SI 12 a2)
+        (reg/v:SI 91 [ color ])) "../Hardware/LCD.c":107 -1
+     (nil))
+(insn 38 37 39 4 (set (reg:SI 11 a1)
+        (reg:SI 86 [ _39 ])) "../Hardware/LCD.c":107 -1
+     (nil))
+(insn 39 38 40 4 (set (reg:SI 10 a0)
+        (reg:SI 74 [ _5 ])) "../Hardware/LCD.c":107 -1
+     (nil))
+(call_insn 40 39 41 4 (parallel [
+            (call (mem:SI (symbol_ref:SI ("LCD_DrawPoint") [flags 0x3] <function_decl 066890f0 LCD_DrawPoint>) [0 LCD_DrawPoint S4 A32])
+                (const_int 0 [0]))
+            (clobber (reg:SI 1 ra))
+        ]) "../Hardware/LCD.c":107 -1
+     (expr_list:REG_CALL_DECL (symbol_ref:SI ("LCD_DrawPoint") [flags 0x3] <function_decl 066890f0 LCD_DrawPoint>)
+        (expr_list:REG_EH_REGION (const_int 0 [0])
+            (nil)))
+    (expr_list:HI (use (reg:SI 10 a0))
+        (expr_list:HI (use (reg:SI 11 a1))
+            (expr_list:HI (use (reg:SI 12 a2))
+                (nil)))))
+(debug_insn 41 40 42 4 (debug_marker) "../Hardware/LCD.c":108 -1
+     (nil))
+(insn 42 41 43 4 (set (reg:SI 95)
+        (minus:SI (reg/v:SI 88 [ x0 ])
+            (reg:SI 87 [ _41 ]))) -1
+     (nil))
+(insn 43 42 44 4 (set (reg:SI 75 [ _6 ])
+        (zero_extend:SI (subreg:HI (reg:SI 95) 0))) -1
+     (nil))
+(insn 44 43 45 4 (set (reg:SI 96)
+        (plus:SI (reg:SI 72 [ _1 ])
+            (reg/v:SI 89 [ y0 ]))) "../Hardware/LCD.c":108 -1
+     (nil))
+(insn 45 44 46 4 (set (reg:SI 77 [ _9 ])
+        (zero_extend:SI (subreg:HI (reg:SI 96) 0))) "../Hardware/LCD.c":108 -1
+     (nil))
+(insn 46 45 47 4 (set (reg:SI 12 a2)
+        (reg/v:SI 91 [ color ])) "../Hardware/LCD.c":108 -1
+     (nil))
+(insn 47 46 48 4 (set (reg:SI 11 a1)
+        (reg:SI 77 [ _9 ])) "../Hardware/LCD.c":108 -1
+     (nil))
+(insn 48 47 49 4 (set (reg:SI 10 a0)
+        (reg:SI 75 [ _6 ])) "../Hardware/LCD.c":108 -1
+     (nil))
+(call_insn 49 48 50 4 (parallel [
+            (call (mem:SI (symbol_ref:SI ("LCD_DrawPoint") [flags 0x3] <function_decl 066890f0 LCD_DrawPoint>) [0 LCD_DrawPoint S4 A32])
+                (const_int 0 [0]))
+            (clobber (reg:SI 1 ra))
+        ]) "../Hardware/LCD.c":108 -1
+     (expr_list:REG_CALL_DECL (symbol_ref:SI ("LCD_DrawPoint") [flags 0x3] <function_decl 066890f0 LCD_DrawPoint>)
+        (expr_list:REG_EH_REGION (const_int 0 [0])
+            (nil)))
+    (expr_list:HI (use (reg:SI 10 a0))
+        (expr_list:HI (use (reg:SI 11 a1))
+            (expr_list:HI (use (reg:SI 12 a2))
+                (nil)))))
+(debug_insn 50 49 51 4 (debug_marker) "../Hardware/LCD.c":109 -1
+     (nil))
+(insn 51 50 52 4 (set (reg:SI 97)
+        (minus:SI (reg/v:SI 89 [ y0 ])
+            (reg:SI 72 [ _1 ]))) "../Hardware/LCD.c":109 -1
+     (nil))
+(insn 52 51 53 4 (set (reg:SI 78 [ _10 ])
+        (zero_extend:SI (subreg:HI (reg:SI 97) 0))) "../Hardware/LCD.c":109 -1
+     (nil))
+(insn 53 52 54 4 (set (reg:SI 12 a2)
+        (reg/v:SI 91 [ color ])) "../Hardware/LCD.c":109 -1
+     (nil))
+(insn 54 53 55 4 (set (reg:SI 11 a1)
+        (reg:SI 78 [ _10 ])) "../Hardware/LCD.c":109 -1
+     (nil))
+(insn 55 54 56 4 (set (reg:SI 10 a0)
+        (reg:SI 75 [ _6 ])) "../Hardware/LCD.c":109 -1
+     (nil))
+(call_insn 56 55 57 4 (parallel [
+            (call (mem:SI (symbol_ref:SI ("LCD_DrawPoint") [flags 0x3] <function_decl 066890f0 LCD_DrawPoint>) [0 LCD_DrawPoint S4 A32])
+                (const_int 0 [0]))
+            (clobber (reg:SI 1 ra))
+        ]) "../Hardware/LCD.c":109 -1
+     (expr_list:REG_CALL_DECL (symbol_ref:SI ("LCD_DrawPoint") [flags 0x3] <function_decl 066890f0 LCD_DrawPoint>)
+        (expr_list:REG_EH_REGION (const_int 0 [0])
+            (nil)))
+    (expr_list:HI (use (reg:SI 10 a0))
+        (expr_list:HI (use (reg:SI 11 a1))
+            (expr_list:HI (use (reg:SI 12 a2))
+                (nil)))))
+(debug_insn 57 56 58 4 (debug_marker) "../Hardware/LCD.c":110 -1
+     (nil))
+(insn 58 57 59 4 (set (reg:SI 98)
+        (plus:SI (reg/v:SI 89 [ y0 ])
+            (reg:SI 87 [ _41 ]))) -1
+     (nil))
+(insn 59 58 60 4 (set (reg:SI 84 [ _36 ])
+        (zero_extend:SI (subreg:HI (reg:SI 98) 0))) -1
+     (nil))
+(insn 60 59 61 4 (set (reg:SI 12 a2)
+        (reg/v:SI 91 [ color ])) "../Hardware/LCD.c":110 -1
+     (nil))
+(insn 61 60 62 4 (set (reg:SI 11 a1)
+        (reg:SI 84 [ _36 ])) "../Hardware/LCD.c":110 -1
+     (nil))
+(insn 62 61 63 4 (set (reg:SI 10 a0)
+        (reg:SI 74 [ _5 ])) "../Hardware/LCD.c":110 -1
+     (nil))
+(call_insn 63 62 64 4 (parallel [
+            (call (mem:SI (symbol_ref:SI ("LCD_DrawPoint") [flags 0x3] <function_decl 066890f0 LCD_DrawPoint>) [0 LCD_DrawPoint S4 A32])
+                (const_int 0 [0]))
+            (clobber (reg:SI 1 ra))
+        ]) "../Hardware/LCD.c":110 -1
+     (expr_list:REG_CALL_DECL (symbol_ref:SI ("LCD_DrawPoint") [flags 0x3] <function_decl 066890f0 LCD_DrawPoint>)
+        (expr_list:REG_EH_REGION (const_int 0 [0])
+            (nil)))
+    (expr_list:HI (use (reg:SI 10 a0))
+        (expr_list:HI (use (reg:SI 11 a1))
+            (expr_list:HI (use (reg:SI 12 a2))
+                (nil)))))
+(debug_insn 64 63 65 4 (debug_marker) "../Hardware/LCD.c":111 -1
+     (nil))
+(insn 65 64 66 4 (set (reg:SI 99)
+        (plus:SI (reg/v:SI 88 [ x0 ])
+            (reg:SI 87 [ _41 ]))) -1
+     (nil))
+(insn 66 65 67 4 (set (reg:SI 85 [ _37 ])
+        (zero_extend:SI (subreg:HI (reg:SI 99) 0))) -1
+     (nil))
+(insn 67 66 68 4 (set (reg:SI 12 a2)
+        (reg/v:SI 91 [ color ])) "../Hardware/LCD.c":111 -1
+     (nil))
+(insn 68 67 69 4 (set (reg:SI 11 a1)
+        (reg:SI 78 [ _10 ])) "../Hardware/LCD.c":111 -1
+     (nil))
+(insn 69 68 70 4 (set (reg:SI 10 a0)
+        (reg:SI 85 [ _37 ])) "../Hardware/LCD.c":111 -1
+     (nil))
+(call_insn 70 69 71 4 (parallel [
+            (call (mem:SI (symbol_ref:SI ("LCD_DrawPoint") [flags 0x3] <function_decl 066890f0 LCD_DrawPoint>) [0 LCD_DrawPoint S4 A32])
+                (const_int 0 [0]))
+            (clobber (reg:SI 1 ra))
+        ]) "../Hardware/LCD.c":111 -1
+     (expr_list:REG_CALL_DECL (symbol_ref:SI ("LCD_DrawPoint") [flags 0x3] <function_decl 066890f0 LCD_DrawPoint>)
+        (expr_list:REG_EH_REGION (const_int 0 [0])
+            (nil)))
+    (expr_list:HI (use (reg:SI 10 a0))
+        (expr_list:HI (use (reg:SI 11 a1))
+            (expr_list:HI (use (reg:SI 12 a2))
+                (nil)))))
+(debug_insn 71 70 72 4 (debug_marker) "../Hardware/LCD.c":112 -1
+     (nil))
+(insn 72 71 73 4 (set (reg:SI 12 a2)
+        (reg/v:SI 91 [ color ])) "../Hardware/LCD.c":112 -1
+     (nil))
+(insn 73 72 74 4 (set (reg:SI 11 a1)
+        (reg:SI 77 [ _9 ])) "../Hardware/LCD.c":112 -1
+     (nil))
+(insn 74 73 75 4 (set (reg:SI 10 a0)
+        (reg:SI 85 [ _37 ])) "../Hardware/LCD.c":112 -1
+     (nil))
+(call_insn 75 74 76 4 (parallel [
+            (call (mem:SI (symbol_ref:SI ("LCD_DrawPoint") [flags 0x3] <function_decl 066890f0 LCD_DrawPoint>) [0 LCD_DrawPoint S4 A32])
+                (const_int 0 [0]))
+            (clobber (reg:SI 1 ra))
+        ]) "../Hardware/LCD.c":112 -1
+     (expr_list:REG_CALL_DECL (symbol_ref:SI ("LCD_DrawPoint") [flags 0x3] <function_decl 066890f0 LCD_DrawPoint>)
+        (expr_list:REG_EH_REGION (const_int 0 [0])
+            (nil)))
+    (expr_list:HI (use (reg:SI 10 a0))
+        (expr_list:HI (use (reg:SI 11 a1))
+            (expr_list:HI (use (reg:SI 12 a2))
+                (nil)))))
+(debug_insn 76 75 77 4 (debug_marker) "../Hardware/LCD.c":113 -1
+     (nil))
+(insn 77 76 78 4 (set (reg:SI 12 a2)
+        (reg/v:SI 91 [ color ])) "../Hardware/LCD.c":113 -1
+     (nil))
+(insn 78 77 79 4 (set (reg:SI 11 a1)
+        (reg:SI 84 [ _36 ])) "../Hardware/LCD.c":113 -1
+     (nil))
+(insn 79 78 80 4 (set (reg:SI 10 a0)
+        (reg:SI 73 [ _2 ])) "../Hardware/LCD.c":113 -1
+     (nil))
+(call_insn 80 79 81 4 (parallel [
+            (call (mem:SI (symbol_ref:SI ("LCD_DrawPoint") [flags 0x3] <function_decl 066890f0 LCD_DrawPoint>) [0 LCD_DrawPoint S4 A32])
+                (const_int 0 [0]))
+            (clobber (reg:SI 1 ra))
+        ]) "../Hardware/LCD.c":113 -1
+     (expr_list:REG_CALL_DECL (symbol_ref:SI ("LCD_DrawPoint") [flags 0x3] <function_decl 066890f0 LCD_DrawPoint>)
+        (expr_list:REG_EH_REGION (const_int 0 [0])
+            (nil)))
+    (expr_list:HI (use (reg:SI 10 a0))
+        (expr_list:HI (use (reg:SI 11 a1))
+            (expr_list:HI (use (reg:SI 12 a2))
+                (nil)))))
+(debug_insn 81 80 82 4 (debug_marker) "../Hardware/LCD.c":114 -1
+     (nil))
+(insn 82 81 83 4 (set (reg/v:SI 83 [ a ])
+        (plus:SI (reg/v:SI 83 [ a ])
+            (const_int 1 [0x1]))) "../Hardware/LCD.c":114 -1
+     (nil))
+(debug_insn 83 82 84 4 (var_location:SI a (reg/v:SI 83 [ a ])) "../Hardware/LCD.c":114 -1
+     (nil))
+(debug_insn 84 83 85 4 (debug_marker) "../Hardware/LCD.c":115 -1
+     (nil))
+(insn 85 84 86 4 (set (reg:SI 100)
+        (mult:SI (reg/v:SI 83 [ a ])
+            (reg/v:SI 83 [ a ]))) "../Hardware/LCD.c":115 -1
+     (nil))
+(insn 86 85 87 4 (set (reg:SI 101)
+        (mult:SI (reg/v:SI 76 [ b ])
+            (reg/v:SI 76 [ b ]))) "../Hardware/LCD.c":115 -1
+     (nil))
+(insn 87 86 88 4 (set (reg:SI 102)
+        (plus:SI (reg:SI 100)
+            (reg:SI 101))) "../Hardware/LCD.c":115 -1
+     (nil))
+(jump_insn 88 87 89 4 (set (pc)
+        (if_then_else (le (reg:SI 102)
+                (reg:SI 82 [ _16 ]))
+            (label_ref 93)
+            (pc))) "../Hardware/LCD.c":115 -1
+     (int_list:REG_BR_PROB 536870916 (nil))
+ -> 93)
+(note 89 88 90 5 [bb 5] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 90 89 91 5 (debug_marker) "../Hardware/LCD.c":117 -1
+     (nil))
+(insn 91 90 92 5 (set (reg/v:SI 76 [ b ])
+        (plus:SI (reg/v:SI 76 [ b ])
+            (const_int -1 [0xffffffffffffffff]))) "../Hardware/LCD.c":117 -1
+     (nil))
+(debug_insn 92 91 93 5 (var_location:SI b (reg/v:SI 76 [ b ])) "../Hardware/LCD.c":117 -1
+     (nil))
+(code_label 93 92 94 6 27 (nil) [1 uses])
+(note 94 93 95 6 [bb 6] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 95 94 96 6 (var_location:SI b (reg/v:SI 76 [ b ])) -1
+     (nil))
+(debug_insn 96 95 98 6 (var_location:SI a (reg/v:SI 83 [ a ])) -1
+     (nil))
+(jump_insn 98 96 99 6 (set (pc)
+        (if_then_else (ge (reg/v:SI 76 [ b ])
+                (reg/v:SI 83 [ a ]))
+            (label_ref 97)
+            (pc))) "../Hardware/LCD.c":104 -1
+     (int_list:REG_BR_PROB 941032164 (nil))
+ -> 97)
+(note 99 98 0 7 [bb 7] NOTE_INSN_BASIC_BLOCK)
+
+;; Function LCD_ShowChinese12x12 (LCD_ShowChinese12x12, funcdef_no=36, decl_uid=5017, cgraph_uid=36, symbol_order=44)
+
+
+;; Generating RTL for gimple basic block 2
+
+
+try_optimize_cfg iteration 1
+
+Merging block 3 into block 2...
+Merged blocks 2 and 3.
+Merged 2 and 3 without moving.
+Merging block 4 into block 2...
+Merged blocks 2 and 4.
+Merged 2 and 4 without moving.
+
+
+try_optimize_cfg iteration 2
+
+
+
+;;
+;; Full RTL generated for this function:
+;;
+(note 1 0 10 NOTE_INSN_DELETED)
+(note 10 1 2 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn 2 10 3 2 (set (reg/v:SI 72 [ x ])
+        (reg:SI 10 a0 [ x ])) "../Hardware/LCD.c":157 -1
+     (nil))
+(insn 3 2 4 2 (set (reg/v:SI 73 [ y ])
+        (reg:SI 11 a1 [ y ])) "../Hardware/LCD.c":157 -1
+     (nil))
+(insn 4 3 5 2 (set (reg/v/f:SI 74 [ s ])
+        (reg:SI 12 a2 [ s ])) "../Hardware/LCD.c":157 -1
+     (nil))
+(insn 5 4 6 2 (set (reg/v:SI 75 [ fc ])
+        (reg:SI 13 a3 [ fc ])) "../Hardware/LCD.c":157 -1
+     (nil))
+(insn 6 5 7 2 (set (reg/v:SI 76 [ bc ])
+        (reg:SI 14 a4 [ bc ])) "../Hardware/LCD.c":157 -1
+     (nil))
+(insn 7 6 8 2 (set (reg/v:SI 77 [ sizey ])
+        (reg:SI 15 a5 [ sizey ])) "../Hardware/LCD.c":157 -1
+     (nil))
+(insn 8 7 9 2 (set (reg/v:SI 78 [ mode ])
+        (reg:SI 16 a6 [ mode ])) "../Hardware/LCD.c":157 -1
+     (nil))
+(note 9 8 12 2 NOTE_INSN_FUNCTION_BEG)
+(debug_insn 12 9 13 2 (debug_marker) "../Hardware/LCD.c":158 -1
+     (nil))
+(debug_insn 13 12 14 2 (var_location:QI m (const_int 0 [0])) "../Hardware/LCD.c":158 -1
+     (nil))
+(debug_insn 14 13 15 2 (debug_marker) "../Hardware/LCD.c":159 -1
+     (nil))
+(debug_insn 15 14 16 2 (debug_marker) "../Hardware/LCD.c":160 -1
+     (nil))
+(debug_insn 16 15 17 2 (debug_marker) "../Hardware/LCD.c":161 -1
+     (nil))
+(debug_insn 17 16 18 2 (debug_marker) "../Hardware/LCD.c":162 -1
+     (nil))
+(debug_insn 18 17 19 2 (var_location:HI x0 (subreg:HI (entry_value:SI (reg:SI 10 a0 [ x ])) 0)) "../Hardware/LCD.c":162 -1
+     (nil))
+(debug_insn 19 18 20 2 (debug_marker) "../Hardware/LCD.c":163 -1
+     (nil))
+(debug_insn 20 19 21 2 (var_location:QI D#8 (lshiftrt:QI (subreg:QI (entry_value:SI (reg:SI 15 a5 [ sizey ])) 0)
+        (const_int 3 [0x3]))) "../Hardware/LCD.c":163 -1
+     (nil))
+(debug_insn 21 20 22 2 (var_location:SI D#7 (zero_extend:SI (debug_expr:QI D#8))) "../Hardware/LCD.c":163 -1
+     (nil))
+(debug_insn 22 21 23 2 (var_location:QI D#6 (and:QI (subreg:QI (entry_value:SI (reg:SI 15 a5 [ sizey ])) 0)
+        (const_int 7 [0x7]))) "../Hardware/LCD.c":163 -1
+     (nil))
+(debug_insn 23 22 24 2 (var_location:QI D#5 (ne:QI (debug_expr:QI D#6)
+        (const_int 0 [0]))) "../Hardware/LCD.c":163 -1
+     (nil))
+(debug_insn 24 23 25 2 (var_location:SI D#4 (zero_extend:SI (debug_expr:QI D#5))) "../Hardware/LCD.c":163 -1
+     (nil))
+(debug_insn 25 24 26 2 (var_location:SI D#3 (plus:SI (debug_expr:SI D#7)
+        (debug_expr:SI D#4))) "../Hardware/LCD.c":163 -1
+     (nil))
+(debug_insn 26 25 27 2 (var_location:HI D#2 (subreg:HI (debug_expr:SI D#3) 0)) "../Hardware/LCD.c":163 -1
+     (nil))
+(debug_insn 27 26 28 2 (var_location:HI D#1 (zero_extend:HI (subreg:QI (entry_value:SI (reg:SI 15 a5 [ sizey ])) 0))) "../Hardware/LCD.c":163 -1
+     (nil))
+(debug_insn 28 27 29 2 (var_location:HI TypefaceNum (mult:HI (debug_expr:HI D#2)
+        (debug_expr:HI D#1))) "../Hardware/LCD.c":163 -1
+     (nil))
+(debug_insn 29 28 30 2 (debug_marker) "../Hardware/LCD.c":165 -1
+     (nil))
+(debug_insn 30 29 31 2 (var_location:HI HZnum (const_int 0 [0])) "../Hardware/LCD.c":165 -1
+     (nil))
+(debug_insn 31 30 32 2 (debug_marker) "../Hardware/LCD.c":166 -1
+     (nil))
+(debug_insn 32 31 33 2 (var_location:HI k (const_int 0 [0])) "../Hardware/LCD.c":166 -1
+     (nil))
+(debug_insn 33 32 34 2 (var_location:HI k (const_int 0 [0])) -1
+     (nil))
+(debug_insn 34 33 35 2 (var_location:QI m (const_int 0 [0])) -1
+     (nil))
+(debug_insn 35 34 36 2 (var_location:HI y (subreg:HI (entry_value:SI (reg:SI 11 a1 [ y ])) 0)) -1
+     (nil))
+(debug_insn 36 35 0 2 (var_location:HI x (subreg:HI (entry_value:SI (reg:SI 10 a0 [ x ])) 0)) -1
+     (nil))
+
+;; Function LCD_ShowChinese16x16 (LCD_ShowChinese16x16, funcdef_no=37, decl_uid=5025, cgraph_uid=37, symbol_order=45)
+
+
+;; Generating RTL for gimple basic block 2
+
+;; Generating RTL for gimple basic block 3
+
+;; Generating RTL for gimple basic block 4
+
+;; Generating RTL for gimple basic block 5
+
+;; Generating RTL for gimple basic block 6
+
+;; Generating RTL for gimple basic block 7
+
+;; Generating RTL for gimple basic block 8
+
+;; Generating RTL for gimple basic block 9
+
+;; Generating RTL for gimple basic block 10
+
+;; Generating RTL for gimple basic block 11
+
+;; Generating RTL for gimple basic block 12
+
+;; Generating RTL for gimple basic block 13
+
+;; Generating RTL for gimple basic block 14
+
+;; Generating RTL for gimple basic block 15
+
+;; Generating RTL for gimple basic block 16
+
+;; Generating RTL for gimple basic block 17
+
+;; Generating RTL for gimple basic block 18
+
+;; Generating RTL for gimple basic block 19
+Edge 10->16 redirected to 24
+Edge 17->6 redirected to 25
+
+
+try_optimize_cfg iteration 1
+
+Merging block 3 into block 2...
+Merged blocks 2 and 3.
+Merged 2 and 3 without moving.
+Forwarding edge 12->13 to 18 failed.
+Forwarding edge 18->19 to 21 failed.
+Forwarding edge 23->24 to 25 failed.
+Merging block 25 into block 24...
+Merged blocks 24 and 25.
+Merged 24 and 25 without moving.
+
+
+try_optimize_cfg iteration 2
+
+Forwarding edge 12->13 to 18 failed.
+Forwarding edge 18->19 to 21 failed.
+
+
+;;
+;; Full RTL generated for this function:
+;;
+(note 1 0 17 NOTE_INSN_DELETED)
+(note 17 1 2 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn 2 17 3 2 (set (reg/v:SI 108 [ x ])
+        (reg:SI 10 a0 [ x ])) "../Hardware/LCD.c":215 -1
+     (nil))
+(insn 3 2 4 2 (set (reg/v:SI 109 [ y ])
+        (reg:SI 11 a1 [ y ])) "../Hardware/LCD.c":215 -1
+     (nil))
+(insn 4 3 5 2 (set (reg/v/f:SI 110 [ s ])
+        (reg:SI 12 a2 [ s ])) "../Hardware/LCD.c":215 -1
+     (nil))
+(insn 5 4 6 2 (set (reg/v:SI 111 [ fc ])
+        (reg:SI 13 a3 [ fc ])) "../Hardware/LCD.c":215 -1
+     (nil))
+(insn 6 5 7 2 (set (reg/v:SI 112 [ bc ])
+        (reg:SI 14 a4 [ bc ])) "../Hardware/LCD.c":215 -1
+     (nil))
+(insn 7 6 8 2 (set (reg/v:SI 113 [ sizey ])
+        (reg:SI 15 a5 [ sizey ])) "../Hardware/LCD.c":215 -1
+     (nil))
+(insn 8 7 9 2 (set (reg/v:SI 114 [ mode ])
+        (reg:SI 16 a6 [ mode ])) "../Hardware/LCD.c":215 -1
+     (nil))
+(note 9 8 19 2 NOTE_INSN_FUNCTION_BEG)
+(debug_insn 19 9 20 2 (debug_marker) "../Hardware/LCD.c":216 -1
+     (nil))
+(debug_insn 20 19 21 2 (var_location:QI m (const_int 0 [0])) "../Hardware/LCD.c":216 -1
+     (nil))
+(debug_insn 21 20 22 2 (debug_marker) "../Hardware/LCD.c":217 -1
+     (nil))
+(debug_insn 22 21 23 2 (debug_marker) "../Hardware/LCD.c":218 -1
+     (nil))
+(debug_insn 23 22 24 2 (debug_marker) "../Hardware/LCD.c":219 -1
+     (nil))
+(debug_insn 24 23 25 2 (debug_marker) "../Hardware/LCD.c":220 -1
+     (nil))
+(debug_insn 25 24 26 2 (var_location:HI x0 (subreg:HI (reg/v:SI 108 [ x ]) 0)) "../Hardware/LCD.c":220 -1
+     (nil))
+(debug_insn 26 25 27 2 (debug_marker) "../Hardware/LCD.c":221 -1
+     (nil))
+(insn 27 26 28 2 (set (reg:SI 79 [ _8 ])
+        (zero_extend:SI (subreg:HI (reg/v:SI 113 [ sizey ]) 0))) "../Hardware/LCD.c":221 -1
+     (nil))
+(insn 28 27 29 2 (set (reg:SI 115)
+        (and:SI (reg/v:SI 113 [ sizey ])
+            (const_int 7 [0x7]))) "../Hardware/LCD.c":221 -1
+     (nil))
+(insn 29 28 30 2 (set (reg:SI 117)
+        (zero_extend:SI (subreg:QI (reg:SI 115) 0))) "../Hardware/LCD.c":221 -1
+     (nil))
+(insn 30 29 31 2 (set (reg:SI 118)
+        (ne:SI (reg:SI 117)
+            (const_int 0 [0]))) "../Hardware/LCD.c":221 -1
+     (nil))
+(insn 31 30 32 2 (set (reg:SI 119)
+        (lshiftrt:SI (reg/v:SI 113 [ sizey ])
+            (const_int 3 [0x3]))) "../Hardware/LCD.c":221 -1
+     (nil))
+(insn 32 31 33 2 (set (reg:SI 120)
+        (zero_extend:SI (subreg:QI (reg:SI 119) 0))) "../Hardware/LCD.c":221 -1
+     (nil))
+(insn 33 32 34 2 (set (reg:SI 121)
+        (plus:SI (reg:SI 118)
+            (reg:SI 120))) "../Hardware/LCD.c":221 -1
+     (nil))
+(insn 34 33 35 2 (set (reg:HI 122)
+        (subreg:HI (reg:SI 121) 0)) "../Hardware/LCD.c":221 -1
+     (nil))
+(insn 35 34 36 2 (set (reg:SI 123)
+        (mult:SI (reg:SI 79 [ _8 ])
+            (subreg:SI (reg:HI 122) 0))) "../Hardware/LCD.c":221 -1
+     (nil))
+(insn 36 35 37 2 (set (reg/v:SI 104 [ TypefaceNum ])
+        (zero_extend:SI (subreg:HI (reg:SI 123) 0))) "../Hardware/LCD.c":221 -1
+     (nil))
+(debug_insn 37 36 38 2 (var_location:HI TypefaceNum (subreg:HI (reg/v:SI 104 [ TypefaceNum ]) 0)) "../Hardware/LCD.c":221 -1
+     (nil))
+(debug_insn 38 37 39 2 (debug_marker) "../Hardware/LCD.c":222 -1
+     (nil))
+(debug_insn 39 38 40 2 (var_location:HI HZnum (const_int 11 [0xb])) "../Hardware/LCD.c":222 -1
+     (nil))
+(debug_insn 40 39 41 2 (debug_marker) "../Hardware/LCD.c":223 -1
+     (nil))
+(debug_insn 41 40 42 2 (var_location:HI k (const_int 0 [0])) "../Hardware/LCD.c":223 -1
+     (nil))
+(debug_insn 42 41 43 2 (var_location:HI k (const_int 0 [0])) -1
+     (nil))
+(debug_insn 43 42 44 2 (var_location:QI m (const_int 0 [0])) -1
+     (nil))
+(debug_insn 44 43 45 2 (var_location:HI y (subreg:HI (reg/v:SI 109 [ y ]) 0)) -1
+     (nil))
+(debug_insn 45 44 46 2 (var_location:HI x (subreg:HI (reg/v:SI 108 [ x ]) 0)) -1
+     (nil))
+(insn 46 45 47 2 (set (reg:SI 125)
+        (high:SI (symbol_ref:SI ("*.LANCHOR0") [flags 0x182]))) -1
+     (nil))
+(insn 47 46 48 2 (set (reg/f:SI 124)
+        (lo_sum:SI (reg:SI 125)
+            (symbol_ref:SI ("*.LANCHOR0") [flags 0x182]))) -1
+     (expr_list:REG_EQUAL (symbol_ref:SI ("*.LANCHOR0") [flags 0x182])
+        (nil)))
+(insn 48 47 10 2 (set (reg:SI 88 [ ivtmp.79 ])
+        (reg/f:SI 124)) -1
+     (nil))
+(insn 10 48 11 2 (set (reg/v:SI 97 [ x ])
+        (reg/v:SI 108 [ x ])) "../Hardware/LCD.c":221 -1
+     (nil))
+(insn 11 10 12 2 (set (reg:SI 87 [ ivtmp.73 ])
+        (const_int 0 [0])) "../Hardware/LCD.c":221 -1
+     (nil))
+(insn 12 11 196 2 (set (reg/v:SI 102 [ m ])
+        (const_int 0 [0])) "../Hardware/LCD.c":216 -1
+     (nil))
+(code_label 196 12 49 4 42 (nil) [1 uses])
+(note 49 196 50 4 [bb 4] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 50 49 51 4 (var_location:HI k (subreg:HI (reg:SI 87 [ ivtmp.73 ]) 0)) -1
+     (nil))
+(debug_insn 51 50 52 4 (var_location:QI m (subreg:QI (reg/v:SI 102 [ m ]) 0)) -1
+     (nil))
+(debug_insn 52 51 53 4 (var_location:HI y (subreg:HI (reg/v:SI 109 [ y ]) 0)) -1
+     (nil))
+(debug_insn 53 52 54 4 (var_location:HI x (subreg:HI (reg/v:SI 97 [ x ]) 0)) -1
+     (nil))
+(debug_insn 54 53 55 4 (debug_marker) "../Hardware/LCD.c":225 -1
+     (nil))
+(insn 55 54 56 4 (set (reg:SI 80 [ _9 ])
+        (reg:SI 87 [ ivtmp.73 ])) "../Hardware/LCD.c":225 -1
+     (nil))
+(insn 56 55 57 4 (set (reg/f:SI 89 [ _23 ])
+        (reg:SI 88 [ ivtmp.79 ])) -1
+     (nil))
+(insn 57 56 58 4 (set (reg:SI 126)
+        (zero_extend:SI (mem:QI (reg/f:SI 89 [ _23 ]) [0 MEM[base: _23, offset: 0B]+0 S1 A16]))) "../Hardware/LCD.c":225 -1
+     (nil))
+(insn 58 57 59 4 (set (reg:SI 127)
+        (zero_extend:SI (mem:QI (reg/v/f:SI 110 [ s ]) [0 *s_69(D)+0 S1 A8]))) "../Hardware/LCD.c":225 -1
+     (nil))
+(jump_insn 59 58 60 4 (set (pc)
+        (if_then_else (ne (reg:SI 126)
+                (reg:SI 127))
+            (label_ref 182)
+            (pc))) "../Hardware/LCD.c":225 -1
+     (int_list:REG_BR_PROB 708669604 (nil))
+ -> 182)
+(note 60 59 61 5 [bb 5] NOTE_INSN_BASIC_BLOCK)
+(insn 61 60 62 5 (set (reg:SI 128)
+        (zero_extend:SI (mem:QI (plus:SI (reg/f:SI 89 [ _23 ])
+                    (const_int 1 [0x1])) [0 MEM[base: _23, offset: 1B]+0 S1 A8]))) "../Hardware/LCD.c":225 -1
+     (nil))
+(insn 62 61 63 5 (set (reg:SI 129)
+        (zero_extend:SI (mem:QI (plus:SI (reg/v/f:SI 110 [ s ])
+                    (const_int 1 [0x1])) [0 MEM[(u8 *)s_69(D) + 1B]+0 S1 A8]))) "../Hardware/LCD.c":225 -1
+     (nil))
+(jump_insn 63 62 64 5 (set (pc)
+        (if_then_else (ne (reg:SI 128)
+                (reg:SI 129))
+            (label_ref 182)
+            (pc))) "../Hardware/LCD.c":225 -1
+     (int_list:REG_BR_PROB 981614780 (nil))
+ -> 182)
+(note 64 63 65 6 [bb 6] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 65 64 66 6 (debug_marker) "../Hardware/LCD.c":227 -1
+     (nil))
+(insn 66 65 67 6 (set (reg:SI 130)
+        (plus:SI (reg:SI 79 [ _8 ])
+            (const_int -1 [0xffffffffffffffff]))) -1
+     (nil))
+(insn 67 66 68 6 (set (reg:SI 105 [ _87 ])
+        (zero_extend:SI (subreg:HI (reg:SI 130) 0))) -1
+     (nil))
+(insn 68 67 69 6 (set (reg:SI 131)
+        (plus:SI (reg:SI 105 [ _87 ])
+            (reg/v:SI 109 [ y ]))) "../Hardware/LCD.c":227 -1
+     (nil))
+(insn 69 68 70 6 (set (reg:SI 132)
+        (zero_extend:SI (subreg:HI (reg:SI 131) 0))) "../Hardware/LCD.c":227 -1
+     (nil))
+(insn 70 69 71 6 (set (reg:SI 133)
+        (plus:SI (reg:SI 105 [ _87 ])
+            (reg/v:SI 97 [ x ]))) "../Hardware/LCD.c":227 -1
+     (nil))
+(insn 71 70 72 6 (set (reg:SI 134)
+        (zero_extend:SI (subreg:HI (reg:SI 133) 0))) "../Hardware/LCD.c":227 -1
+     (nil))
+(insn 72 71 73 6 (set (reg:SI 13 a3)
+        (reg:SI 132)) "../Hardware/LCD.c":227 -1
+     (nil))
+(insn 73 72 74 6 (set (reg:SI 12 a2)
+        (reg:SI 134)) "../Hardware/LCD.c":227 -1
+     (nil))
+(insn 74 73 75 6 (set (reg:SI 11 a1)
+        (reg/v:SI 109 [ y ])) "../Hardware/LCD.c":227 -1
+     (nil))
+(insn 75 74 76 6 (set (reg:SI 10 a0)
+        (reg/v:SI 97 [ x ])) "../Hardware/LCD.c":227 -1
+     (nil))
+(call_insn 76 75 77 6 (parallel [
+            (call (mem:SI (symbol_ref:SI ("LCD_Address_Set") [flags 0x41] <function_decl 06874f78 LCD_Address_Set>) [0 LCD_Address_Set S4 A32])
+                (const_int 0 [0]))
+            (clobber (reg:SI 1 ra))
+        ]) "../Hardware/LCD.c":227 -1
+     (expr_list:REG_CALL_DECL (symbol_ref:SI ("LCD_Address_Set") [flags 0x41] <function_decl 06874f78 LCD_Address_Set>)
+        (nil))
+    (expr_list:HI (use (reg:SI 10 a0))
+        (expr_list:HI (use (reg:SI 11 a1))
+            (expr_list:HI (use (reg:SI 12 a2))
+                (expr_list:HI (use (reg:SI 13 a3))
+                    (nil))))))
+(debug_insn 77 76 78 6 (debug_marker) "../Hardware/LCD.c":228 -1
+     (nil))
+(debug_insn 78 77 16 6 (var_location:QI i (const_int 0 [0])) "../Hardware/LCD.c":228 -1
+     (nil))
+(insn 16 78 79 6 (set (reg/v:SI 100 [ i ])
+        (const_int 0 [0])) "../Hardware/LCD.c":228 -1
+     (nil))
+(jump_insn 79 16 80 6 (set (pc)
+        (label_ref 174)) "../Hardware/LCD.c":228 -1
+     (nil)
+ -> 174)
+(barrier 80 79 208)
+(code_label 208 80 207 7 44 (nil) [1 uses])
+(note 207 208 13 7 [bb 7] NOTE_INSN_BASIC_BLOCK)
+(insn 13 207 163 7 (set (reg:SI 91 [ ivtmp.64 ])
+        (const_int 0 [0])) -1
+     (nil))
+(code_label 163 13 81 8 41 (nil) [1 uses])
+(note 81 163 82 8 [bb 8] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 82 81 83 8 (var_location:QI m (subreg:QI (reg/v:SI 102 [ m ]) 0)) -1
+     (nil))
+(debug_insn 83 82 84 8 (var_location:QI j (subreg:QI (reg:SI 91 [ ivtmp.64 ]) 0)) -1
+     (nil))
+(debug_insn 84 83 85 8 (var_location:HI x (subreg:HI (reg/v:SI 97 [ x ]) 0)) -1
+     (nil))
+(debug_insn 85 84 86 8 (debug_marker) "../Hardware/LCD.c":232 -1
+     (nil))
+(insn 86 85 87 8 (set (reg:SI 136)
+        (high:SI (symbol_ref:SI ("*.LANCHOR0") [flags 0x182]))) -1
+     (nil))
+(insn 87 86 88 8 (set (reg/f:SI 135)
+        (lo_sum:SI (reg:SI 136)
+            (symbol_ref:SI ("*.LANCHOR0") [flags 0x182]))) -1
+     (expr_list:REG_EQUAL (symbol_ref:SI ("*.LANCHOR0") [flags 0x182])
+        (nil)))
+(insn 88 87 89 8 (set (reg:SI 138)
+        (const_int 34 [0x22])) -1
+     (nil))
+(insn 89 88 90 8 (set (reg:SI 139)
+        (mult:SI (reg:SI 80 [ _9 ])
+            (reg:SI 138))) -1
+     (nil))
+(insn 90 89 91 8 (set (reg:SI 140)
+        (plus:SI (reg/f:SI 135)
+            (reg:SI 139))) -1
+     (nil))
+(insn 91 90 92 8 (set (reg/f:SI 137)
+        (plus:SI (reg:SI 140)
+            (reg/v:SI 100 [ i ]))) -1
+     (nil))
+(insn 92 91 93 8 (set (reg:SI 141)
+        (zero_extend:SI (mem/u/j:QI (plus:SI (reg/f:SI 137)
+                    (const_int 2 [0x2])) [0 tfont16[_9].Msk S1 A8]))) -1
+     (nil))
+(insn 93 92 94 8 (set (reg:SI 142)
+        (ashiftrt:SI (reg:SI 141)
+            (subreg:QI (reg:SI 91 [ ivtmp.64 ]) 0))) -1
+     (nil))
+(insn 94 93 95 8 (set (reg:SI 106 [ _92 ])
+        (and:SI (reg:SI 142)
+            (const_int 1 [0x1]))) -1
+     (nil))
+(jump_insn 95 94 96 8 (set (pc)
+        (if_then_else (ne (reg/v:SI 114 [ mode ])
+                (const_int 0 [0]))
+            (label_ref 124)
+            (pc))) "../Hardware/LCD.c":232 -1
+     (int_list:REG_BR_PROB 536870916 (nil))
+ -> 124)
+(note 96 95 97 9 [bb 9] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 97 96 98 9 (debug_marker) "../Hardware/LCD.c":234 -1
+     (nil))
+(jump_insn 98 97 99 9 (set (pc)
+        (if_then_else (eq (reg:SI 106 [ _92 ])
+                (const_int 0 [0]))
+            (label_ref 105)
+            (pc))) "../Hardware/LCD.c":234 -1
+     (int_list:REG_BR_PROB 536870916 (nil))
+ -> 105)
+(note 99 98 100 10 [bb 10] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 100 99 101 10 (debug_marker) "../Hardware/LCD.c":234 -1
+     (nil))
+(insn 101 100 102 10 (set (reg:SI 10 a0)
+        (reg/v:SI 111 [ fc ])) "../Hardware/LCD.c":234 -1
+     (nil))
+(call_insn 102 101 103 10 (parallel [
+            (call (mem:SI (symbol_ref:SI ("LCD_WR_DATA") [flags 0x41] <function_decl 06874e88 LCD_WR_DATA>) [0 LCD_WR_DATA S4 A32])
+                (const_int 0 [0]))
+            (clobber (reg:SI 1 ra))
+        ]) "../Hardware/LCD.c":234 -1
+     (expr_list:REG_CALL_DECL (symbol_ref:SI ("LCD_WR_DATA") [flags 0x41] <function_decl 06874e88 LCD_WR_DATA>)
+        (nil))
+    (expr_list:HI (use (reg:SI 10 a0))
+        (nil)))
+(jump_insn 103 102 104 10 (set (pc)
+        (label_ref 110)) -1
+     (nil)
+ -> 110)
+(barrier 104 103 105)
+(code_label 105 104 106 11 36 (nil) [1 uses])
+(note 106 105 107 11 [bb 11] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 107 106 108 11 (debug_marker) "../Hardware/LCD.c":235 -1
+     (nil))
+(insn 108 107 109 11 (set (reg:SI 10 a0)
+        (reg/v:SI 112 [ bc ])) "../Hardware/LCD.c":235 -1
+     (nil))
+(call_insn 109 108 110 11 (parallel [
+            (call (mem:SI (symbol_ref:SI ("LCD_WR_DATA") [flags 0x41] <function_decl 06874e88 LCD_WR_DATA>) [0 LCD_WR_DATA S4 A32])
+                (const_int 0 [0]))
+            (clobber (reg:SI 1 ra))
+        ]) "../Hardware/LCD.c":235 -1
+     (expr_list:REG_CALL_DECL (symbol_ref:SI ("LCD_WR_DATA") [flags 0x41] <function_decl 06874e88 LCD_WR_DATA>)
+        (nil))
+    (expr_list:HI (use (reg:SI 10 a0))
+        (nil)))
+(code_label 110 109 111 12 37 (nil) [1 uses])
+(note 111 110 112 12 [bb 12] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 112 111 113 12 (debug_marker) "../Hardware/LCD.c":236 -1
+     (nil))
+(insn 113 112 114 12 (set (reg:SI 143)
+        (plus:SI (reg/v:SI 102 [ m ])
+            (const_int 1 [0x1]))) "../Hardware/LCD.c":236 -1
+     (nil))
+(insn 114 113 115 12 (set (reg/v:SI 102 [ m ])
+        (zero_extend:SI (subreg:QI (reg:SI 143) 0))) "../Hardware/LCD.c":236 -1
+     (nil))
+(debug_insn 115 114 116 12 (var_location:QI m (subreg:QI (reg/v:SI 102 [ m ]) 0)) "../Hardware/LCD.c":236 -1
+     (nil))
+(debug_insn 116 115 117 12 (debug_marker) "../Hardware/LCD.c":237 -1
+     (nil))
+(insn 117 116 118 12 (set (reg:SI 145)
+        (umod:SI (reg/v:SI 102 [ m ])
+            (reg/v:SI 113 [ sizey ]))) "../Hardware/LCD.c":237 -1
+     (nil))
+(insn 118 117 119 12 (set (reg:QI 146)
+        (subreg:QI (reg:SI 145) 0)) "../Hardware/LCD.c":237 -1
+     (nil))
+(insn 119 118 120 12 (set (reg:SI 147)
+        (zero_extend:SI (reg:QI 146))) "../Hardware/LCD.c":237 -1
+     (nil))
+(jump_insn 120 119 123 12 (set (pc)
+        (if_then_else (eq (reg:SI 147)
+                (const_int 0 [0]))
+            (label_ref:SI 206)
+            (pc))) "../Hardware/LCD.c":237 180 {*branchsi}
+     (int_list:REG_BR_PROB 39298956 (nil))
+ -> 206)
+(note 123 120 121 13 [bb 13] NOTE_INSN_BASIC_BLOCK)
+(jump_insn 121 123 122 13 (set (pc)
+        (label_ref 153)) -1
+     (nil)
+ -> 153)
+(barrier 122 121 124)
+(code_label 124 122 125 14 35 (nil) [1 uses])
+(note 125 124 126 14 [bb 14] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 126 125 127 14 (debug_marker) "../Hardware/LCD.c":245 -1
+     (nil))
+(jump_insn 127 126 128 14 (set (pc)
+        (if_then_else (eq (reg:SI 106 [ _92 ])
+                (const_int 0 [0]))
+            (label_ref 134)
+            (pc))) "../Hardware/LCD.c":245 -1
+     (int_list:REG_BR_PROB 719407028 (nil))
+ -> 134)
+(note 128 127 129 15 [bb 15] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 129 128 130 15 (debug_marker) "../Hardware/LCD.c":245 -1
+     (nil))
+(insn 130 129 131 15 (set (reg:SI 12 a2)
+        (reg/v:SI 111 [ fc ])) "../Hardware/LCD.c":245 -1
+     (nil))
+(insn 131 130 132 15 (set (reg:SI 11 a1)
+        (reg/v:SI 109 [ y ])) "../Hardware/LCD.c":245 -1
+     (nil))
+(insn 132 131 133 15 (set (reg:SI 10 a0)
+        (reg/v:SI 97 [ x ])) "../Hardware/LCD.c":245 -1
+     (nil))
+(call_insn 133 132 134 15 (parallel [
+            (call (mem:SI (symbol_ref:SI ("LCD_DrawPoint") [flags 0x3] <function_decl 066890f0 LCD_DrawPoint>) [0 LCD_DrawPoint S4 A32])
+                (const_int 0 [0]))
+            (clobber (reg:SI 1 ra))
+        ]) "../Hardware/LCD.c":245 -1
+     (expr_list:REG_CALL_DECL (symbol_ref:SI ("LCD_DrawPoint") [flags 0x3] <function_decl 066890f0 LCD_DrawPoint>)
+        (expr_list:REG_EH_REGION (const_int 0 [0])
+            (nil)))
+    (expr_list:HI (use (reg:SI 10 a0))
+        (expr_list:HI (use (reg:SI 11 a1))
+            (expr_list:HI (use (reg:SI 12 a2))
+                (nil)))))
+(code_label 134 133 135 16 40 (nil) [1 uses])
+(note 135 134 136 16 [bb 16] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 136 135 137 16 (debug_marker) "../Hardware/LCD.c":246 -1
+     (nil))
+(insn 137 136 138 16 (set (reg:SI 148)
+        (plus:SI (reg/v:SI 97 [ x ])
+            (const_int 1 [0x1]))) "../Hardware/LCD.c":246 -1
+     (nil))
+(insn 138 137 139 16 (set (reg/v:SI 97 [ x ])
+        (zero_extend:SI (subreg:HI (reg:SI 148) 0))) "../Hardware/LCD.c":246 -1
+     (nil))
+(debug_insn 139 138 140 16 (var_location:HI x (subreg:HI (reg/v:SI 97 [ x ]) 0)) "../Hardware/LCD.c":246 -1
+     (nil))
+(debug_insn 140 139 141 16 (debug_marker) "../Hardware/LCD.c":247 -1
+     (nil))
+(insn 141 140 142 16 (set (reg:SI 149)
+        (minus:SI (reg/v:SI 97 [ x ])
+            (reg/v:SI 108 [ x ]))) "../Hardware/LCD.c":247 -1
+     (nil))
+(jump_insn 142 141 143 16 (set (pc)
+        (if_then_else (ne (reg:SI 149)
+                (reg/v:SI 113 [ sizey ]))
+            (label_ref 153)
+            (pc))) "../Hardware/LCD.c":247 -1
+     (int_list:REG_BR_PROB 1034442876 (nil))
+ -> 153)
+(note 143 142 144 17 [bb 17] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 144 143 145 17 (debug_marker) "../Hardware/LCD.c":249 -1
+     (nil))
+(debug_insn 145 144 146 17 (var_location:HI x (subreg:HI (reg/v:SI 108 [ x ]) 0)) "../Hardware/LCD.c":249 -1
+     (nil))
+(debug_insn 146 145 147 17 (debug_marker) "../Hardware/LCD.c":250 -1
+     (nil))
+(insn 147 146 148 17 (set (reg:SI 150)
+        (plus:SI (reg/v:SI 109 [ y ])
+            (const_int 1 [0x1]))) "../Hardware/LCD.c":250 -1
+     (nil))
+(insn 148 147 149 17 (set (reg/v:SI 109 [ y ])
+        (zero_extend:SI (subreg:HI (reg:SI 150) 0))) "../Hardware/LCD.c":250 -1
+     (nil))
+(debug_insn 149 148 150 17 (var_location:HI y (subreg:HI (reg/v:SI 109 [ y ]) 0)) "../Hardware/LCD.c":250 -1
+     (nil))
+(debug_insn 150 149 15 17 (debug_marker) "../Hardware/LCD.c":251 -1
+     (nil))
+(insn 15 150 151 17 (set (reg/v:SI 97 [ x ])
+        (reg/v:SI 108 [ x ])) "../Hardware/LCD.c":249 -1
+     (nil))
+(jump_insn 151 15 152 17 (set (pc)
+        (label_ref 166)) "../Hardware/LCD.c":251 -1
+     (nil)
+ -> 166)
+(barrier 152 151 153)
+(code_label 153 152 154 18 39 (nil) [2 uses])
+(note 154 153 155 18 [bb 18] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 155 154 156 18 (var_location:QI m (subreg:QI (reg/v:SI 102 [ m ]) 0)) -1
+     (nil))
+(debug_insn 156 155 157 18 (var_location:HI x (subreg:HI (reg/v:SI 97 [ x ]) 0)) -1
+     (nil))
+(debug_insn 157 156 158 18 (var_location:QI D#45 (plus:QI (subreg:QI (reg:SI 91 [ ivtmp.64 ]) 0)
+        (const_int 1 [0x1]))) -1
+     (nil))
+(debug_insn 158 157 159 18 (var_location:QI j (debug_expr:QI D#45)) "../Hardware/LCD.c":230 -1
+     (nil))
+(debug_insn 159 158 160 18 (var_location:QI m (subreg:QI (reg/v:SI 102 [ m ]) 0)) -1
+     (nil))
+(debug_insn 160 159 161 18 (var_location:QI j (debug_expr:QI D#45)) -1
+     (nil))
+(debug_insn 161 160 162 18 (var_location:HI x (subreg:HI (reg/v:SI 97 [ x ]) 0)) -1
+     (nil))
+(insn 162 161 164 18 (set (reg:SI 91 [ ivtmp.64 ])
+        (plus:SI (reg:SI 91 [ ivtmp.64 ])
+            (const_int 1 [0x1]))) -1
+     (nil))
+(insn 164 162 165 18 (set (reg:SI 151)
+        (const_int 8 [0x8])) "../Hardware/LCD.c":230 -1
+     (nil))
+(jump_insn 165 164 202 18 (set (pc)
+        (if_then_else (ne (reg:SI 91 [ ivtmp.64 ])
+                (reg:SI 151))
+            (label_ref 163)
+            (pc))) "../Hardware/LCD.c":230 -1
+     (int_list:REG_BR_PROB 934440780 (nil))
+ -> 163)
+(note 202 165 203 19 [bb 19] NOTE_INSN_BASIC_BLOCK)
+(jump_insn 203 202 204 19 (set (pc)
+        (label_ref 166)) -1
+     (nil)
+ -> 166)
+(barrier 204 203 206)
+(code_label 206 204 205 20 43 (nil) [1 uses])
+(note 205 206 14 20 [bb 20] NOTE_INSN_BASIC_BLOCK)
+(insn 14 205 166 20 (set (reg/v:SI 102 [ m ])
+        (reg/v:SI 114 [ mode ])) "../Hardware/LCD.c":239 -1
+     (nil))
+(code_label 166 14 167 21 38 (nil) [2 uses])
+(note 167 166 168 21 [bb 21] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 168 167 169 21 (var_location:QI m (subreg:QI (reg/v:SI 102 [ m ]) 0)) -1
+     (nil))
+(debug_insn 169 168 170 21 (var_location:HI y (subreg:HI (reg/v:SI 109 [ y ]) 0)) -1
+     (nil))
+(debug_insn 170 169 171 21 (var_location:HI x (subreg:HI (reg/v:SI 97 [ x ]) 0)) -1
+     (nil))
+(insn 171 170 172 21 (set (reg:SI 152)
+        (plus:SI (reg/v:SI 100 [ i ])
+            (const_int 1 [0x1]))) "../Hardware/LCD.c":228 -1
+     (nil))
+(insn 172 171 173 21 (set (reg/v:SI 100 [ i ])
+        (zero_extend:SI (subreg:QI (reg:SI 152) 0))) "../Hardware/LCD.c":228 -1
+     (nil))
+(debug_insn 173 172 174 21 (var_location:QI i (subreg:QI (reg/v:SI 100 [ i ]) 0)) "../Hardware/LCD.c":228 -1
+     (nil))
+(code_label 174 173 175 22 34 (nil) [1 uses])
+(note 175 174 176 22 [bb 22] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 176 175 177 22 (var_location:QI m (subreg:QI (reg/v:SI 102 [ m ]) 0)) -1
+     (nil))
+(debug_insn 177 176 178 22 (var_location:QI i (subreg:QI (reg/v:SI 100 [ i ]) 0)) -1
+     (nil))
+(debug_insn 178 177 179 22 (var_location:HI y (subreg:HI (reg/v:SI 109 [ y ]) 0)) -1
+     (nil))
+(debug_insn 179 178 180 22 (var_location:HI x (subreg:HI (reg/v:SI 97 [ x ]) 0)) -1
+     (nil))
+(insn 180 179 181 22 (set (reg:SI 153)
+        (zero_extend:SI (subreg:HI (reg/v:SI 100 [ i ]) 0))) "../Hardware/LCD.c":228 -1
+     (nil))
+(jump_insn 181 180 182 22 (set (pc)
+        (if_then_else (ltu (reg:SI 153)
+                (reg/v:SI 104 [ TypefaceNum ]))
+            (label_ref:SI 208)
+            (pc))) "../Hardware/LCD.c":228 180 {*branchsi}
+     (int_list:REG_BR_PROB 955630228 (nil))
+ -> 208)
+(code_label 182 181 183 23 33 (nil) [2 uses])
+(note 183 182 184 23 [bb 23] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 184 183 185 23 (var_location:QI m (subreg:QI (reg/v:SI 102 [ m ]) 0)) -1
+     (nil))
+(debug_insn 185 184 186 23 (var_location:HI y (subreg:HI (reg/v:SI 109 [ y ]) 0)) -1
+     (nil))
+(debug_insn 186 185 187 23 (var_location:HI x (subreg:HI (reg/v:SI 97 [ x ]) 0)) -1
+     (nil))
+(debug_insn 187 186 188 23 (debug_marker) "../Hardware/LCD.c":257 -1
+     (nil))
+(debug_insn 188 187 189 23 (var_location:HI D#46 (plus:HI (subreg:HI (reg:SI 87 [ ivtmp.73 ]) 0)
+        (const_int 1 [0x1]))) -1
+     (nil))
+(debug_insn 189 188 190 23 (var_location:HI k (debug_expr:HI D#46)) "../Hardware/LCD.c":223 -1
+     (nil))
+(debug_insn 190 189 191 23 (var_location:HI k (debug_expr:HI D#46)) -1
+     (nil))
+(debug_insn 191 190 192 23 (var_location:QI m (subreg:QI (reg/v:SI 102 [ m ]) 0)) -1
+     (nil))
+(debug_insn 192 191 193 23 (var_location:HI y (subreg:HI (reg/v:SI 109 [ y ]) 0)) -1
+     (nil))
+(debug_insn 193 192 194 23 (var_location:HI x (subreg:HI (reg/v:SI 97 [ x ]) 0)) -1
+     (nil))
+(insn 194 193 195 23 (set (reg:SI 87 [ ivtmp.73 ])
+        (plus:SI (reg:SI 87 [ ivtmp.73 ])
+            (const_int 1 [0x1]))) -1
+     (nil))
+(insn 195 194 197 23 (set (reg:SI 88 [ ivtmp.79 ])
+        (plus:SI (reg:SI 88 [ ivtmp.79 ])
+            (const_int 34 [0x22]))) -1
+     (nil))
+(insn 197 195 198 23 (set (reg:SI 154)
+        (const_int 11 [0xb])) "../Hardware/LCD.c":223 -1
+     (nil))
+(jump_insn 198 197 199 23 (set (pc)
+        (if_then_else (ne (reg:SI 87 [ ivtmp.73 ])
+                (reg:SI 154))
+            (label_ref 196)
+            (pc))) "../Hardware/LCD.c":223 -1
+     (int_list:REG_BR_PROB 976171524 (nil))
+ -> 196)
+(note 199 198 0 24 [bb 24] NOTE_INSN_BASIC_BLOCK)
+
+;; Function LCD_ShowChinese (LCD_ShowChinese, funcdef_no=35, decl_uid=5009, cgraph_uid=35, symbol_order=43)
+
+
+;; Generating RTL for gimple basic block 2
+
+;; Generating RTL for gimple basic block 3
+
+;; Generating RTL for gimple basic block 4
+
+;; Generating RTL for gimple basic block 5
+
+;; Generating RTL for gimple basic block 6
+
+;; Generating RTL for gimple basic block 7
+
+;; Generating RTL for gimple basic block 8
+
+;; Generating RTL for gimple basic block 9
+
+
+try_optimize_cfg iteration 1
+
+Merging block 3 into block 2...
+Merged blocks 2 and 3.
+Merged 2 and 3 without moving.
+Edge 7->10 redirected to 11
+Forwarding edge 9->10 to 11 failed.
+Deleted label in block 10.
+
+
+try_optimize_cfg iteration 2
+
+Forwarding edge 9->10 to 11 failed.
+
+
+;;
+;; Full RTL generated for this function:
+;;
+(note 1 0 10 NOTE_INSN_DELETED)
+(note 10 1 2 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn 2 10 3 2 (set (reg/v:SI 76 [ x ])
+        (reg:SI 10 a0 [ x ])) "../Hardware/LCD.c":133 -1
+     (nil))
+(insn 3 2 4 2 (set (reg/v:SI 77 [ y ])
+        (reg:SI 11 a1 [ y ])) "../Hardware/LCD.c":133 -1
+     (nil))
+(insn 4 3 5 2 (set (reg/v/f:SI 78 [ s ])
+        (reg:SI 12 a2 [ s ])) "../Hardware/LCD.c":133 -1
+     (nil))
+(insn 5 4 6 2 (set (reg/v:SI 79 [ fc ])
+        (reg:SI 13 a3 [ fc ])) "../Hardware/LCD.c":133 -1
+     (nil))
+(insn 6 5 7 2 (set (reg/v:SI 80 [ bc ])
+        (reg:SI 14 a4 [ bc ])) "../Hardware/LCD.c":133 -1
+     (nil))
+(insn 7 6 8 2 (set (reg/v:SI 81 [ sizey ])
+        (reg:SI 15 a5 [ sizey ])) "../Hardware/LCD.c":133 -1
+     (nil))
+(insn 8 7 9 2 (set (reg/v:SI 82 [ mode ])
+        (reg:SI 16 a6 [ mode ])) "../Hardware/LCD.c":133 -1
+     (nil))
+(note 9 8 12 2 NOTE_INSN_FUNCTION_BEG)
+(debug_insn 12 9 13 2 (debug_marker) "../Hardware/LCD.c":134 -1
+     (nil))
+(jump_insn 13 12 14 2 (set (pc)
+        (label_ref 54)) "../Hardware/LCD.c":134 -1
+     (nil)
+ -> 54)
+(barrier 14 13 58)
+(code_label 58 14 15 4 57 (nil) [1 uses])
+(note 15 58 16 4 [bb 4] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 16 15 17 4 (debug_marker) "../Hardware/LCD.c":136 -1
+     (nil))
+(insn 17 16 18 4 (set (reg:SI 83)
+        (const_int 12 [0xc])) "../Hardware/LCD.c":136 -1
+     (nil))
+(jump_insn 18 17 19 4 (set (pc)
+        (if_then_else (eq (reg/v:SI 81 [ sizey ])
+                (reg:SI 83))
+            (label_ref 44)
+            (pc))) "../Hardware/LCD.c":136 -1
+     (int_list:REG_BR_PROB 365072228 (nil))
+ -> 44)
+(note 19 18 20 5 [bb 5] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 20 19 21 5 (debug_marker) "../Hardware/LCD.c":137 -1
+     (nil))
+(insn 21 20 22 5 (set (reg:SI 84)
+        (const_int 16 [0x10])) "../Hardware/LCD.c":137 -1
+     (nil))
+(jump_insn 22 21 23 5 (set (pc)
+        (if_then_else (ne (reg/v:SI 81 [ sizey ])
+                (reg:SI 84))
+            (label_ref 35)
+            (pc))) "../Hardware/LCD.c":137 -1
+     (int_list:REG_BR_PROB 856416484 (nil))
+ -> 35)
+(note 23 22 24 6 [bb 6] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 24 23 25 6 (debug_marker) "../Hardware/LCD.c":137 -1
+     (nil))
+(insn 25 24 26 6 (set (reg:SI 16 a6)
+        (reg/v:SI 82 [ mode ])) "../Hardware/LCD.c":137 -1
+     (nil))
+(insn 26 25 27 6 (set (reg:SI 15 a5)
+        (const_int 16 [0x10])) "../Hardware/LCD.c":137 -1
+     (nil))
+(insn 27 26 28 6 (set (reg:SI 14 a4)
+        (reg/v:SI 80 [ bc ])) "../Hardware/LCD.c":137 -1
+     (nil))
+(insn 28 27 29 6 (set (reg:SI 13 a3)
+        (reg/v:SI 79 [ fc ])) "../Hardware/LCD.c":137 -1
+     (nil))
+(insn 29 28 30 6 (set (reg:SI 12 a2)
+        (reg/v/f:SI 78 [ s ])) "../Hardware/LCD.c":137 -1
+     (nil))
+(insn 30 29 31 6 (set (reg:SI 11 a1)
+        (reg/v:SI 77 [ y ])) "../Hardware/LCD.c":137 -1
+     (nil))
+(insn 31 30 32 6 (set (reg:SI 10 a0)
+        (reg/v:SI 76 [ x ])) "../Hardware/LCD.c":137 -1
+     (nil))
+(call_insn 32 31 33 6 (parallel [
+            (call (mem:SI (symbol_ref:SI ("LCD_ShowChinese16x16") [flags 0x3] <function_decl 066893c0 LCD_ShowChinese16x16>) [0 LCD_ShowChinese16x16 S4 A32])
+                (const_int 0 [0]))
+            (clobber (reg:SI 1 ra))
+        ]) "../Hardware/LCD.c":137 -1
+     (expr_list:REG_CALL_DECL (symbol_ref:SI ("LCD_ShowChinese16x16") [flags 0x3] <function_decl 066893c0 LCD_ShowChinese16x16>)
+        (expr_list:REG_EH_REGION (const_int 0 [0])
+            (nil)))
+    (expr_list:HI (use (reg:SI 10 a0))
+        (expr_list:HI (use (reg:SI 11 a1))
+            (expr_list:SI (use (reg:SI 12 a2))
+                (expr_list:HI (use (reg:SI 13 a3))
+                    (expr_list:HI (use (reg:SI 14 a4))
+                        (expr_list:QI (use (reg:SI 15 a5))
+                            (expr_list:QI (use (reg:SI 16 a6))
+                                (nil)))))))))
+(jump_insn 33 32 34 6 (set (pc)
+        (label_ref 44)) -1
+     (nil)
+ -> 44)
+(barrier 34 33 35)
+(code_label 35 34 36 7 55 (nil) [1 uses])
+(note 36 35 37 7 [bb 7] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 37 36 38 7 (debug_marker) "../Hardware/LCD.c":138 -1
+     (nil))
+(insn 38 37 39 7 (set (reg:SI 85)
+        (plus:SI (reg/v:SI 81 [ sizey ])
+            (const_int -24 [0xffffffffffffffe8]))) "../Hardware/LCD.c":138 -1
+     (nil))
+(insn 39 38 40 7 (set (reg:QI 86)
+        (subreg:QI (reg:SI 85) 0)) "../Hardware/LCD.c":138 -1
+     (nil))
+(insn 40 39 41 7 (set (reg:SI 87)
+        (and:SI (subreg:SI (reg:QI 86) 0)
+            (const_int -9 [0xfffffffffffffff7]))) "../Hardware/LCD.c":138 -1
+     (nil))
+(insn 41 40 42 7 (set (reg:QI 88)
+        (subreg:QI (reg:SI 87) 0)) "../Hardware/LCD.c":138 -1
+     (nil))
+(insn 42 41 43 7 (set (reg:SI 89)
+        (zero_extend:SI (reg:QI 88))) "../Hardware/LCD.c":138 -1
+     (nil))
+(jump_insn 43 42 44 7 (set (pc)
+        (if_then_else (ne (reg:SI 89)
+                (const_int 0 [0]))
+            (label_ref:SI 63)
+            (pc))) "../Hardware/LCD.c":138 180 {*branchsi}
+     (int_list:REG_BR_PROB 708669604 (nil))
+ -> 63)
+(code_label 44 43 45 8 54 (nil) [2 uses])
+(note 45 44 46 8 [bb 8] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 46 45 47 8 (debug_marker) "../Hardware/LCD.c":141 -1
+     (nil))
+(insn 47 46 48 8 (set (reg/v/f:SI 78 [ s ])
+        (plus:SI (reg/v/f:SI 78 [ s ])
+            (const_int 2 [0x2]))) "../Hardware/LCD.c":141 -1
+     (nil))
+(debug_insn 48 47 49 8 (var_location:SI s (reg/v/f:SI 78 [ s ])) "../Hardware/LCD.c":141 -1
+     (nil))
+(debug_insn 49 48 50 8 (debug_marker) "../Hardware/LCD.c":142 -1
+     (nil))
+(insn 50 49 51 8 (set (reg:HI 90)
+        (subreg:HI (reg/v:SI 81 [ sizey ]) 0)) "../Hardware/LCD.c":142 -1
+     (nil))
+(insn 51 50 52 8 (set (reg:SI 91)
+        (plus:SI (reg/v:SI 76 [ x ])
+            (subreg:SI (reg:HI 90) 0))) "../Hardware/LCD.c":142 -1
+     (nil))
+(insn 52 51 53 8 (set (reg/v:SI 76 [ x ])
+        (zero_extend:SI (subreg:HI (reg:SI 91) 0))) "../Hardware/LCD.c":142 -1
+     (nil))
+(debug_insn 53 52 54 8 (var_location:HI x (subreg:HI (reg/v:SI 76 [ x ]) 0)) "../Hardware/LCD.c":142 -1
+     (nil))
+(code_label 54 53 55 9 53 (nil) [1 uses])
+(note 55 54 56 9 [bb 9] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 56 55 57 9 (var_location:SI s (reg/v/f:SI 78 [ s ])) -1
+     (nil))
+(debug_insn 57 56 59 9 (var_location:HI x (subreg:HI (reg/v:SI 76 [ x ]) 0)) -1
+     (nil))
+(insn 59 57 60 9 (set (reg:SI 92)
+        (zero_extend:SI (mem:QI (reg/v/f:SI 78 [ s ]) [0 MEM[base: s_4, offset: 0B]+0 S1 A8]))) "../Hardware/LCD.c":134 -1
+     (nil))
+(jump_insn 60 59 62 9 (set (pc)
+        (if_then_else (ne (reg:SI 92)
+                (const_int 0 [0]))
+            (label_ref 58)
+            (pc))) "../Hardware/LCD.c":134 -1
+     (int_list:REG_BR_PROB 1014686028 (nil))
+ -> 58)
+(note 62 60 63 10 [bb 10] NOTE_INSN_BASIC_BLOCK)
+(code_label 63 62 64 11 52 (nil) [1 uses])
+(note 64 63 0 11 [bb 11] NOTE_INSN_BASIC_BLOCK)
+
+;; Function LCD_ShowChinese24x24 (LCD_ShowChinese24x24, funcdef_no=48, decl_uid=5033, cgraph_uid=38, symbol_order=46)
+
+
+;; Generating RTL for gimple basic block 2
+
+
+try_optimize_cfg iteration 1
+
+Merging block 3 into block 2...
+Merged blocks 2 and 3.
+Merged 2 and 3 without moving.
+Merging block 4 into block 2...
+Merged blocks 2 and 4.
+Merged 2 and 4 without moving.
+
+
+try_optimize_cfg iteration 2
+
+
+
+;;
+;; Full RTL generated for this function:
+;;
+(note 1 0 10 NOTE_INSN_DELETED)
+(note 10 1 2 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn 2 10 3 2 (set (reg/v:SI 72 [ x ])
+        (reg:SI 10 a0 [ x ])) "../Hardware/LCD.c":271 -1
+     (nil))
+(insn 3 2 4 2 (set (reg/v:SI 73 [ y ])
+        (reg:SI 11 a1 [ y ])) "../Hardware/LCD.c":271 -1
+     (nil))
+(insn 4 3 5 2 (set (reg/v/f:SI 74 [ s ])
+        (reg:SI 12 a2 [ s ])) "../Hardware/LCD.c":271 -1
+     (nil))
+(insn 5 4 6 2 (set (reg/v:SI 75 [ fc ])
+        (reg:SI 13 a3 [ fc ])) "../Hardware/LCD.c":271 -1
+     (nil))
+(insn 6 5 7 2 (set (reg/v:SI 76 [ bc ])
+        (reg:SI 14 a4 [ bc ])) "../Hardware/LCD.c":271 -1
+     (nil))
+(insn 7 6 8 2 (set (reg/v:SI 77 [ sizey ])
+        (reg:SI 15 a5 [ sizey ])) "../Hardware/LCD.c":271 -1
+     (nil))
+(insn 8 7 9 2 (set (reg/v:SI 78 [ mode ])
+        (reg:SI 16 a6 [ mode ])) "../Hardware/LCD.c":271 -1
+     (nil))
+(note 9 8 12 2 NOTE_INSN_FUNCTION_BEG)
+(debug_insn 12 9 13 2 (var_location:HI D#31 (subreg:HI (entry_value:SI (reg:SI 10 a0 [ x ])) 0)) -1
+     (nil))
+(debug_insn 13 12 14 2 (var_location:HI D#32 (subreg:HI (entry_value:SI (reg:SI 11 a1 [ y ])) 0)) -1
+     (nil))
+(debug_insn 14 13 15 2 (var_location:SI D#33 (entry_value:SI (reg:SI 12 a2 [ s ]))) -1
+     (nil))
+(debug_insn 15 14 16 2 (var_location:HI D#34 (subreg:HI (entry_value:SI (reg:SI 13 a3 [ fc ])) 0)) -1
+     (nil))
+(debug_insn 16 15 17 2 (var_location:HI D#35 (subreg:HI (entry_value:SI (reg:SI 14 a4 [ bc ])) 0)) -1
+     (nil))
+(debug_insn 17 16 18 2 (var_location:QI D#36 (subreg:QI (entry_value:SI (reg:SI 15 a5 [ sizey ])) 0)) -1
+     (nil))
+(debug_insn 18 17 19 2 (var_location:QI D#37 (subreg:QI (entry_value:SI (reg:SI 16 a6 [ mode ])) 0)) -1
+     (nil))
+(debug_insn 19 18 20 2 (var_location:HI D#44 (debug_expr:HI D#31)) -1
+     (nil))
+(debug_insn 20 19 21 2 (var_location:HI x (debug_expr:HI D#44)) -1
+     (nil))
+(debug_insn 21 20 22 2 (var_location:HI D#43 (debug_expr:HI D#32)) -1
+     (nil))
+(debug_insn 22 21 23 2 (var_location:HI y (debug_expr:HI D#43)) -1
+     (nil))
+(debug_insn 23 22 24 2 (var_location:SI D#42 (debug_expr:SI D#33)) -1
+     (nil))
+(debug_insn 24 23 25 2 (var_location:SI s (debug_expr:SI D#42)) -1
+     (nil))
+(debug_insn 25 24 26 2 (var_location:HI D#41 (debug_expr:HI D#34)) -1
+     (nil))
+(debug_insn 26 25 27 2 (var_location:HI fc (debug_expr:HI D#41)) -1
+     (nil))
+(debug_insn 27 26 28 2 (var_location:HI D#40 (debug_expr:HI D#35)) -1
+     (nil))
+(debug_insn 28 27 29 2 (var_location:HI bc (debug_expr:HI D#40)) -1
+     (nil))
+(debug_insn 29 28 30 2 (var_location:QI D#39 (debug_expr:QI D#36)) -1
+     (nil))
+(debug_insn 30 29 31 2 (var_location:QI sizey (debug_expr:QI D#39)) -1
+     (nil))
+(debug_insn 31 30 32 2 (var_location:QI D#38 (debug_expr:QI D#37)) -1
+     (nil))
+(debug_insn 32 31 33 2 (var_location:QI mode (debug_expr:QI D#38)) -1
+     (nil))
+(debug_insn 33 32 34 2 (debug_marker) "../Hardware/LCD.c":158 -1
+     (nil))
+(debug_insn 34 33 35 2 (var_location:QI m (const_int 0 [0])) "../Hardware/LCD.c":158 -1
+     (nil))
+(debug_insn 35 34 36 2 (debug_marker) "../Hardware/LCD.c":159 -1
+     (nil))
+(debug_insn 36 35 37 2 (debug_marker) "../Hardware/LCD.c":160 -1
+     (nil))
+(debug_insn 37 36 38 2 (debug_marker) "../Hardware/LCD.c":161 -1
+     (nil))
+(debug_insn 38 37 39 2 (debug_marker) "../Hardware/LCD.c":162 -1
+     (nil))
+(debug_insn 39 38 40 2 (var_location:HI x0 (clobber (const_int 0 [0]))) "../Hardware/LCD.c":162 -1
+     (nil))
+(debug_insn 40 39 41 2 (debug_marker) "../Hardware/LCD.c":163 -1
+     (nil))
+(debug_insn 41 40 42 2 (var_location:SI D#7 (zero_extend:SI (debug_expr:QI D#8))) "../Hardware/LCD.c":163 -1
+     (nil))
+(debug_insn 42 41 43 2 (var_location:QI D#5 (ne:QI (debug_expr:QI D#6)
+        (const_int 0 [0]))) "../Hardware/LCD.c":163 -1
+     (nil))
+(debug_insn 43 42 44 2 (var_location:SI D#4 (zero_extend:SI (debug_expr:QI D#5))) "../Hardware/LCD.c":163 -1
+     (nil))
+(debug_insn 44 43 45 2 (var_location:SI D#3 (plus:SI (debug_expr:SI D#7)
+        (debug_expr:SI D#4))) "../Hardware/LCD.c":163 -1
+     (nil))
+(debug_insn 45 44 46 2 (var_location:HI D#2 (subreg:HI (debug_expr:SI D#3) 0)) "../Hardware/LCD.c":163 -1
+     (nil))
+(debug_insn 46 45 47 2 (var_location:HI TypefaceNum (mult:HI (debug_expr:HI D#2)
+        (debug_expr:HI D#1))) "../Hardware/LCD.c":163 -1
+     (nil))
+(debug_insn 47 46 48 2 (debug_marker) "../Hardware/LCD.c":165 -1
+     (nil))
+(debug_insn 48 47 49 2 (var_location:HI HZnum (const_int 0 [0])) "../Hardware/LCD.c":165 -1
+     (nil))
+(debug_insn 49 48 50 2 (debug_marker) "../Hardware/LCD.c":166 -1
+     (nil))
+(debug_insn 50 49 51 2 (var_location:HI k (const_int 0 [0])) "../Hardware/LCD.c":166 -1
+     (nil))
+(debug_insn 51 50 52 2 (var_location:HI k (const_int 0 [0])) -1
+     (nil))
+(debug_insn 52 51 53 2 (var_location:QI m (const_int 0 [0])) -1
+     (nil))
+(debug_insn 53 52 54 2 (var_location:HI y (clobber (const_int 0 [0]))) -1
+     (nil))
+(debug_insn 54 53 55 2 (var_location:HI x (clobber (const_int 0 [0]))) -1
+     (nil))
+(debug_insn 55 54 56 2 (var_location:HI x (clobber (const_int 0 [0]))) -1
+     (nil))
+(debug_insn 56 55 57 2 (var_location:HI y (clobber (const_int 0 [0]))) -1
+     (nil))
+(debug_insn 57 56 58 2 (var_location:SI s (clobber (const_int 0 [0]))) -1
+     (nil))
+(debug_insn 58 57 59 2 (var_location:HI fc (clobber (const_int 0 [0]))) -1
+     (nil))
+(debug_insn 59 58 60 2 (var_location:HI bc (clobber (const_int 0 [0]))) -1
+     (nil))
+(debug_insn 60 59 61 2 (var_location:QI sizey (clobber (const_int 0 [0]))) -1
+     (nil))
+(debug_insn 61 60 0 2 (var_location:QI mode (clobber (const_int 0 [0]))) -1
+     (nil))
+
+;; Function LCD_ShowChinese32x32 (LCD_ShowChinese32x32, funcdef_no=50, decl_uid=5041, cgraph_uid=39, symbol_order=47)
+
+
+;; Generating RTL for gimple basic block 2
+
+
+try_optimize_cfg iteration 1
+
+Merging block 3 into block 2...
+Merged blocks 2 and 3.
+Merged 2 and 3 without moving.
+Merging block 4 into block 2...
+Merged blocks 2 and 4.
+Merged 2 and 4 without moving.
+
+
+try_optimize_cfg iteration 2
+
+
+
+;;
+;; Full RTL generated for this function:
+;;
+(note 1 0 10 NOTE_INSN_DELETED)
+(note 10 1 2 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn 2 10 3 2 (set (reg/v:SI 72 [ x ])
+        (reg:SI 10 a0 [ x ])) "../Hardware/LCD.c":328 -1
+     (nil))
+(insn 3 2 4 2 (set (reg/v:SI 73 [ y ])
+        (reg:SI 11 a1 [ y ])) "../Hardware/LCD.c":328 -1
+     (nil))
+(insn 4 3 5 2 (set (reg/v/f:SI 74 [ s ])
+        (reg:SI 12 a2 [ s ])) "../Hardware/LCD.c":328 -1
+     (nil))
+(insn 5 4 6 2 (set (reg/v:SI 75 [ fc ])
+        (reg:SI 13 a3 [ fc ])) "../Hardware/LCD.c":328 -1
+     (nil))
+(insn 6 5 7 2 (set (reg/v:SI 76 [ bc ])
+        (reg:SI 14 a4 [ bc ])) "../Hardware/LCD.c":328 -1
+     (nil))
+(insn 7 6 8 2 (set (reg/v:SI 77 [ sizey ])
+        (reg:SI 15 a5 [ sizey ])) "../Hardware/LCD.c":328 -1
+     (nil))
+(insn 8 7 9 2 (set (reg/v:SI 78 [ mode ])
+        (reg:SI 16 a6 [ mode ])) "../Hardware/LCD.c":328 -1
+     (nil))
+(note 9 8 12 2 NOTE_INSN_FUNCTION_BEG)
+(debug_insn 12 9 13 2 (var_location:HI D#31 (subreg:HI (entry_value:SI (reg:SI 10 a0 [ x ])) 0)) -1
+     (nil))
+(debug_insn 13 12 14 2 (var_location:HI D#32 (subreg:HI (entry_value:SI (reg:SI 11 a1 [ y ])) 0)) -1
+     (nil))
+(debug_insn 14 13 15 2 (var_location:SI D#33 (entry_value:SI (reg:SI 12 a2 [ s ]))) -1
+     (nil))
+(debug_insn 15 14 16 2 (var_location:HI D#34 (subreg:HI (entry_value:SI (reg:SI 13 a3 [ fc ])) 0)) -1
+     (nil))
+(debug_insn 16 15 17 2 (var_location:HI D#35 (subreg:HI (entry_value:SI (reg:SI 14 a4 [ bc ])) 0)) -1
+     (nil))
+(debug_insn 17 16 18 2 (var_location:QI D#36 (subreg:QI (entry_value:SI (reg:SI 15 a5 [ sizey ])) 0)) -1
+     (nil))
+(debug_insn 18 17 19 2 (var_location:QI D#37 (subreg:QI (entry_value:SI (reg:SI 16 a6 [ mode ])) 0)) -1
+     (nil))
+(debug_insn 19 18 20 2 (var_location:HI D#44 (debug_expr:HI D#31)) -1
+     (nil))
+(debug_insn 20 19 21 2 (var_location:HI x (debug_expr:HI D#44)) -1
+     (nil))
+(debug_insn 21 20 22 2 (var_location:HI D#43 (debug_expr:HI D#32)) -1
+     (nil))
+(debug_insn 22 21 23 2 (var_location:HI y (debug_expr:HI D#43)) -1
+     (nil))
+(debug_insn 23 22 24 2 (var_location:SI D#42 (debug_expr:SI D#33)) -1
+     (nil))
+(debug_insn 24 23 25 2 (var_location:SI s (debug_expr:SI D#42)) -1
+     (nil))
+(debug_insn 25 24 26 2 (var_location:HI D#41 (debug_expr:HI D#34)) -1
+     (nil))
+(debug_insn 26 25 27 2 (var_location:HI fc (debug_expr:HI D#41)) -1
+     (nil))
+(debug_insn 27 26 28 2 (var_location:HI D#40 (debug_expr:HI D#35)) -1
+     (nil))
+(debug_insn 28 27 29 2 (var_location:HI bc (debug_expr:HI D#40)) -1
+     (nil))
+(debug_insn 29 28 30 2 (var_location:QI D#39 (debug_expr:QI D#36)) -1
+     (nil))
+(debug_insn 30 29 31 2 (var_location:QI sizey (debug_expr:QI D#39)) -1
+     (nil))
+(debug_insn 31 30 32 2 (var_location:QI D#38 (debug_expr:QI D#37)) -1
+     (nil))
+(debug_insn 32 31 33 2 (var_location:QI mode (debug_expr:QI D#38)) -1
+     (nil))
+(debug_insn 33 32 34 2 (debug_marker) "../Hardware/LCD.c":158 -1
+     (nil))
+(debug_insn 34 33 35 2 (var_location:QI m (const_int 0 [0])) "../Hardware/LCD.c":158 -1
+     (nil))
+(debug_insn 35 34 36 2 (debug_marker) "../Hardware/LCD.c":159 -1
+     (nil))
+(debug_insn 36 35 37 2 (debug_marker) "../Hardware/LCD.c":160 -1
+     (nil))
+(debug_insn 37 36 38 2 (debug_marker) "../Hardware/LCD.c":161 -1
+     (nil))
+(debug_insn 38 37 39 2 (debug_marker) "../Hardware/LCD.c":162 -1
+     (nil))
+(debug_insn 39 38 40 2 (var_location:HI x0 (clobber (const_int 0 [0]))) "../Hardware/LCD.c":162 -1
+     (nil))
+(debug_insn 40 39 41 2 (debug_marker) "../Hardware/LCD.c":163 -1
+     (nil))
+(debug_insn 41 40 42 2 (var_location:SI D#7 (zero_extend:SI (debug_expr:QI D#8))) "../Hardware/LCD.c":163 -1
+     (nil))
+(debug_insn 42 41 43 2 (var_location:QI D#5 (ne:QI (debug_expr:QI D#6)
+        (const_int 0 [0]))) "../Hardware/LCD.c":163 -1
+     (nil))
+(debug_insn 43 42 44 2 (var_location:SI D#4 (zero_extend:SI (debug_expr:QI D#5))) "../Hardware/LCD.c":163 -1
+     (nil))
+(debug_insn 44 43 45 2 (var_location:SI D#3 (plus:SI (debug_expr:SI D#7)
+        (debug_expr:SI D#4))) "../Hardware/LCD.c":163 -1
+     (nil))
+(debug_insn 45 44 46 2 (var_location:HI D#2 (subreg:HI (debug_expr:SI D#3) 0)) "../Hardware/LCD.c":163 -1
+     (nil))
+(debug_insn 46 45 47 2 (var_location:HI TypefaceNum (mult:HI (debug_expr:HI D#2)
+        (debug_expr:HI D#1))) "../Hardware/LCD.c":163 -1
+     (nil))
+(debug_insn 47 46 48 2 (debug_marker) "../Hardware/LCD.c":165 -1
+     (nil))
+(debug_insn 48 47 49 2 (var_location:HI HZnum (const_int 0 [0])) "../Hardware/LCD.c":165 -1
+     (nil))
+(debug_insn 49 48 50 2 (debug_marker) "../Hardware/LCD.c":166 -1
+     (nil))
+(debug_insn 50 49 51 2 (var_location:HI k (const_int 0 [0])) "../Hardware/LCD.c":166 -1
+     (nil))
+(debug_insn 51 50 52 2 (var_location:HI k (const_int 0 [0])) -1
+     (nil))
+(debug_insn 52 51 53 2 (var_location:QI m (const_int 0 [0])) -1
+     (nil))
+(debug_insn 53 52 54 2 (var_location:HI y (clobber (const_int 0 [0]))) -1
+     (nil))
+(debug_insn 54 53 55 2 (var_location:HI x (clobber (const_int 0 [0]))) -1
+     (nil))
+(debug_insn 55 54 56 2 (var_location:HI x (clobber (const_int 0 [0]))) -1
+     (nil))
+(debug_insn 56 55 57 2 (var_location:HI y (clobber (const_int 0 [0]))) -1
+     (nil))
+(debug_insn 57 56 58 2 (var_location:SI s (clobber (const_int 0 [0]))) -1
+     (nil))
+(debug_insn 58 57 59 2 (var_location:HI fc (clobber (const_int 0 [0]))) -1
+     (nil))
+(debug_insn 59 58 60 2 (var_location:HI bc (clobber (const_int 0 [0]))) -1
+     (nil))
+(debug_insn 60 59 61 2 (var_location:QI sizey (clobber (const_int 0 [0]))) -1
+     (nil))
+(debug_insn 61 60 0 2 (var_location:QI mode (clobber (const_int 0 [0]))) -1
+     (nil))
+
+;; Function LCD_ShowChar (LCD_ShowChar, funcdef_no=40, decl_uid=5049, cgraph_uid=40, symbol_order=48)
+
+
+;; Generating RTL for gimple basic block 2
+
+;; Generating RTL for gimple basic block 3
+
+;; Generating RTL for gimple basic block 4
+
+;; Generating RTL for gimple basic block 5
+
+;; Generating RTL for gimple basic block 6
+
+;; Generating RTL for gimple basic block 7
+
+;; Generating RTL for gimple basic block 8
+
+;; Generating RTL for gimple basic block 9
+
+;; Generating RTL for gimple basic block 10
+
+;; Generating RTL for gimple basic block 11
+
+;; Generating RTL for gimple basic block 12
+
+;; Generating RTL for gimple basic block 13
+
+;; Generating RTL for gimple basic block 14
+
+;; Generating RTL for gimple basic block 15
+
+;; Generating RTL for gimple basic block 16
+
+;; Generating RTL for gimple basic block 17
+
+;; Generating RTL for gimple basic block 18
+
+;; Generating RTL for gimple basic block 19
+
+;; Generating RTL for gimple basic block 20
+
+;; Generating RTL for gimple basic block 21
+
+;; Generating RTL for gimple basic block 22
+
+;; Generating RTL for gimple basic block 23
+
+;; Generating RTL for gimple basic block 24
+Edge 16->22 redirected to 29
+
+
+try_optimize_cfg iteration 1
+
+Merging block 3 into block 2...
+Merged blocks 2 and 3.
+Merged 2 and 3 without moving.
+Edge 10->28 redirected to 29
+Forwarding edge 17->18 to 23 failed.
+Forwarding edge 23->24 to 26 failed.
+Forwarding edge 27->28 to 29 failed.
+Deleted label in block 28.
+
+
+try_optimize_cfg iteration 2
+
+Forwarding edge 17->18 to 23 failed.
+Forwarding edge 23->24 to 26 failed.
+Forwarding edge 27->28 to 29 failed.
+
+
+;;
+;; Full RTL generated for this function:
+;;
+(note 1 0 16 NOTE_INSN_DELETED)
+(note 16 1 2 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn 2 16 3 2 (set (reg/v:SI 116 [ x ])
+        (reg:SI 10 a0 [ x ])) "../Hardware/LCD.c":386 -1
+     (nil))
+(insn 3 2 4 2 (set (reg/v:SI 117 [ y ])
+        (reg:SI 11 a1 [ y ])) "../Hardware/LCD.c":386 -1
+     (nil))
+(insn 4 3 5 2 (set (reg/v:SI 118 [ num ])
+        (reg:SI 12 a2 [ num ])) "../Hardware/LCD.c":386 -1
+     (nil))
+(insn 5 4 6 2 (set (reg/v:SI 119 [ fc ])
+        (reg:SI 13 a3 [ fc ])) "../Hardware/LCD.c":386 -1
+     (nil))
+(insn 6 5 7 2 (set (reg/v:SI 120 [ bc ])
+        (reg:SI 14 a4 [ bc ])) "../Hardware/LCD.c":386 -1
+     (nil))
+(insn 7 6 8 2 (set (reg/v:SI 121 [ sizey ])
+        (reg:SI 15 a5 [ sizey ])) "../Hardware/LCD.c":386 -1
+     (nil))
+(insn 8 7 9 2 (set (reg/v:SI 122 [ mode ])
+        (reg:SI 16 a6 [ mode ])) "../Hardware/LCD.c":386 -1
+     (nil))
+(note 9 8 18 2 NOTE_INSN_FUNCTION_BEG)
+(debug_insn 18 9 19 2 (debug_marker) "../Hardware/LCD.c":387 -1
+     (nil))
+(debug_insn 19 18 20 2 (var_location:QI m (const_int 0 [0])) "../Hardware/LCD.c":387 -1
+     (nil))
+(debug_insn 20 19 21 2 (debug_marker) "../Hardware/LCD.c":388 -1
+     (nil))
+(debug_insn 21 20 22 2 (debug_marker) "../Hardware/LCD.c":389 -1
+     (nil))
+(debug_insn 22 21 23 2 (var_location:HI x0 (subreg:HI (reg/v:SI 116 [ x ]) 0)) "../Hardware/LCD.c":389 -1
+     (nil))
+(debug_insn 23 22 24 2 (debug_marker) "../Hardware/LCD.c":390 -1
+     (nil))
+(insn 24 23 25 2 (set (reg:SI 123)
+        (lshiftrt:SI (reg/v:SI 121 [ sizey ])
+            (const_int 1 [0x1]))) "../Hardware/LCD.c":390 -1
+     (nil))
+(insn 25 24 26 2 (set (reg/v:SI 98 [ sizex ])
+        (zero_extend:SI (subreg:QI (reg:SI 123) 0))) "../Hardware/LCD.c":390 -1
+     (nil))
+(debug_insn 26 25 27 2 (var_location:QI sizex (subreg:QI (reg/v:SI 98 [ sizex ]) 0)) "../Hardware/LCD.c":390 -1
+     (nil))
+(debug_insn 27 26 28 2 (debug_marker) "../Hardware/LCD.c":391 -1
+     (nil))
+(insn 28 27 29 2 (set (reg:SI 79 [ _8 ])
+        (zero_extend:SI (subreg:HI (reg/v:SI 121 [ sizey ]) 0))) "../Hardware/LCD.c":391 -1
+     (nil))
+(insn 29 28 30 2 (set (reg:SI 124)
+        (and:SI (reg/v:SI 98 [ sizex ])
+            (const_int 7 [0x7]))) "../Hardware/LCD.c":391 -1
+     (nil))
+(insn 30 29 31 2 (set (reg:SI 126)
+        (zero_extend:SI (subreg:QI (reg:SI 124) 0))) "../Hardware/LCD.c":391 -1
+     (nil))
+(insn 31 30 32 2 (set (reg:SI 127)
+        (ne:SI (reg:SI 126)
+            (const_int 0 [0]))) "../Hardware/LCD.c":391 -1
+     (nil))
+(insn 32 31 33 2 (set (reg:SI 128)
+        (lshiftrt:SI (reg/v:SI 121 [ sizey ])
+            (const_int 4 [0x4]))) "../Hardware/LCD.c":391 -1
+     (nil))
+(insn 33 32 34 2 (set (reg:SI 129)
+        (zero_extend:SI (subreg:QI (reg:SI 128) 0))) "../Hardware/LCD.c":391 -1
+     (nil))
+(insn 34 33 35 2 (set (reg:SI 130)
+        (plus:SI (reg:SI 127)
+            (reg:SI 129))) "../Hardware/LCD.c":391 -1
+     (nil))
+(insn 35 34 36 2 (set (reg:HI 131)
+        (subreg:HI (reg:SI 130) 0)) "../Hardware/LCD.c":391 -1
+     (nil))
+(insn 36 35 37 2 (set (reg:SI 132)
+        (mult:SI (reg:SI 79 [ _8 ])
+            (subreg:SI (reg:HI 131) 0))) "../Hardware/LCD.c":391 -1
+     (nil))
+(insn 37 36 38 2 (set (reg/v:SI 99 [ TypefaceNum ])
+        (zero_extend:SI (subreg:HI (reg:SI 132) 0))) "../Hardware/LCD.c":391 -1
+     (nil))
+(debug_insn 38 37 39 2 (var_location:HI TypefaceNum (subreg:HI (reg/v:SI 99 [ TypefaceNum ]) 0)) "../Hardware/LCD.c":391 -1
+     (nil))
+(debug_insn 39 38 40 2 (debug_marker) "../Hardware/LCD.c":392 -1
+     (nil))
+(debug_insn 40 39 41 2 (var_location:QI num (plus:QI (subreg:QI (reg/v:SI 118 [ num ]) 0)
+        (const_int -32 [0xffffffffffffffe0]))) "../Hardware/LCD.c":392 -1
+     (nil))
+(debug_insn 41 40 42 2 (debug_marker) "../Hardware/LCD.c":393 -1
+     (nil))
+(insn 42 41 43 2 (set (reg:SI 133)
+        (plus:SI (reg/v:SI 117 [ y ])
+            (const_int -1 [0xffffffffffffffff]))) "../Hardware/LCD.c":393 -1
+     (nil))
+(insn 43 42 44 2 (set (reg:HI 134)
+        (subreg:HI (reg:SI 133) 0)) "../Hardware/LCD.c":393 -1
+     (nil))
+(insn 44 43 45 2 (set (reg:SI 135)
+        (plus:SI (reg:SI 79 [ _8 ])
+            (subreg:SI (reg:HI 134) 0))) "../Hardware/LCD.c":393 -1
+     (nil))
+(insn 45 44 46 2 (set (reg:SI 136)
+        (zero_extend:SI (subreg:HI (reg:SI 135) 0))) "../Hardware/LCD.c":393 -1
+     (nil))
+(insn 46 45 47 2 (set (reg:SI 137)
+        (plus:SI (reg/v:SI 116 [ x ])
+            (const_int -1 [0xffffffffffffffff]))) "../Hardware/LCD.c":393 -1
+     (nil))
+(insn 47 46 48 2 (set (reg:HI 138)
+        (subreg:HI (reg:SI 137) 0)) "../Hardware/LCD.c":393 -1
+     (nil))
+(insn 48 47 49 2 (set (reg:HI 139)
+        (subreg:HI (reg/v:SI 98 [ sizex ]) 0)) "../Hardware/LCD.c":393 -1
+     (nil))
+(insn 49 48 50 2 (set (reg:SI 140)
+        (plus:SI (subreg:SI (reg:HI 138) 0)
+            (subreg:SI (reg:HI 139) 0))) "../Hardware/LCD.c":393 -1
+     (nil))
+(insn 50 49 51 2 (set (reg:SI 141)
+        (zero_extend:SI (subreg:HI (reg:SI 140) 0))) "../Hardware/LCD.c":393 -1
+     (nil))
+(insn 51 50 52 2 (set (reg:SI 13 a3)
+        (reg:SI 136)) "../Hardware/LCD.c":393 -1
+     (nil))
+(insn 52 51 53 2 (set (reg:SI 12 a2)
+        (reg:SI 141)) "../Hardware/LCD.c":393 -1
+     (nil))
+(insn 53 52 54 2 (set (reg:SI 11 a1)
+        (reg/v:SI 117 [ y ])) "../Hardware/LCD.c":393 -1
+     (nil))
+(insn 54 53 55 2 (set (reg:SI 10 a0)
+        (reg/v:SI 116 [ x ])) "../Hardware/LCD.c":393 -1
+     (nil))
+(call_insn 55 54 56 2 (parallel [
+            (call (mem:SI (symbol_ref:SI ("LCD_Address_Set") [flags 0x41] <function_decl 06874f78 LCD_Address_Set>) [0 LCD_Address_Set S4 A32])
+                (const_int 0 [0]))
+            (clobber (reg:SI 1 ra))
+        ]) "../Hardware/LCD.c":393 -1
+     (expr_list:REG_CALL_DECL (symbol_ref:SI ("LCD_Address_Set") [flags 0x41] <function_decl 06874f78 LCD_Address_Set>)
+        (nil))
+    (expr_list:HI (use (reg:SI 10 a0))
+        (expr_list:HI (use (reg:SI 11 a1))
+            (expr_list:HI (use (reg:SI 12 a2))
+                (expr_list:HI (use (reg:SI 13 a3))
+                    (nil))))))
+(debug_insn 56 55 57 2 (debug_marker) "../Hardware/LCD.c":394 -1
+     (nil))
+(debug_insn 57 56 58 2 (var_location:HI i (const_int 0 [0])) "../Hardware/LCD.c":394 -1
+     (nil))
+(insn 58 57 59 2 (set (reg:SI 142)
+        (plus:SI (reg/v:SI 118 [ num ])
+            (const_int -32 [0xffffffffffffffe0]))) "../Hardware/LCD.c":392 -1
+     (nil))
+(insn 59 58 60 2 (set (reg:SI 113 [ _101 ])
+        (zero_extend:SI (subreg:QI (reg:SI 142) 0))) -1
+     (nil))
+(insn 60 59 61 2 (set (reg:SI 114 [ _102 ])
+        (ashift:SI (reg:SI 113 [ _101 ])
+            (const_int 6 [0x6]))) -1
+     (nil))
+(insn 61 60 62 2 (set (reg:SI 143)
+        (const_int 48 [0x30])) -1
+     (nil))
+(insn 62 61 63 2 (set (reg:SI 110 [ _97 ])
+        (mult:SI (reg:SI 113 [ _101 ])
+            (reg:SI 143))) -1
+     (nil))
+(insn 63 62 64 2 (set (reg:SI 106 [ _92 ])
+        (ashift:SI (reg:SI 113 [ _101 ])
+            (const_int 4 [0x4]))) -1
+     (nil))
+(insn 64 63 65 2 (set (reg:SI 144)
+        (const_int 12 [0xc])) -1
+     (nil))
+(insn 65 64 13 2 (set (reg:SI 85 [ _25 ])
+        (mult:SI (reg:SI 113 [ _101 ])
+            (reg:SI 144))) -1
+     (nil))
+(insn 13 65 14 2 (set (reg/v:SI 93 [ x ])
+        (reg/v:SI 116 [ x ])) "../Hardware/LCD.c":394 -1
+     (nil))
+(insn 14 13 15 2 (set (reg:SI 87 [ ivtmp.95 ])
+        (const_int 0 [0])) "../Hardware/LCD.c":394 -1
+     (nil))
+(insn 15 14 66 2 (set (reg/v:SI 95 [ m ])
+        (const_int 0 [0])) "../Hardware/LCD.c":387 -1
+     (nil))
+(jump_insn 66 15 67 2 (set (pc)
+        (label_ref 218)) "../Hardware/LCD.c":394 -1
+     (nil)
+ -> 218)
+(barrier 67 66 224)
+(code_label 224 67 68 4 75 (nil) [1 uses])
+(note 68 224 69 4 [bb 4] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 69 68 70 4 (debug_marker) "../Hardware/LCD.c":396 -1
+     (nil))
+(insn 70 69 71 4 (set (reg:SI 145)
+        (const_int 12 [0xc])) "../Hardware/LCD.c":396 -1
+     (nil))
+(jump_insn 71 70 72 4 (set (pc)
+        (if_then_else (ne (reg/v:SI 121 [ sizey ])
+                (reg:SI 145))
+            (label_ref 82)
+            (pc))) "../Hardware/LCD.c":396 -1
+     (int_list:REG_BR_PROB 708669604 (nil))
+ -> 82)
+(note 72 71 73 5 [bb 5] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 73 72 74 5 (debug_marker) "../Hardware/LCD.c":396 -1
+     (nil))
+(insn 74 73 75 5 (set (reg:SI 147)
+        (high:SI (symbol_ref:SI ("*.LANCHOR1") [flags 0x182]))) "../Hardware/LCD.c":396 -1
+     (nil))
+(insn 75 74 76 5 (set (reg/f:SI 146)
+        (lo_sum:SI (reg:SI 147)
+            (symbol_ref:SI ("*.LANCHOR1") [flags 0x182]))) "../Hardware/LCD.c":396 -1
+     (expr_list:REG_EQUAL (symbol_ref:SI ("*.LANCHOR1") [flags 0x182])
+        (nil)))
+(insn 76 75 77 5 (set (reg:SI 148)
+        (plus:SI (reg:SI 85 [ _25 ])
+            (reg:SI 87 [ ivtmp.95 ]))) "../Hardware/LCD.c":396 -1
+     (nil))
+(insn 77 76 78 5 (set (reg:SI 149)
+        (plus:SI (reg/f:SI 146)
+            (reg:SI 148))) "../Hardware/LCD.c":396 -1
+     (nil))
+(insn 78 77 79 5 (set (reg/v:SI 94 [ temp ])
+        (zero_extend:SI (mem:QI (reg:SI 149) [0 MEM[base: _82, offset: 0B]+0 S1 A8]))) "../Hardware/LCD.c":396 -1
+     (nil))
+(debug_insn 79 78 80 5 (var_location:QI temp (subreg:QI (reg/v:SI 94 [ temp ]) 0)) "../Hardware/LCD.c":396 -1
+     (nil))
+(jump_insn 80 79 81 5 (set (pc)
+        (label_ref 125)) -1
+     (nil)
+ -> 125)
+(barrier 81 80 82)
+(code_label 82 81 83 6 63 (nil) [1 uses])
+(note 83 82 84 6 [bb 6] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 84 83 85 6 (debug_marker) "../Hardware/LCD.c":397 -1
+     (nil))
+(insn 85 84 86 6 (set (reg:SI 150)
+        (const_int 16 [0x10])) "../Hardware/LCD.c":397 -1
+     (nil))
+(jump_insn 86 85 87 6 (set (pc)
+        (if_then_else (ne (reg/v:SI 121 [ sizey ])
+                (reg:SI 150))
+            (label_ref 97)
+            (pc))) "../Hardware/LCD.c":397 -1
+     (int_list:REG_BR_PROB 708669604 (nil))
+ -> 97)
+(note 87 86 88 7 [bb 7] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 88 87 89 7 (debug_marker) "../Hardware/LCD.c":397 -1
+     (nil))
+(insn 89 88 90 7 (set (reg:SI 152)
+        (high:SI (symbol_ref:SI ("*.LANCHOR2") [flags 0x182]))) "../Hardware/LCD.c":397 -1
+     (nil))
+(insn 90 89 91 7 (set (reg/f:SI 151)
+        (lo_sum:SI (reg:SI 152)
+            (symbol_ref:SI ("*.LANCHOR2") [flags 0x182]))) "../Hardware/LCD.c":397 -1
+     (expr_list:REG_EQUAL (symbol_ref:SI ("*.LANCHOR2") [flags 0x182])
+        (nil)))
+(insn 91 90 92 7 (set (reg:SI 153)
+        (plus:SI (reg:SI 87 [ ivtmp.95 ])
+            (reg:SI 106 [ _92 ]))) "../Hardware/LCD.c":397 -1
+     (nil))
+(insn 92 91 93 7 (set (reg:SI 154)
+        (plus:SI (reg/f:SI 151)
+            (reg:SI 153))) "../Hardware/LCD.c":397 -1
+     (nil))
+(insn 93 92 94 7 (set (reg/v:SI 94 [ temp ])
+        (zero_extend:SI (mem:QI (reg:SI 154) [0 MEM[base: _94, offset: 0B]+0 S1 A8]))) "../Hardware/LCD.c":397 -1
+     (nil))
+(debug_insn 94 93 95 7 (var_location:QI temp (subreg:QI (reg/v:SI 94 [ temp ]) 0)) "../Hardware/LCD.c":397 -1
+     (nil))
+(jump_insn 95 94 96 7 (set (pc)
+        (label_ref 125)) -1
+     (nil)
+ -> 125)
+(barrier 96 95 97)
+(code_label 97 96 98 8 65 (nil) [1 uses])
+(note 98 97 99 8 [bb 8] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 99 98 100 8 (debug_marker) "../Hardware/LCD.c":398 -1
+     (nil))
+(insn 100 99 101 8 (set (reg:SI 155)
+        (const_int 24 [0x18])) "../Hardware/LCD.c":398 -1
+     (nil))
+(jump_insn 101 100 102 8 (set (pc)
+        (if_then_else (ne (reg/v:SI 121 [ sizey ])
+                (reg:SI 155))
+            (label_ref 112)
+            (pc))) "../Hardware/LCD.c":398 -1
+     (int_list:REG_BR_PROB 708669604 (nil))
+ -> 112)
+(note 102 101 103 9 [bb 9] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 103 102 104 9 (debug_marker) "../Hardware/LCD.c":398 -1
+     (nil))
+(insn 104 103 105 9 (set (reg:SI 157)
+        (high:SI (symbol_ref:SI ("*.LANCHOR3") [flags 0x182]))) "../Hardware/LCD.c":398 -1
+     (nil))
+(insn 105 104 106 9 (set (reg/f:SI 156)
+        (lo_sum:SI (reg:SI 157)
+            (symbol_ref:SI ("*.LANCHOR3") [flags 0x182]))) "../Hardware/LCD.c":398 -1
+     (expr_list:REG_EQUAL (symbol_ref:SI ("*.LANCHOR3") [flags 0x182])
+        (nil)))
+(insn 106 105 107 9 (set (reg:SI 158)
+        (plus:SI (reg:SI 87 [ ivtmp.95 ])
+            (reg:SI 110 [ _97 ]))) "../Hardware/LCD.c":398 -1
+     (nil))
+(insn 107 106 108 9 (set (reg:SI 159)
+        (plus:SI (reg/f:SI 156)
+            (reg:SI 158))) "../Hardware/LCD.c":398 -1
+     (nil))
+(insn 108 107 109 9 (set (reg/v:SI 94 [ temp ])
+        (zero_extend:SI (mem:QI (reg:SI 159) [0 MEM[base: _99, offset: 0B]+0 S1 A8]))) "../Hardware/LCD.c":398 -1
+     (nil))
+(debug_insn 109 108 110 9 (var_location:QI temp (subreg:QI (reg/v:SI 94 [ temp ]) 0)) "../Hardware/LCD.c":398 -1
+     (nil))
+(jump_insn 110 109 111 9 (set (pc)
+        (label_ref 125)) -1
+     (nil)
+ -> 125)
+(barrier 111 110 112)
+(code_label 112 111 113 10 66 (nil) [1 uses])
+(note 113 112 114 10 [bb 10] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 114 113 115 10 (debug_marker) "../Hardware/LCD.c":399 -1
+     (nil))
+(insn 115 114 116 10 (set (reg:SI 160)
+        (const_int 32 [0x20])) "../Hardware/LCD.c":399 -1
+     (nil))
+(jump_insn 116 115 117 10 (set (pc)
+        (if_then_else (ne (reg/v:SI 121 [ sizey ])
+                (reg:SI 160))
+            (label_ref:SI 229)
+            (pc))) "../Hardware/LCD.c":399 180 {*branchsi}
+     (int_list:REG_BR_PROB 59055804 (nil))
+ -> 229)
+(note 117 116 118 11 [bb 11] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 118 117 119 11 (debug_marker) "../Hardware/LCD.c":399 -1
+     (nil))
+(insn 119 118 120 11 (set (reg:SI 162)
+        (high:SI (symbol_ref:SI ("*.LANCHOR4") [flags 0x182]))) "../Hardware/LCD.c":399 -1
+     (nil))
+(insn 120 119 121 11 (set (reg/f:SI 161)
+        (lo_sum:SI (reg:SI 162)
+            (symbol_ref:SI ("*.LANCHOR4") [flags 0x182]))) "../Hardware/LCD.c":399 -1
+     (expr_list:REG_EQUAL (symbol_ref:SI ("*.LANCHOR4") [flags 0x182])
+        (nil)))
+(insn 121 120 122 11 (set (reg:SI 163)
+        (plus:SI (reg:SI 87 [ ivtmp.95 ])
+            (reg:SI 114 [ _102 ]))) "../Hardware/LCD.c":399 -1
+     (nil))
+(insn 122 121 123 11 (set (reg:SI 164)
+        (plus:SI (reg/f:SI 161)
+            (reg:SI 163))) "../Hardware/LCD.c":399 -1
+     (nil))
+(insn 123 122 124 11 (set (reg/v:SI 94 [ temp ])
+        (zero_extend:SI (mem:QI (reg:SI 164) [0 MEM[base: _104, offset: 0B]+0 S1 A8]))) "../Hardware/LCD.c":399 -1
+     (nil))
+(debug_insn 124 123 125 11 (var_location:QI temp (subreg:QI (reg/v:SI 94 [ temp ]) 0)) "../Hardware/LCD.c":399 -1
+     (nil))
+(code_label 125 124 126 12 64 (nil) [3 uses])
+(note 126 125 127 12 [bb 12] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 127 126 128 12 (var_location:QI temp (subreg:QI (reg/v:SI 94 [ temp ]) 0)) -1
+     (nil))
+(debug_insn 128 127 129 12 (debug_marker) "../Hardware/LCD.c":401 -1
+     (nil))
+(debug_insn 129 128 130 12 (var_location:QI t (const_int 0 [0])) "../Hardware/LCD.c":401 -1
+     (nil))
+(debug_insn 130 129 131 12 (var_location:QI m (subreg:QI (reg/v:SI 95 [ m ]) 0)) -1
+     (nil))
+(debug_insn 131 130 132 12 (var_location:QI t (const_int 0 [0])) -1
+     (nil))
+(debug_insn 132 131 10 12 (var_location:HI x (subreg:HI (reg/v:SI 93 [ x ]) 0)) -1
+     (nil))
+(insn 10 132 208 12 (set (reg:SI 81 [ ivtmp.89 ])
+        (const_int 0 [0])) "../Hardware/LCD.c":386 -1
+     (nil))
+(code_label 208 10 133 13 74 (nil) [1 uses])
+(note 133 208 134 13 [bb 13] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 134 133 135 13 (var_location:QI m (subreg:QI (reg/v:SI 95 [ m ]) 0)) -1
+     (nil))
+(debug_insn 135 134 136 13 (var_location:QI t (subreg:QI (reg:SI 81 [ ivtmp.89 ]) 0)) -1
+     (nil))
+(debug_insn 136 135 137 13 (var_location:HI x (subreg:HI (reg/v:SI 93 [ x ]) 0)) -1
+     (nil))
+(debug_insn 137 136 138 13 (debug_marker) "../Hardware/LCD.c":403 -1
+     (nil))
+(insn 138 137 139 13 (set (reg:SI 165)
+        (ashiftrt:SI (reg/v:SI 94 [ temp ])
+            (subreg:QI (reg:SI 81 [ ivtmp.89 ]) 0))) -1
+     (nil))
+(insn 139 138 140 13 (set (reg:SI 104 [ _83 ])
+        (and:SI (reg:SI 165)
+            (const_int 1 [0x1]))) -1
+     (nil))
+(jump_insn 140 139 141 13 (set (pc)
+        (if_then_else (ne (reg/v:SI 122 [ mode ])
+                (const_int 0 [0]))
+            (label_ref 169)
+            (pc))) "../Hardware/LCD.c":403 -1
+     (int_list:REG_BR_PROB 536870916 (nil))
+ -> 169)
+(note 141 140 142 14 [bb 14] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 142 141 143 14 (debug_marker) "../Hardware/LCD.c":405 -1
+     (nil))
+(jump_insn 143 142 144 14 (set (pc)
+        (if_then_else (eq (reg:SI 104 [ _83 ])
+                (const_int 0 [0]))
+            (label_ref 150)
+            (pc))) "../Hardware/LCD.c":405 -1
+     (int_list:REG_BR_PROB 536870916 (nil))
+ -> 150)
+(note 144 143 145 15 [bb 15] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 145 144 146 15 (debug_marker) "../Hardware/LCD.c":405 -1
+     (nil))
+(insn 146 145 147 15 (set (reg:SI 10 a0)
+        (reg/v:SI 119 [ fc ])) "../Hardware/LCD.c":405 -1
+     (nil))
+(call_insn 147 146 148 15 (parallel [
+            (call (mem:SI (symbol_ref:SI ("LCD_WR_DATA") [flags 0x41] <function_decl 06874e88 LCD_WR_DATA>) [0 LCD_WR_DATA S4 A32])
+                (const_int 0 [0]))
+            (clobber (reg:SI 1 ra))
+        ]) "../Hardware/LCD.c":405 -1
+     (expr_list:REG_CALL_DECL (symbol_ref:SI ("LCD_WR_DATA") [flags 0x41] <function_decl 06874e88 LCD_WR_DATA>)
+        (nil))
+    (expr_list:HI (use (reg:SI 10 a0))
+        (nil)))
+(jump_insn 148 147 149 15 (set (pc)
+        (label_ref 155)) -1
+     (nil)
+ -> 155)
+(barrier 149 148 150)
+(code_label 150 149 151 16 69 (nil) [1 uses])
+(note 151 150 152 16 [bb 16] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 152 151 153 16 (debug_marker) "../Hardware/LCD.c":406 -1
+     (nil))
+(insn 153 152 154 16 (set (reg:SI 10 a0)
+        (reg/v:SI 120 [ bc ])) "../Hardware/LCD.c":406 -1
+     (nil))
+(call_insn 154 153 155 16 (parallel [
+            (call (mem:SI (symbol_ref:SI ("LCD_WR_DATA") [flags 0x41] <function_decl 06874e88 LCD_WR_DATA>) [0 LCD_WR_DATA S4 A32])
+                (const_int 0 [0]))
+            (clobber (reg:SI 1 ra))
+        ]) "../Hardware/LCD.c":406 -1
+     (expr_list:REG_CALL_DECL (symbol_ref:SI ("LCD_WR_DATA") [flags 0x41] <function_decl 06874e88 LCD_WR_DATA>)
+        (nil))
+    (expr_list:HI (use (reg:SI 10 a0))
+        (nil)))
+(code_label 155 154 156 17 70 (nil) [1 uses])
+(note 156 155 157 17 [bb 17] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 157 156 158 17 (debug_marker) "../Hardware/LCD.c":407 -1
+     (nil))
+(insn 158 157 159 17 (set (reg:SI 166)
+        (plus:SI (reg/v:SI 95 [ m ])
+            (const_int 1 [0x1]))) "../Hardware/LCD.c":407 -1
+     (nil))
+(insn 159 158 160 17 (set (reg/v:SI 95 [ m ])
+        (zero_extend:SI (subreg:QI (reg:SI 166) 0))) "../Hardware/LCD.c":407 -1
+     (nil))
+(debug_insn 160 159 161 17 (var_location:QI m (subreg:QI (reg/v:SI 95 [ m ]) 0)) "../Hardware/LCD.c":407 -1
+     (nil))
+(debug_insn 161 160 162 17 (debug_marker) "../Hardware/LCD.c":408 -1
+     (nil))
+(insn 162 161 163 17 (set (reg:SI 168)
+        (umod:SI (reg/v:SI 95 [ m ])
+            (reg/v:SI 98 [ sizex ]))) "../Hardware/LCD.c":408 -1
+     (nil))
+(insn 163 162 164 17 (set (reg:QI 169)
+        (subreg:QI (reg:SI 168) 0)) "../Hardware/LCD.c":408 -1
+     (nil))
+(insn 164 163 165 17 (set (reg:SI 170)
+        (zero_extend:SI (reg:QI 169))) "../Hardware/LCD.c":408 -1
+     (nil))
+(jump_insn 165 164 168 17 (set (pc)
+        (if_then_else (eq (reg:SI 170)
+                (const_int 0 [0]))
+            (label_ref:SI 235)
+            (pc))) "../Hardware/LCD.c":408 180 {*branchsi}
+     (int_list:REG_BR_PROB 39298956 (nil))
+ -> 235)
+(note 168 165 166 18 [bb 18] NOTE_INSN_BASIC_BLOCK)
+(jump_insn 166 168 167 18 (set (pc)
+        (label_ref 198)) -1
+     (nil)
+ -> 198)
+(barrier 167 166 169)
+(code_label 169 167 170 19 68 (nil) [1 uses])
+(note 170 169 171 19 [bb 19] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 171 170 172 19 (debug_marker) "../Hardware/LCD.c":416 -1
+     (nil))
+(jump_insn 172 171 173 19 (set (pc)
+        (if_then_else (eq (reg:SI 104 [ _83 ])
+                (const_int 0 [0]))
+            (label_ref 179)
+            (pc))) "../Hardware/LCD.c":416 -1
+     (int_list:REG_BR_PROB 719407028 (nil))
+ -> 179)
+(note 173 172 174 20 [bb 20] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 174 173 175 20 (debug_marker) "../Hardware/LCD.c":416 -1
+     (nil))
+(insn 175 174 176 20 (set (reg:SI 12 a2)
+        (reg/v:SI 119 [ fc ])) "../Hardware/LCD.c":416 -1
+     (nil))
+(insn 176 175 177 20 (set (reg:SI 11 a1)
+        (reg/v:SI 117 [ y ])) "../Hardware/LCD.c":416 -1
+     (nil))
+(insn 177 176 178 20 (set (reg:SI 10 a0)
+        (reg/v:SI 93 [ x ])) "../Hardware/LCD.c":416 -1
+     (nil))
+(call_insn 178 177 179 20 (parallel [
+            (call (mem:SI (symbol_ref:SI ("LCD_DrawPoint") [flags 0x3] <function_decl 066890f0 LCD_DrawPoint>) [0 LCD_DrawPoint S4 A32])
+                (const_int 0 [0]))
+            (clobber (reg:SI 1 ra))
+        ]) "../Hardware/LCD.c":416 -1
+     (expr_list:REG_CALL_DECL (symbol_ref:SI ("LCD_DrawPoint") [flags 0x3] <function_decl 066890f0 LCD_DrawPoint>)
+        (expr_list:REG_EH_REGION (const_int 0 [0])
+            (nil)))
+    (expr_list:HI (use (reg:SI 10 a0))
+        (expr_list:HI (use (reg:SI 11 a1))
+            (expr_list:HI (use (reg:SI 12 a2))
+                (nil)))))
+(code_label 179 178 180 21 73 (nil) [1 uses])
+(note 180 179 181 21 [bb 21] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 181 180 182 21 (debug_marker) "../Hardware/LCD.c":417 -1
+     (nil))
+(insn 182 181 183 21 (set (reg:SI 171)
+        (plus:SI (reg/v:SI 93 [ x ])
+            (const_int 1 [0x1]))) "../Hardware/LCD.c":417 -1
+     (nil))
+(insn 183 182 184 21 (set (reg/v:SI 93 [ x ])
+        (zero_extend:SI (subreg:HI (reg:SI 171) 0))) "../Hardware/LCD.c":417 -1
+     (nil))
+(debug_insn 184 183 185 21 (var_location:HI x (subreg:HI (reg/v:SI 93 [ x ]) 0)) "../Hardware/LCD.c":417 -1
+     (nil))
+(debug_insn 185 184 186 21 (debug_marker) "../Hardware/LCD.c":418 -1
+     (nil))
+(insn 186 185 187 21 (set (reg:SI 172)
+        (minus:SI (reg/v:SI 93 [ x ])
+            (reg/v:SI 116 [ x ]))) "../Hardware/LCD.c":418 -1
+     (nil))
+(jump_insn 187 186 188 21 (set (pc)
+        (if_then_else (ne (reg:SI 172)
+                (reg/v:SI 98 [ sizex ]))
+            (label_ref 198)
+            (pc))) "../Hardware/LCD.c":418 -1
+     (int_list:REG_BR_PROB 1034442876 (nil))
+ -> 198)
+(note 188 187 189 22 [bb 22] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 189 188 190 22 (debug_marker) "../Hardware/LCD.c":420 -1
+     (nil))
+(debug_insn 190 189 191 22 (var_location:HI x (subreg:HI (reg/v:SI 116 [ x ]) 0)) "../Hardware/LCD.c":420 -1
+     (nil))
+(debug_insn 191 190 192 22 (debug_marker) "../Hardware/LCD.c":421 -1
+     (nil))
+(insn 192 191 193 22 (set (reg:SI 173)
+        (plus:SI (reg/v:SI 117 [ y ])
+            (const_int 1 [0x1]))) "../Hardware/LCD.c":421 -1
+     (nil))
+(insn 193 192 194 22 (set (reg/v:SI 117 [ y ])
+        (zero_extend:SI (subreg:HI (reg:SI 173) 0))) "../Hardware/LCD.c":421 -1
+     (nil))
+(debug_insn 194 193 195 22 (var_location:HI y (subreg:HI (reg/v:SI 117 [ y ]) 0)) "../Hardware/LCD.c":421 -1
+     (nil))
+(debug_insn 195 194 12 22 (debug_marker) "../Hardware/LCD.c":422 -1
+     (nil))
+(insn 12 195 196 22 (set (reg/v:SI 93 [ x ])
+        (reg/v:SI 116 [ x ])) "../Hardware/LCD.c":420 -1
+     (nil))
+(jump_insn 196 12 197 22 (set (pc)
+        (label_ref 211)) "../Hardware/LCD.c":422 -1
+     (nil)
+ -> 211)
+(barrier 197 196 198)
+(code_label 198 197 199 23 72 (nil) [2 uses])
+(note 199 198 200 23 [bb 23] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 200 199 201 23 (var_location:QI m (subreg:QI (reg/v:SI 95 [ m ]) 0)) -1
+     (nil))
+(debug_insn 201 200 202 23 (var_location:HI x (subreg:HI (reg/v:SI 93 [ x ]) 0)) -1
+     (nil))
+(debug_insn 202 201 203 23 (var_location:QI D#47 (plus:QI (subreg:QI (reg:SI 81 [ ivtmp.89 ]) 0)
+        (const_int 1 [0x1]))) -1
+     (nil))
+(debug_insn 203 202 204 23 (var_location:QI t (debug_expr:QI D#47)) "../Hardware/LCD.c":401 -1
+     (nil))
+(debug_insn 204 203 205 23 (var_location:QI m (subreg:QI (reg/v:SI 95 [ m ]) 0)) -1
+     (nil))
+(debug_insn 205 204 206 23 (var_location:QI t (debug_expr:QI D#47)) -1
+     (nil))
+(debug_insn 206 205 207 23 (var_location:HI x (subreg:HI (reg/v:SI 93 [ x ]) 0)) -1
+     (nil))
+(insn 207 206 209 23 (set (reg:SI 81 [ ivtmp.89 ])
+        (plus:SI (reg:SI 81 [ ivtmp.89 ])
+            (const_int 1 [0x1]))) -1
+     (nil))
+(insn 209 207 210 23 (set (reg:SI 174)
+        (const_int 8 [0x8])) "../Hardware/LCD.c":401 -1
+     (nil))
+(jump_insn 210 209 231 23 (set (pc)
+        (if_then_else (ne (reg:SI 81 [ ivtmp.89 ])
+                (reg:SI 174))
+            (label_ref 208)
+            (pc))) "../Hardware/LCD.c":401 -1
+     (int_list:REG_BR_PROB 934440780 (nil))
+ -> 208)
+(note 231 210 232 24 [bb 24] NOTE_INSN_BASIC_BLOCK)
+(jump_insn 232 231 233 24 (set (pc)
+        (label_ref 211)) -1
+     (nil)
+ -> 211)
+(barrier 233 232 235)
+(code_label 235 233 234 25 76 (nil) [1 uses])
+(note 234 235 11 25 [bb 25] NOTE_INSN_BASIC_BLOCK)
+(insn 11 234 211 25 (set (reg/v:SI 95 [ m ])
+        (reg/v:SI 122 [ mode ])) "../Hardware/LCD.c":410 -1
+     (nil))
+(code_label 211 11 212 26 71 (nil) [2 uses])
+(note 212 211 213 26 [bb 26] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 213 212 214 26 (var_location:QI m (subreg:QI (reg/v:SI 95 [ m ]) 0)) -1
+     (nil))
+(debug_insn 214 213 215 26 (var_location:HI y (subreg:HI (reg/v:SI 117 [ y ]) 0)) -1
+     (nil))
+(debug_insn 215 214 216 26 (var_location:HI x (subreg:HI (reg/v:SI 93 [ x ]) 0)) -1
+     (nil))
+(debug_insn 216 215 217 26 (var_location:HI i (plus:HI (subreg:HI (reg:SI 87 [ ivtmp.95 ]) 0)
+        (const_int 1 [0x1]))) "../Hardware/LCD.c":394 -1
+     (nil))
+(insn 217 216 218 26 (set (reg:SI 87 [ ivtmp.95 ])
+        (plus:SI (reg:SI 87 [ ivtmp.95 ])
+            (const_int 1 [0x1]))) -1
+     (nil))
+(code_label 218 217 219 27 62 (nil) [1 uses])
+(note 219 218 220 27 [bb 27] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 220 219 221 27 (var_location:HI i (subreg:HI (reg:SI 87 [ ivtmp.95 ]) 0)) -1
+     (nil))
+(debug_insn 221 220 222 27 (var_location:QI m (subreg:QI (reg/v:SI 95 [ m ]) 0)) -1
+     (nil))
+(debug_insn 222 221 223 27 (var_location:HI y (subreg:HI (reg/v:SI 117 [ y ]) 0)) -1
+     (nil))
+(debug_insn 223 222 225 27 (var_location:HI x (subreg:HI (reg/v:SI 93 [ x ]) 0)) -1
+     (nil))
+(insn 225 223 226 27 (set (reg:SI 175)
+        (zero_extend:SI (subreg:HI (reg:SI 87 [ ivtmp.95 ]) 0))) "../Hardware/LCD.c":394 -1
+     (nil))
+(jump_insn 226 225 228 27 (set (pc)
+        (if_then_else (ltu (reg:SI 175)
+                (reg/v:SI 99 [ TypefaceNum ]))
+            (label_ref 224)
+            (pc))) "../Hardware/LCD.c":394 -1
+     (int_list:REG_BR_PROB 1014686028 (nil))
+ -> 224)
+(note 228 226 229 28 [bb 28] NOTE_INSN_BASIC_BLOCK)
+(code_label 229 228 230 29 61 (nil) [1 uses])
+(note 230 229 0 29 [bb 29] NOTE_INSN_BASIC_BLOCK)
+
+;; Function LCD_ShowString (LCD_ShowString, funcdef_no=41, decl_uid=5057, cgraph_uid=41, symbol_order=49)
+
+
+;; Generating RTL for gimple basic block 2
+
+;; Generating RTL for gimple basic block 3
+
+;; Generating RTL for gimple basic block 4
+
+;; Generating RTL for gimple basic block 5
+
+
+try_optimize_cfg iteration 1
+
+Merging block 3 into block 2...
+Merged blocks 2 and 3.
+Merged 2 and 3 without moving.
+Forwarding edge 5->6 to 7 failed.
+Merging block 7 into block 6...
+Merged blocks 6 and 7.
+Merged 6 and 7 without moving.
+
+
+try_optimize_cfg iteration 2
+
+
+
+;;
+;; Full RTL generated for this function:
+;;
+(note 1 0 10 NOTE_INSN_DELETED)
+(note 10 1 2 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn 2 10 3 2 (set (reg/v:SI 75 [ x ])
+        (reg:SI 10 a0 [ x ])) "../Hardware/LCD.c":440 -1
+     (nil))
+(insn 3 2 4 2 (set (reg/v:SI 76 [ y ])
+        (reg:SI 11 a1 [ y ])) "../Hardware/LCD.c":440 -1
+     (nil))
+(insn 4 3 5 2 (set (reg/v/f:SI 77 [ p ])
+        (reg:SI 12 a2 [ p ])) "../Hardware/LCD.c":440 -1
+     (nil))
+(insn 5 4 6 2 (set (reg/v:SI 78 [ fc ])
+        (reg:SI 13 a3 [ fc ])) "../Hardware/LCD.c":440 -1
+     (nil))
+(insn 6 5 7 2 (set (reg/v:SI 79 [ bc ])
+        (reg:SI 14 a4 [ bc ])) "../Hardware/LCD.c":440 -1
+     (nil))
+(insn 7 6 8 2 (set (reg/v:SI 80 [ sizey ])
+        (reg:SI 15 a5 [ sizey ])) "../Hardware/LCD.c":440 -1
+     (nil))
+(insn 8 7 9 2 (set (reg/v:SI 81 [ mode ])
+        (reg:SI 16 a6 [ mode ])) "../Hardware/LCD.c":440 -1
+     (nil))
+(note 9 8 12 2 NOTE_INSN_FUNCTION_BEG)
+(debug_insn 12 9 13 2 (debug_marker) "../Hardware/LCD.c":441 -1
+     (nil))
+(insn 13 12 14 2 (set (reg:SI 82)
+        (lshiftrt:SI (reg/v:SI 80 [ sizey ])
+            (const_int 1 [0x1]))) "../Hardware/LCD.c":444 -1
+     (nil))
+(insn 14 13 15 2 (set (reg:HI 83)
+        (zero_extend:HI (subreg:QI (reg:SI 82) 0))) "../Hardware/LCD.c":444 -1
+     (nil))
+(insn 15 14 16 2 (set (reg:SI 73 [ _2 ])
+        (zero_extend:SI (reg:HI 83))) "../Hardware/LCD.c":444 -1
+     (nil))
+(jump_insn 16 15 17 2 (set (pc)
+        (label_ref 35)) "../Hardware/LCD.c":441 -1
+     (nil)
+ -> 35)
+(barrier 17 16 40)
+(code_label 40 17 18 4 86 (nil) [1 uses])
+(note 18 40 19 4 [bb 4] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 19 18 20 4 (debug_marker) "../Hardware/LCD.c":443 -1
+     (nil))
+(insn 20 19 21 4 (set (reg:SI 16 a6)
+        (reg/v:SI 81 [ mode ])) "../Hardware/LCD.c":443 -1
+     (nil))
+(insn 21 20 22 4 (set (reg:SI 15 a5)
+        (reg/v:SI 80 [ sizey ])) "../Hardware/LCD.c":443 -1
+     (nil))
+(insn 22 21 23 4 (set (reg:SI 14 a4)
+        (reg/v:SI 79 [ bc ])) "../Hardware/LCD.c":443 -1
+     (nil))
+(insn 23 22 24 4 (set (reg:SI 13 a3)
+        (reg/v:SI 78 [ fc ])) "../Hardware/LCD.c":443 -1
+     (nil))
+(insn 24 23 25 4 (set (reg:SI 12 a2)
+        (reg:SI 74 [ _3 ])) "../Hardware/LCD.c":443 -1
+     (nil))
+(insn 25 24 26 4 (set (reg:SI 11 a1)
+        (reg/v:SI 76 [ y ])) "../Hardware/LCD.c":443 -1
+     (nil))
+(insn 26 25 27 4 (set (reg:SI 10 a0)
+        (reg/v:SI 75 [ x ])) "../Hardware/LCD.c":443 -1
+     (nil))
+(call_insn 27 26 28 4 (parallel [
+            (call (mem:SI (symbol_ref:SI ("LCD_ShowChar") [flags 0x3] <function_decl 06689528 LCD_ShowChar>) [0 LCD_ShowChar S4 A32])
+                (const_int 0 [0]))
+            (clobber (reg:SI 1 ra))
+        ]) "../Hardware/LCD.c":443 -1
+     (expr_list:REG_CALL_DECL (symbol_ref:SI ("LCD_ShowChar") [flags 0x3] <function_decl 06689528 LCD_ShowChar>)
+        (expr_list:REG_EH_REGION (const_int 0 [0])
+            (nil)))
+    (expr_list:HI (use (reg:SI 10 a0))
+        (expr_list:HI (use (reg:SI 11 a1))
+            (expr_list:QI (use (reg:SI 12 a2))
+                (expr_list:HI (use (reg:SI 13 a3))
+                    (expr_list:HI (use (reg:SI 14 a4))
+                        (expr_list:QI (use (reg:SI 15 a5))
+                            (expr_list:QI (use (reg:SI 16 a6))
+                                (nil)))))))))
+(debug_insn 28 27 29 4 (debug_marker) "../Hardware/LCD.c":444 -1
+     (nil))
+(insn 29 28 30 4 (set (reg:SI 84)
+        (plus:SI (reg:SI 73 [ _2 ])
+            (reg/v:SI 75 [ x ]))) "../Hardware/LCD.c":444 -1
+     (nil))
+(insn 30 29 31 4 (set (reg/v:SI 75 [ x ])
+        (zero_extend:SI (subreg:HI (reg:SI 84) 0))) "../Hardware/LCD.c":444 -1
+     (nil))
+(debug_insn 31 30 32 4 (var_location:HI x (subreg:HI (reg/v:SI 75 [ x ]) 0)) "../Hardware/LCD.c":444 -1
+     (nil))
+(debug_insn 32 31 33 4 (debug_marker) "../Hardware/LCD.c":445 -1
+     (nil))
+(insn 33 32 34 4 (set (reg/v/f:SI 77 [ p ])
+        (plus:SI (reg/v/f:SI 77 [ p ])
+            (const_int 1 [0x1]))) "../Hardware/LCD.c":445 -1
+     (nil))
+(debug_insn 34 33 35 4 (var_location:SI p (reg/v/f:SI 77 [ p ])) "../Hardware/LCD.c":445 -1
+     (nil))
+(code_label 35 34 36 5 85 (nil) [1 uses])
+(note 36 35 37 5 [bb 5] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 37 36 38 5 (var_location:SI p (reg/v/f:SI 77 [ p ])) -1
+     (nil))
+(debug_insn 38 37 39 5 (var_location:HI x (subreg:HI (reg/v:SI 75 [ x ]) 0)) -1
+     (nil))
+(insn 39 38 41 5 (set (reg:SI 74 [ _3 ])
+        (zero_extend:SI (mem:QI (reg/v/f:SI 77 [ p ]) [0 MEM[base: p_5, offset: 0B]+0 S1 A8]))) "../Hardware/LCD.c":441 -1
+     (nil))
+(jump_insn 41 39 42 5 (set (pc)
+        (if_then_else (ne (reg:SI 74 [ _3 ])
+                (const_int 0 [0]))
+            (label_ref 40)
+            (pc))) "../Hardware/LCD.c":441 -1
+     (int_list:REG_BR_PROB 955630228 (nil))
+ -> 40)
+(note 42 41 0 6 [bb 6] NOTE_INSN_BASIC_BLOCK)
+
+;; Function mypow (mypow, funcdef_no=42, decl_uid=5060, cgraph_uid=42, symbol_order=50)
+
+
+;; Generating RTL for gimple basic block 2
+
+;; Generating RTL for gimple basic block 3
+
+;; Generating RTL for gimple basic block 4
+
+;; Generating RTL for gimple basic block 5
+
+
+try_optimize_cfg iteration 1
+
+Merging block 3 into block 2...
+Merged blocks 2 and 3.
+Merged 2 and 3 without moving.
+Forwarding edge 5->6 to 7 failed.
+Removing jump 29.
+Merging block 7 into block 6...
+Merged blocks 6 and 7.
+Merged 6 and 7 without moving.
+
+
+try_optimize_cfg iteration 2
+
+
+
+;;
+;; Full RTL generated for this function:
+;;
+(note 1 0 6 NOTE_INSN_DELETED)
+(note 6 1 2 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn 2 6 3 2 (set (reg/v:SI 74 [ m ])
+        (reg:SI 10 a0 [ m ])) "../Hardware/LCD.c":455 -1
+     (nil))
+(insn 3 2 4 2 (set (reg/v:SI 75 [ n ])
+        (reg:SI 11 a1 [ n ])) "../Hardware/LCD.c":455 -1
+     (nil))
+(note 4 3 8 2 NOTE_INSN_FUNCTION_BEG)
+(debug_insn 8 4 9 2 (debug_marker) "../Hardware/LCD.c":456 -1
+     (nil))
+(debug_insn 9 8 10 2 (var_location:SI result (const_int 1 [0x1])) "../Hardware/LCD.c":456 -1
+     (nil))
+(debug_insn 10 9 5 2 (debug_marker) "../Hardware/LCD.c":457 -1
+     (nil))
+(insn 5 10 11 2 (set (reg/v:SI 73 [ <retval> ])
+        (const_int 1 [0x1])) "../Hardware/LCD.c":456 -1
+     (nil))
+(jump_insn 11 5 12 2 (set (pc)
+        (label_ref 17)) "../Hardware/LCD.c":457 -1
+     (nil)
+ -> 17)
+(barrier 12 11 24)
+(code_label 24 12 13 4 90 (nil) [1 uses])
+(note 13 24 14 4 [bb 4] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 14 13 15 4 (debug_marker) "../Hardware/LCD.c":457 -1
+     (nil))
+(insn 15 14 16 4 (set (reg/v:SI 73 [ <retval> ])
+        (mult:SI (reg/v:SI 73 [ <retval> ])
+            (reg/v:SI 74 [ m ]))) "../Hardware/LCD.c":457 -1
+     (nil))
+(debug_insn 16 15 17 4 (var_location:SI result (reg/v:SI 73 [ <retval> ])) "../Hardware/LCD.c":457 -1
+     (nil))
+(code_label 17 16 18 5 89 (nil) [1 uses])
+(note 18 17 19 5 [bb 5] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 19 18 20 5 (var_location:SI result (reg/v:SI 73 [ <retval> ])) -1
+     (nil))
+(debug_insn 20 19 21 5 (var_location:QI n (subreg:QI (reg/v:SI 75 [ n ]) 0)) -1
+     (nil))
+(insn 21 20 22 5 (set (reg:SI 76)
+        (plus:SI (reg/v:SI 75 [ n ])
+            (const_int -1 [0xffffffffffffffff]))) "../Hardware/LCD.c":457 -1
+     (nil))
+(insn 22 21 23 5 (set (reg/v:SI 75 [ n ])
+        (zero_extend:SI (subreg:QI (reg:SI 76) 0))) "../Hardware/LCD.c":457 -1
+     (nil))
+(debug_insn 23 22 25 5 (var_location:QI n (subreg:QI (reg/v:SI 75 [ n ]) 0)) "../Hardware/LCD.c":457 -1
+     (nil))
+(insn 25 23 26 5 (set (reg:SI 77)
+        (const_int 255 [0xff])) "../Hardware/LCD.c":457 -1
+     (nil))
+(jump_insn 26 25 27 5 (set (pc)
+        (if_then_else (ne (reg/v:SI 75 [ n ])
+                (reg:SI 77))
+            (label_ref 24)
+            (pc))) "../Hardware/LCD.c":457 -1
+     (int_list:REG_BR_PROB 955630228 (nil))
+ -> 24)
+(note 27 26 28 6 [bb 6] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 28 27 32 6 (debug_marker) "../Hardware/LCD.c":458 -1
+     (nil))
+(insn 32 28 33 6 (set (reg/i:SI 10 a0)
+        (reg/v:SI 73 [ <retval> ])) "../Hardware/LCD.c":459 -1
+     (nil))
+(insn 33 32 0 6 (use (reg/i:SI 10 a0)) "../Hardware/LCD.c":459 -1
+     (nil))
+
+;; Function LCD_ShowIntNum (LCD_ShowIntNum, funcdef_no=43, decl_uid=5068, cgraph_uid=43, symbol_order=51)
+
+
+;; Generating RTL for gimple basic block 2
+
+;; Generating RTL for gimple basic block 3
+
+;; Generating RTL for gimple basic block 4
+
+;; Generating RTL for gimple basic block 5
+
+;; Generating RTL for gimple basic block 6
+
+;; Generating RTL for gimple basic block 7
+
+;; Generating RTL for gimple basic block 8
+
+;; Generating RTL for gimple basic block 9
+
+;; Generating RTL for gimple basic block 10
+
+;; Generating RTL for gimple basic block 11
+
+;; Generating RTL for gimple basic block 12
+
+;; Generating RTL for gimple basic block 13
+Edge 8->10 redirected to 16
+
+
+try_optimize_cfg iteration 1
+
+Merging block 3 into block 2...
+Merged blocks 2 and 3.
+Merged 2 and 3 without moving.
+Forwarding edge 14->15 to 16 failed.
+Merging block 16 into block 15...
+Merged blocks 15 and 16.
+Merged 15 and 16 without moving.
+
+
+try_optimize_cfg iteration 2
+
+
+
+;;
+;; Full RTL generated for this function:
+;;
+(note 1 0 15 NOTE_INSN_DELETED)
+(note 15 1 2 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn 2 15 3 2 (set (reg/v:SI 87 [ x ])
+        (reg:SI 10 a0 [ x ])) "../Hardware/LCD.c":473 -1
+     (nil))
+(insn 3 2 4 2 (set (reg/v:SI 88 [ y ])
+        (reg:SI 11 a1 [ y ])) "../Hardware/LCD.c":473 -1
+     (nil))
+(insn 4 3 5 2 (set (reg/v:SI 89 [ num ])
+        (reg:SI 12 a2 [ num ])) "../Hardware/LCD.c":473 -1
+     (nil))
+(insn 5 4 6 2 (set (reg/v:SI 90 [ len ])
+        (reg:SI 13 a3 [ len ])) "../Hardware/LCD.c":473 -1
+     (nil))
+(insn 6 5 7 2 (set (reg/v:SI 91 [ fc ])
+        (reg:SI 14 a4 [ fc ])) "../Hardware/LCD.c":473 -1
+     (nil))
+(insn 7 6 8 2 (set (reg/v:SI 92 [ bc ])
+        (reg:SI 15 a5 [ bc ])) "../Hardware/LCD.c":473 -1
+     (nil))
+(insn 8 7 9 2 (set (reg/v:SI 93 [ sizey ])
+        (reg:SI 16 a6 [ sizey ])) "../Hardware/LCD.c":473 -1
+     (nil))
+(note 9 8 17 2 NOTE_INSN_FUNCTION_BEG)
+(debug_insn 17 9 18 2 (debug_marker) "../Hardware/LCD.c":474 -1
+     (nil))
+(debug_insn 18 17 19 2 (debug_marker) "../Hardware/LCD.c":475 -1
+     (nil))
+(debug_insn 19 18 20 2 (var_location:QI enshow (const_int 0 [0])) "../Hardware/LCD.c":475 -1
+     (nil))
+(debug_insn 20 19 21 2 (debug_marker) "../Hardware/LCD.c":476 -1
+     (nil))
+(debug_insn 21 20 22 2 (var_location:QI sizex (lshiftrt:QI (subreg:QI (reg/v:SI 93 [ sizey ]) 0)
+        (const_int 1 [0x1]))) "../Hardware/LCD.c":476 -1
+     (nil))
+(debug_insn 22 21 23 2 (debug_marker) "../Hardware/LCD.c":477 -1
+     (nil))
+(debug_insn 23 22 24 2 (var_location:QI t (const_int 0 [0])) "../Hardware/LCD.c":477 -1
+     (nil))
+(insn 24 23 25 2 (set (reg:SI 94)
+        (lshiftrt:SI (reg/v:SI 93 [ sizey ])
+            (const_int 1 [0x1]))) "../Hardware/LCD.c":476 -1
+     (nil))
+(insn 25 24 26 2 (set (reg:HI 95)
+        (zero_extend:HI (subreg:QI (reg:SI 94) 0))) -1
+     (nil))
+(insn 26 25 27 2 (set (reg:SI 85 [ _50 ])
+        (zero_extend:SI (reg:HI 95))) -1
+     (nil))
+(insn 27 26 28 2 (set (reg:SI 96)
+        (plus:SI (reg/v:SI 90 [ len ])
+            (const_int -1 [0xffffffffffffffff]))) -1
+     (nil))
+(insn 28 27 13 2 (set (reg:SI 86 [ ivtmp.134 ])
+        (zero_extend:SI (subreg:QI (reg:SI 96) 0))) -1
+     (nil))
+(insn 13 28 14 2 (set (reg:SI 83 [ ivtmp.130 ])
+        (const_int 0 [0])) "../Hardware/LCD.c":477 -1
+     (nil))
+(insn 14 13 29 2 (set (reg/v:SI 78 [ enshow ])
+        (const_int 0 [0])) "../Hardware/LCD.c":475 -1
+     (nil))
+(jump_insn 29 14 30 2 (set (pc)
+        (label_ref 112)) "../Hardware/LCD.c":477 -1
+     (nil)
+ -> 112)
+(barrier 30 29 116)
+(code_label 116 30 31 4 97 (nil) [1 uses])
+(note 31 116 32 4 [bb 4] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 32 31 33 4 (debug_marker) "../Hardware/LCD.c":479 -1
+     (nil))
+(insn 33 32 34 4 (set (reg:SI 72 [ _1 ])
+        (reg/v:SI 89 [ num ])) "../Hardware/LCD.c":479 -1
+     (nil))
+(debug_insn 34 33 35 4 (var_location:QI m (const_int 10 [0xa])) "../Hardware/LCD.c":479 -1
+     (nil))
+(debug_insn 35 34 36 4 (var_location:QI n (subreg:QI (reg:SI 86 [ ivtmp.134 ]) 0)) "../Hardware/LCD.c":479 -1
+     (nil))
+(debug_insn 36 35 37 4 (debug_marker) "../Hardware/LCD.c":456 -1
+     (nil))
+(debug_insn 37 36 38 4 (var_location:SI result (const_int 1 [0x1])) "../Hardware/LCD.c":456 -1
+     (nil))
+(debug_insn 38 37 10 4 (debug_marker) "../Hardware/LCD.c":457 -1
+     (nil))
+(insn 10 38 11 4 (set (reg/v:SI 82 [ n ])
+        (reg:SI 86 [ ivtmp.134 ])) "../Hardware/LCD.c":479 -1
+     (nil))
+(insn 11 10 39 4 (set (reg/v:SI 81 [ result ])
+        (const_int 1 [0x1])) "../Hardware/LCD.c":456 -1
+     (nil))
+(jump_insn 39 11 40 4 (set (pc)
+        (label_ref 46)) "../Hardware/LCD.c":479 -1
+     (nil)
+ -> 46)
+(barrier 40 39 53)
+(code_label 53 40 41 5 94 (nil) [1 uses])
+(note 41 53 42 5 [bb 5] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 42 41 43 5 (debug_marker) "../Hardware/LCD.c":457 -1
+     (nil))
+(insn 43 42 44 5 (set (reg:SI 97)
+        (const_int 10 [0xa])) "../Hardware/LCD.c":457 -1
+     (nil))
+(insn 44 43 45 5 (set (reg/v:SI 81 [ result ])
+        (mult:SI (reg/v:SI 81 [ result ])
+            (reg:SI 97))) "../Hardware/LCD.c":457 -1
+     (nil))
+(debug_insn 45 44 46 5 (var_location:SI result (reg/v:SI 81 [ result ])) "../Hardware/LCD.c":457 -1
+     (nil))
+(code_label 46 45 47 6 93 (nil) [1 uses])
+(note 47 46 48 6 [bb 6] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 48 47 49 6 (var_location:SI result (reg/v:SI 81 [ result ])) -1
+     (nil))
+(debug_insn 49 48 50 6 (var_location:QI n (subreg:QI (reg/v:SI 82 [ n ]) 0)) -1
+     (nil))
+(insn 50 49 51 6 (set (reg:SI 98)
+        (plus:SI (reg/v:SI 82 [ n ])
+            (const_int -1 [0xffffffffffffffff]))) "../Hardware/LCD.c":457 -1
+     (nil))
+(insn 51 50 52 6 (set (reg/v:SI 82 [ n ])
+        (zero_extend:SI (subreg:QI (reg:SI 98) 0))) "../Hardware/LCD.c":457 -1
+     (nil))
+(debug_insn 52 51 54 6 (var_location:QI n (subreg:QI (reg/v:SI 82 [ n ]) 0)) "../Hardware/LCD.c":457 -1
+     (nil))
+(insn 54 52 55 6 (set (reg:SI 99)
+        (const_int 255 [0xff])) "../Hardware/LCD.c":457 -1
+     (nil))
+(jump_insn 55 54 56 6 (set (pc)
+        (if_then_else (ne (reg/v:SI 82 [ n ])
+                (reg:SI 99))
+            (label_ref 53)
+            (pc))) "../Hardware/LCD.c":457 -1
+     (int_list:REG_BR_PROB 955630228 (nil))
+ -> 53)
+(note 56 55 57 7 [bb 7] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 57 56 58 7 (debug_marker) "../Hardware/LCD.c":458 -1
+     (nil))
+(debug_insn 58 57 59 7 (var_location:QI m (clobber (const_int 0 [0]))) "../Hardware/LCD.c":479 -1
+     (nil))
+(debug_insn 59 58 60 7 (var_location:QI n (clobber (const_int 0 [0]))) "../Hardware/LCD.c":479 -1
+     (nil))
+(debug_insn 60 59 61 7 (var_location:SI result (clobber (const_int 0 [0]))) "../Hardware/LCD.c":479 -1
+     (nil))
+(insn 61 60 62 7 (set (reg:SI 101)
+        (udiv:SI (reg:SI 72 [ _1 ])
+            (reg/v:SI 81 [ result ]))) "../Hardware/LCD.c":479 -1
+     (nil))
+(insn 62 61 63 7 (set (reg:SI 102)
+        (const_int 10 [0xa])) "../Hardware/LCD.c":479 -1
+     (nil))
+(insn 63 62 66 7 (set (reg:SI 74 [ _5 ])
+        (umod:SI (reg:SI 101)
+            (reg:SI 102))) "../Hardware/LCD.c":479 -1
+     (nil))
+(insn 66 63 67 7 (set (reg/v:SI 80 [ temp ])
+        (zero_extend:SI (subreg:QI (reg:SI 74 [ _5 ]) 0))) "../Hardware/LCD.c":479 -1
+     (nil))
+(debug_insn 67 66 68 7 (var_location:QI temp (subreg:QI (reg/v:SI 80 [ temp ]) 0)) "../Hardware/LCD.c":479 -1
+     (nil))
+(debug_insn 68 67 69 7 (debug_marker) "../Hardware/LCD.c":480 -1
+     (nil))
+(jump_insn 69 68 70 7 (set (pc)
+        (if_then_else (ne (reg/v:SI 78 [ enshow ])
+                (const_int 0 [0]))
+            (label_ref 89)
+            (pc))) "../Hardware/LCD.c":480 -1
+     (int_list:REG_BR_PROB 354334804 (nil))
+ -> 89)
+(note 70 69 71 8 [bb 8] NOTE_INSN_BASIC_BLOCK)
+(insn 71 70 72 8 (set (reg:SI 104)
+        (plus:SI (reg/v:SI 90 [ len ])
+            (const_int -1 [0xffffffffffffffff]))) "../Hardware/LCD.c":480 -1
+     (nil))
+(jump_insn 72 71 73 8 (set (pc)
+        (if_then_else (le (reg:SI 104)
+                (reg:SI 83 [ ivtmp.130 ]))
+            (label_ref 89)
+            (pc))) "../Hardware/LCD.c":480 -1
+     (int_list:REG_BR_PROB 536870916 (nil))
+ -> 89)
+(note 73 72 74 9 [bb 9] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 74 73 75 9 (debug_marker) "../Hardware/LCD.c":482 -1
+     (nil))
+(jump_insn 75 74 76 9 (set (pc)
+        (if_then_else (ne (reg:SI 74 [ _5 ])
+                (const_int 0 [0]))
+            (label_ref:SI 123)
+            (pc))) "../Hardware/LCD.c":482 180 {*branchsi}
+     (int_list:REG_BR_PROB 864147420 (nil))
+ -> 123)
+(note 76 75 77 10 [bb 10] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 77 76 78 10 (debug_marker) "../Hardware/LCD.c":484 -1
+     (nil))
+(insn 78 77 79 10 (set (reg:SI 16 a6)
+        (const_int 0 [0])) "../Hardware/LCD.c":484 -1
+     (nil))
+(insn 79 78 80 10 (set (reg:SI 15 a5)
+        (reg/v:SI 93 [ sizey ])) "../Hardware/LCD.c":484 -1
+     (nil))
+(insn 80 79 81 10 (set (reg:SI 14 a4)
+        (reg/v:SI 92 [ bc ])) "../Hardware/LCD.c":484 -1
+     (nil))
+(insn 81 80 82 10 (set (reg:SI 13 a3)
+        (reg/v:SI 91 [ fc ])) "../Hardware/LCD.c":484 -1
+     (nil))
+(insn 82 81 83 10 (set (reg:SI 12 a2)
+        (const_int 32 [0x20])) "../Hardware/LCD.c":484 -1
+     (nil))
+(insn 83 82 84 10 (set (reg:SI 11 a1)
+        (reg/v:SI 88 [ y ])) "../Hardware/LCD.c":484 -1
+     (nil))
+(insn 84 83 85 10 (set (reg:SI 10 a0)
+        (reg/v:SI 87 [ x ])) "../Hardware/LCD.c":484 -1
+     (nil))
+(call_insn 85 84 86 10 (parallel [
+            (call (mem:SI (symbol_ref:SI ("LCD_ShowChar") [flags 0x3] <function_decl 06689528 LCD_ShowChar>) [0 LCD_ShowChar S4 A32])
+                (const_int 0 [0]))
+            (clobber (reg:SI 1 ra))
+        ]) "../Hardware/LCD.c":484 -1
+     (expr_list:REG_CALL_DECL (symbol_ref:SI ("LCD_ShowChar") [flags 0x3] <function_decl 06689528 LCD_ShowChar>)
+        (expr_list:REG_EH_REGION (const_int 0 [0])
+            (nil)))
+    (expr_list:HI (use (reg:SI 10 a0))
+        (expr_list:HI (use (reg:SI 11 a1))
+            (expr_list:QI (use (reg:SI 12 a2))
+                (expr_list:HI (use (reg:SI 13 a3))
+                    (expr_list:HI (use (reg:SI 14 a4))
+                        (expr_list:QI (use (reg:SI 15 a5))
+                            (expr_list:QI (use (reg:SI 16 a6))
+                                (nil)))))))))
+(debug_insn 86 85 87 10 (debug_marker) "../Hardware/LCD.c":485 -1
+     (nil))
+(jump_insn 87 86 88 10 (set (pc)
+        (label_ref 103)) "../Hardware/LCD.c":485 -1
+     (nil)
+ -> 103)
+(barrier 88 87 123)
+(code_label 123 88 122 11 98 (nil) [1 uses])
+(note 122 123 12 11 [bb 11] NOTE_INSN_BASIC_BLOCK)
+(insn 12 122 89 11 (set (reg/v:SI 78 [ enshow ])
+        (const_int 1 [0x1])) -1
+     (nil))
+(code_label 89 12 90 12 95 (nil) [2 uses])
+(note 90 89 91 12 [bb 12] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 91 90 92 12 (var_location:QI enshow (subreg:QI (reg/v:SI 78 [ enshow ]) 0)) -1
+     (nil))
+(debug_insn 92 91 93 12 (debug_marker) "../Hardware/LCD.c":489 -1
+     (nil))
+(insn 93 92 94 12 (set (reg:SI 105)
+        (plus:SI (reg/v:SI 80 [ temp ])
+            (const_int 48 [0x30]))) "../Hardware/LCD.c":489 -1
+     (nil))
+(insn 94 93 95 12 (set (reg:SI 106)
+        (zero_extend:SI (subreg:QI (reg:SI 105) 0))) "../Hardware/LCD.c":489 -1
+     (nil))
+(insn 95 94 96 12 (set (reg:SI 16 a6)
+        (const_int 0 [0])) "../Hardware/LCD.c":489 -1
+     (nil))
+(insn 96 95 97 12 (set (reg:SI 15 a5)
+        (reg/v:SI 93 [ sizey ])) "../Hardware/LCD.c":489 -1
+     (nil))
+(insn 97 96 98 12 (set (reg:SI 14 a4)
+        (reg/v:SI 92 [ bc ])) "../Hardware/LCD.c":489 -1
+     (nil))
+(insn 98 97 99 12 (set (reg:SI 13 a3)
+        (reg/v:SI 91 [ fc ])) "../Hardware/LCD.c":489 -1
+     (nil))
+(insn 99 98 100 12 (set (reg:SI 12 a2)
+        (reg:SI 106)) "../Hardware/LCD.c":489 -1
+     (nil))
+(insn 100 99 101 12 (set (reg:SI 11 a1)
+        (reg/v:SI 88 [ y ])) "../Hardware/LCD.c":489 -1
+     (nil))
+(insn 101 100 102 12 (set (reg:SI 10 a0)
+        (reg/v:SI 87 [ x ])) "../Hardware/LCD.c":489 -1
+     (nil))
+(call_insn 102 101 103 12 (parallel [
+            (call (mem:SI (symbol_ref:SI ("LCD_ShowChar") [flags 0x3] <function_decl 06689528 LCD_ShowChar>) [0 LCD_ShowChar S4 A32])
+                (const_int 0 [0]))
+            (clobber (reg:SI 1 ra))
+        ]) "../Hardware/LCD.c":489 -1
+     (expr_list:REG_CALL_DECL (symbol_ref:SI ("LCD_ShowChar") [flags 0x3] <function_decl 06689528 LCD_ShowChar>)
+        (expr_list:REG_EH_REGION (const_int 0 [0])
+            (nil)))
+    (expr_list:HI (use (reg:SI 10 a0))
+        (expr_list:HI (use (reg:SI 11 a1))
+            (expr_list:QI (use (reg:SI 12 a2))
+                (expr_list:HI (use (reg:SI 13 a3))
+                    (expr_list:HI (use (reg:SI 14 a4))
+                        (expr_list:QI (use (reg:SI 15 a5))
+                            (expr_list:QI (use (reg:SI 16 a6))
+                                (nil)))))))))
+(code_label 103 102 104 13 96 (nil) [1 uses])
+(note 104 103 105 13 [bb 13] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 105 104 106 13 (var_location:QI enshow (subreg:QI (reg/v:SI 78 [ enshow ]) 0)) -1
+     (nil))
+(debug_insn 106 105 107 13 (var_location:QI t (plus:QI (subreg:QI (reg:SI 83 [ ivtmp.130 ]) 0)
+        (const_int 1 [0x1]))) "../Hardware/LCD.c":477 -1
+     (nil))
+(insn 107 106 108 13 (set (reg:SI 83 [ ivtmp.130 ])
+        (plus:SI (reg:SI 83 [ ivtmp.130 ])
+            (const_int 1 [0x1]))) -1
+     (nil))
+(insn 108 107 109 13 (set (reg:SI 107)
+        (plus:SI (reg/v:SI 87 [ x ])
+            (reg:SI 85 [ _50 ]))) -1
+     (nil))
+(insn 109 108 110 13 (set (reg/v:SI 87 [ x ])
+        (zero_extend:SI (subreg:HI (reg:SI 107) 0))) -1
+     (nil))
+(insn 110 109 111 13 (set (reg:SI 108)
+        (plus:SI (reg:SI 86 [ ivtmp.134 ])
+            (const_int -1 [0xffffffffffffffff]))) -1
+     (nil))
+(insn 111 110 112 13 (set (reg:SI 86 [ ivtmp.134 ])
+        (zero_extend:SI (subreg:QI (reg:SI 108) 0))) -1
+     (nil))
+(code_label 112 111 113 14 92 (nil) [1 uses])
+(note 113 112 114 14 [bb 14] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 114 113 115 14 (var_location:QI enshow (subreg:QI (reg/v:SI 78 [ enshow ]) 0)) -1
+     (nil))
+(debug_insn 115 114 117 14 (var_location:QI t (subreg:QI (reg:SI 83 [ ivtmp.130 ]) 0)) -1
+     (nil))
+(insn 117 115 118 14 (set (reg:SI 109)
+        (const_int 255 [0xff])) "../Hardware/LCD.c":477 -1
+     (nil))
+(jump_insn 118 117 119 14 (set (pc)
+        (if_then_else (ne (reg:SI 86 [ ivtmp.134 ])
+                (reg:SI 109))
+            (label_ref 116)
+            (pc))) "../Hardware/LCD.c":477 -1
+     (int_list:REG_BR_PROB 955630228 (nil))
+ -> 116)
+(note 119 118 0 15 [bb 15] NOTE_INSN_BASIC_BLOCK)
+
+;; Function LCD_ShowSignedNum (LCD_ShowSignedNum, funcdef_no=44, decl_uid=5076, cgraph_uid=44, symbol_order=52)
+
+
+;; Generating RTL for gimple basic block 2
+
+;; Generating RTL for gimple basic block 3
+
+;; Generating RTL for gimple basic block 4
+
+;; Generating RTL for gimple basic block 5
+
+;; Generating RTL for gimple basic block 6
+
+;; Generating RTL for gimple basic block 7
+
+;; Generating RTL for gimple basic block 8
+
+;; Generating RTL for gimple basic block 9
+
+;; Generating RTL for gimple basic block 10
+
+;; Generating RTL for gimple basic block 11
+
+;; Generating RTL for gimple basic block 12
+
+;; Generating RTL for gimple basic block 13
+
+;; Generating RTL for gimple basic block 14
+
+;; Generating RTL for gimple basic block 15
+
+;; Generating RTL for gimple basic block 16
+Edge 11->13 redirected to 19
+
+
+try_optimize_cfg iteration 1
+
+Merging block 3 into block 2...
+Merged blocks 2 and 3.
+Merged 2 and 3 without moving.
+Forwarding edge 17->18 to 19 failed.
+Merging block 19 into block 18...
+Merged blocks 18 and 19.
+Merged 18 and 19 without moving.
+
+
+try_optimize_cfg iteration 2
+
+
+
+;;
+;; Full RTL generated for this function:
+;;
+(note 1 0 15 NOTE_INSN_DELETED)
+(note 15 1 2 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn 2 15 3 2 (set (reg/v:SI 90 [ x ])
+        (reg:SI 10 a0 [ x ])) "../Hardware/LCD.c":504 -1
+     (nil))
+(insn 3 2 4 2 (set (reg/v:SI 91 [ y ])
+        (reg:SI 11 a1 [ y ])) "../Hardware/LCD.c":504 -1
+     (nil))
+(insn 4 3 5 2 (set (reg/v:SI 92 [ num ])
+        (reg:SI 12 a2 [ num ])) "../Hardware/LCD.c":504 -1
+     (nil))
+(insn 5 4 6 2 (set (reg/v:SI 93 [ len ])
+        (reg:SI 13 a3 [ len ])) "../Hardware/LCD.c":504 -1
+     (nil))
+(insn 6 5 7 2 (set (reg/v:SI 94 [ fc ])
+        (reg:SI 14 a4 [ fc ])) "../Hardware/LCD.c":504 -1
+     (nil))
+(insn 7 6 8 2 (set (reg/v:SI 95 [ bc ])
+        (reg:SI 15 a5 [ bc ])) "../Hardware/LCD.c":504 -1
+     (nil))
+(insn 8 7 9 2 (set (reg/v:SI 96 [ sizey ])
+        (reg:SI 16 a6 [ sizey ])) "../Hardware/LCD.c":504 -1
+     (nil))
+(note 9 8 17 2 NOTE_INSN_FUNCTION_BEG)
+(debug_insn 17 9 18 2 (debug_marker) "../Hardware/LCD.c":505 -1
+     (nil))
+(debug_insn 18 17 19 2 (debug_marker) "../Hardware/LCD.c":506 -1
+     (nil))
+(debug_insn 19 18 20 2 (var_location:QI enshow (const_int 0 [0])) "../Hardware/LCD.c":506 -1
+     (nil))
+(debug_insn 20 19 21 2 (debug_marker) "../Hardware/LCD.c":507 -1
+     (nil))
+(insn 21 20 22 2 (set (reg:SI 97)
+        (lshiftrt:SI (reg/v:SI 96 [ sizey ])
+            (const_int 1 [0x1]))) "../Hardware/LCD.c":507 -1
+     (nil))
+(insn 22 21 23 2 (set (reg/v:SI 82 [ sizex ])
+        (zero_extend:SI (subreg:QI (reg:SI 97) 0))) "../Hardware/LCD.c":507 -1
+     (nil))
+(debug_insn 23 22 24 2 (var_location:QI sizex (subreg:QI (reg/v:SI 82 [ sizex ]) 0)) "../Hardware/LCD.c":507 -1
+     (nil))
+(debug_insn 24 23 25 2 (debug_marker) "../Hardware/LCD.c":508 -1
+     (nil))
+(jump_insn 25 24 26 2 (set (pc)
+        (if_then_else (lt (reg/v:SI 92 [ num ])
+                (const_int 0 [0]))
+            (label_ref 38)
+            (pc))) "../Hardware/LCD.c":508 -1
+     (int_list:REG_BR_PROB 440234148 (nil))
+ -> 38)
+(note 26 25 27 4 [bb 4] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 27 26 28 4 (debug_marker) "../Hardware/LCD.c":510 -1
+     (nil))
+(insn 28 27 29 4 (set (reg:SI 16 a6)
+        (const_int 0 [0])) "../Hardware/LCD.c":510 -1
+     (nil))
+(insn 29 28 30 4 (set (reg:SI 15 a5)
+        (reg/v:SI 96 [ sizey ])) "../Hardware/LCD.c":510 -1
+     (nil))
+(insn 30 29 31 4 (set (reg:SI 14 a4)
+        (reg/v:SI 95 [ bc ])) "../Hardware/LCD.c":510 -1
+     (nil))
+(insn 31 30 32 4 (set (reg:SI 13 a3)
+        (reg/v:SI 94 [ fc ])) "../Hardware/LCD.c":510 -1
+     (nil))
+(insn 32 31 33 4 (set (reg:SI 12 a2)
+        (const_int 43 [0x2b])) "../Hardware/LCD.c":510 -1
+     (nil))
+(insn 33 32 34 4 (set (reg:SI 11 a1)
+        (reg/v:SI 91 [ y ])) "../Hardware/LCD.c":510 -1
+     (nil))
+(insn 34 33 35 4 (set (reg:SI 10 a0)
+        (reg/v:SI 90 [ x ])) "../Hardware/LCD.c":510 -1
+     (nil))
+(call_insn 35 34 36 4 (parallel [
+            (call (mem:SI (symbol_ref:SI ("LCD_ShowChar") [flags 0x3] <function_decl 06689528 LCD_ShowChar>) [0 LCD_ShowChar S4 A32])
+                (const_int 0 [0]))
+            (clobber (reg:SI 1 ra))
+        ]) "../Hardware/LCD.c":510 -1
+     (expr_list:REG_CALL_DECL (symbol_ref:SI ("LCD_ShowChar") [flags 0x3] <function_decl 06689528 LCD_ShowChar>)
+        (expr_list:REG_EH_REGION (const_int 0 [0])
+            (nil)))
+    (expr_list:HI (use (reg:SI 10 a0))
+        (expr_list:HI (use (reg:SI 11 a1))
+            (expr_list:QI (use (reg:SI 12 a2))
+                (expr_list:HI (use (reg:SI 13 a3))
+                    (expr_list:HI (use (reg:SI 14 a4))
+                        (expr_list:QI (use (reg:SI 15 a5))
+                            (expr_list:QI (use (reg:SI 16 a6))
+                                (nil)))))))))
+(jump_insn 36 35 37 4 (set (pc)
+        (label_ref 55)) -1
+     (nil)
+ -> 55)
+(barrier 37 36 38)
+(code_label 38 37 39 5 102 (nil) [1 uses])
+(note 39 38 40 5 [bb 5] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 40 39 41 5 (debug_marker) "../Hardware/LCD.c":514 -1
+     (nil))
+(insn 41 40 42 5 (set (reg:SI 16 a6)
+        (const_int 0 [0])) "../Hardware/LCD.c":514 -1
+     (nil))
+(insn 42 41 43 5 (set (reg:SI 15 a5)
+        (reg/v:SI 96 [ sizey ])) "../Hardware/LCD.c":514 -1
+     (nil))
+(insn 43 42 44 5 (set (reg:SI 14 a4)
+        (reg/v:SI 95 [ bc ])) "../Hardware/LCD.c":514 -1
+     (nil))
+(insn 44 43 45 5 (set (reg:SI 13 a3)
+        (reg/v:SI 94 [ fc ])) "../Hardware/LCD.c":514 -1
+     (nil))
+(insn 45 44 46 5 (set (reg:SI 12 a2)
+        (const_int 45 [0x2d])) "../Hardware/LCD.c":514 -1
+     (nil))
+(insn 46 45 47 5 (set (reg:SI 11 a1)
+        (reg/v:SI 91 [ y ])) "../Hardware/LCD.c":514 -1
+     (nil))
+(insn 47 46 48 5 (set (reg:SI 10 a0)
+        (reg/v:SI 90 [ x ])) "../Hardware/LCD.c":514 -1
+     (nil))
+(call_insn 48 47 49 5 (parallel [
+            (call (mem:SI (symbol_ref:SI ("LCD_ShowChar") [flags 0x3] <function_decl 06689528 LCD_ShowChar>) [0 LCD_ShowChar S4 A32])
+                (const_int 0 [0]))
+            (clobber (reg:SI 1 ra))
+        ]) "../Hardware/LCD.c":514 -1
+     (expr_list:REG_CALL_DECL (symbol_ref:SI ("LCD_ShowChar") [flags 0x3] <function_decl 06689528 LCD_ShowChar>)
+        (expr_list:REG_EH_REGION (const_int 0 [0])
+            (nil)))
+    (expr_list:HI (use (reg:SI 10 a0))
+        (expr_list:HI (use (reg:SI 11 a1))
+            (expr_list:QI (use (reg:SI 12 a2))
+                (expr_list:HI (use (reg:SI 13 a3))
+                    (expr_list:HI (use (reg:SI 14 a4))
+                        (expr_list:QI (use (reg:SI 15 a5))
+                            (expr_list:QI (use (reg:SI 16 a6))
+                                (nil)))))))))
+(debug_insn 49 48 50 5 (debug_marker) "../Hardware/LCD.c":515 -1
+     (nil))
+(insn 50 49 51 5 (set (reg:HI 98)
+        (subreg/u:HI (reg/v:SI 92 [ num ]) 0)) "../Hardware/LCD.c":515 -1
+     (nil))
+(insn 51 50 52 5 (set (reg:SI 99)
+        (neg:SI (subreg:SI (reg:HI 98) 0))) "../Hardware/LCD.c":515 -1
+     (nil))
+(insn 52 51 53 5 (set (reg:SI 73 [ _2 ])
+        (zero_extend:SI (subreg:HI (reg:SI 99) 0))) "../Hardware/LCD.c":515 -1
+     (nil))
+(insn 53 52 54 5 (set (reg/v:SI 92 [ num ])
+        (sign_extend:SI (subreg/v:HI (reg:SI 73 [ _2 ]) 0))) "../Hardware/LCD.c":515 -1
+     (nil))
+(debug_insn 54 53 55 5 (var_location:HI num (subreg:HI (reg/v:SI 92 [ num ]) 0)) "../Hardware/LCD.c":515 -1
+     (nil))
+(code_label 55 54 56 6 103 (nil) [1 uses])
+(note 56 55 57 6 [bb 6] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 57 56 58 6 (var_location:HI num (subreg:HI (reg/v:SI 92 [ num ]) 0)) -1
+     (nil))
+(debug_insn 58 57 59 6 (debug_marker) "../Hardware/LCD.c":517 -1
+     (nil))
+(debug_insn 59 58 60 6 (var_location:QI t (const_int 0 [0])) "../Hardware/LCD.c":517 -1
+     (nil))
+(insn 60 59 61 6 (set (reg:SI 88 [ _61 ])
+        (zero_extend:SI (subreg:HI (reg/v:SI 82 [ sizex ]) 0))) -1
+     (nil))
+(insn 61 60 62 6 (set (reg:SI 100)
+        (plus:SI (reg/v:SI 90 [ x ])
+            (reg:SI 88 [ _61 ]))) -1
+     (nil))
+(insn 62 61 63 6 (set (reg:SI 77 [ ivtmp.147 ])
+        (zero_extend:SI (subreg:HI (reg:SI 100) 0))) -1
+     (nil))
+(insn 63 62 64 6 (set (reg:SI 101)
+        (plus:SI (reg/v:SI 93 [ len ])
+            (const_int -1 [0xffffffffffffffff]))) -1
+     (nil))
+(insn 64 63 13 6 (set (reg:SI 89 [ ivtmp.148 ])
+        (zero_extend:SI (subreg:QI (reg:SI 101) 0))) -1
+     (nil))
+(insn 13 64 14 6 (set (reg:SI 86 [ ivtmp.144 ])
+        (const_int 0 [0])) "../Hardware/LCD.c":517 -1
+     (nil))
+(insn 14 13 65 6 (set (reg/v:SI 81 [ enshow ])
+        (const_int 0 [0])) "../Hardware/LCD.c":506 -1
+     (nil))
+(jump_insn 65 14 66 6 (set (pc)
+        (label_ref 146)) "../Hardware/LCD.c":517 -1
+     (nil)
+ -> 146)
+(barrier 66 65 150)
+(code_label 150 66 67 7 109 (nil) [1 uses])
+(note 67 150 68 7 [bb 7] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 68 67 69 7 (debug_marker) "../Hardware/LCD.c":519 -1
+     (nil))
+(insn 69 68 70 7 (set (reg:SI 74 [ _3 ])
+        (reg/v:SI 92 [ num ])) "../Hardware/LCD.c":519 -1
+     (nil))
+(debug_insn 70 69 71 7 (var_location:QI m (const_int 10 [0xa])) "../Hardware/LCD.c":519 -1
+     (nil))
+(debug_insn 71 70 72 7 (var_location:QI n (subreg:QI (reg:SI 89 [ ivtmp.148 ]) 0)) "../Hardware/LCD.c":519 -1
+     (nil))
+(debug_insn 72 71 73 7 (debug_marker) "../Hardware/LCD.c":456 -1
+     (nil))
+(debug_insn 73 72 74 7 (var_location:SI result (const_int 1 [0x1])) "../Hardware/LCD.c":456 -1
+     (nil))
+(debug_insn 74 73 10 7 (debug_marker) "../Hardware/LCD.c":457 -1
+     (nil))
+(insn 10 74 11 7 (set (reg/v:SI 85 [ n ])
+        (reg:SI 89 [ ivtmp.148 ])) "../Hardware/LCD.c":519 -1
+     (nil))
+(insn 11 10 75 7 (set (reg/v:SI 84 [ result ])
+        (const_int 1 [0x1])) "../Hardware/LCD.c":456 -1
+     (nil))
+(jump_insn 75 11 76 7 (set (pc)
+        (label_ref 82)) "../Hardware/LCD.c":519 -1
+     (nil)
+ -> 82)
+(barrier 76 75 89)
+(code_label 89 76 77 8 106 (nil) [1 uses])
+(note 77 89 78 8 [bb 8] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 78 77 79 8 (debug_marker) "../Hardware/LCD.c":457 -1
+     (nil))
+(insn 79 78 80 8 (set (reg:SI 102)
+        (const_int 10 [0xa])) "../Hardware/LCD.c":457 -1
+     (nil))
+(insn 80 79 81 8 (set (reg/v:SI 84 [ result ])
+        (mult:SI (reg/v:SI 84 [ result ])
+            (reg:SI 102))) "../Hardware/LCD.c":457 -1
+     (nil))
+(debug_insn 81 80 82 8 (var_location:SI result (reg/v:SI 84 [ result ])) "../Hardware/LCD.c":457 -1
+     (nil))
+(code_label 82 81 83 9 105 (nil) [1 uses])
+(note 83 82 84 9 [bb 9] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 84 83 85 9 (var_location:SI result (reg/v:SI 84 [ result ])) -1
+     (nil))
+(debug_insn 85 84 86 9 (var_location:QI n (subreg:QI (reg/v:SI 85 [ n ]) 0)) -1
+     (nil))
+(insn 86 85 87 9 (set (reg:SI 103)
+        (plus:SI (reg/v:SI 85 [ n ])
+            (const_int -1 [0xffffffffffffffff]))) "../Hardware/LCD.c":457 -1
+     (nil))
+(insn 87 86 88 9 (set (reg/v:SI 85 [ n ])
+        (zero_extend:SI (subreg:QI (reg:SI 103) 0))) "../Hardware/LCD.c":457 -1
+     (nil))
+(debug_insn 88 87 90 9 (var_location:QI n (subreg:QI (reg/v:SI 85 [ n ]) 0)) "../Hardware/LCD.c":457 -1
+     (nil))
+(insn 90 88 91 9 (set (reg:SI 104)
+        (const_int 255 [0xff])) "../Hardware/LCD.c":457 -1
+     (nil))
+(jump_insn 91 90 92 9 (set (pc)
+        (if_then_else (ne (reg/v:SI 85 [ n ])
+                (reg:SI 104))
+            (label_ref 89)
+            (pc))) "../Hardware/LCD.c":457 -1
+     (int_list:REG_BR_PROB 955630228 (nil))
+ -> 89)
+(note 92 91 93 10 [bb 10] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 93 92 94 10 (debug_marker) "../Hardware/LCD.c":458 -1
+     (nil))
+(debug_insn 94 93 95 10 (var_location:QI m (clobber (const_int 0 [0]))) "../Hardware/LCD.c":519 -1
+     (nil))
+(debug_insn 95 94 96 10 (var_location:QI n (clobber (const_int 0 [0]))) "../Hardware/LCD.c":519 -1
+     (nil))
+(debug_insn 96 95 97 10 (var_location:SI result (clobber (const_int 0 [0]))) "../Hardware/LCD.c":519 -1
+     (nil))
+(insn 97 96 98 10 (set (reg:SI 106)
+        (udiv:SI (reg:SI 74 [ _3 ])
+            (reg/v:SI 84 [ result ]))) "../Hardware/LCD.c":519 -1
+     (nil))
+(insn 98 97 99 10 (set (reg:SI 107)
+        (const_int 10 [0xa])) "../Hardware/LCD.c":519 -1
+     (nil))
+(insn 99 98 100 10 (set (reg:SI 76 [ _7 ])
+        (umod:SI (reg:SI 106)
+            (reg:SI 107))) "../Hardware/LCD.c":519 -1
+     (nil))
+(insn 100 99 101 10 (set (reg/v:SI 83 [ temp ])
+        (zero_extend:SI (subreg:QI (reg:SI 76 [ _7 ]) 0))) "../Hardware/LCD.c":519 -1
+     (nil))
+(debug_insn 101 100 102 10 (var_location:QI temp (subreg:QI (reg/v:SI 83 [ temp ]) 0)) "../Hardware/LCD.c":519 -1
+     (nil))
+(debug_insn 102 101 103 10 (debug_marker) "../Hardware/LCD.c":520 -1
+     (nil))
+(jump_insn 103 102 104 10 (set (pc)
+        (if_then_else (ne (reg/v:SI 81 [ enshow ])
+                (const_int 0 [0]))
+            (label_ref 123)
+            (pc))) "../Hardware/LCD.c":520 -1
+     (int_list:REG_BR_PROB 354334804 (nil))
+ -> 123)
+(note 104 103 105 11 [bb 11] NOTE_INSN_BASIC_BLOCK)
+(insn 105 104 106 11 (set (reg:SI 108)
+        (plus:SI (reg/v:SI 93 [ len ])
+            (const_int -1 [0xffffffffffffffff]))) "../Hardware/LCD.c":520 -1
+     (nil))
+(jump_insn 106 105 107 11 (set (pc)
+        (if_then_else (le (reg:SI 108)
+                (reg:SI 86 [ ivtmp.144 ]))
+            (label_ref 123)
+            (pc))) "../Hardware/LCD.c":520 -1
+     (int_list:REG_BR_PROB 536870916 (nil))
+ -> 123)
+(note 107 106 108 12 [bb 12] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 108 107 109 12 (debug_marker) "../Hardware/LCD.c":522 -1
+     (nil))
+(jump_insn 109 108 110 12 (set (pc)
+        (if_then_else (ne (reg:SI 76 [ _7 ])
+                (const_int 0 [0]))
+            (label_ref:SI 157)
+            (pc))) "../Hardware/LCD.c":522 180 {*branchsi}
+     (int_list:REG_BR_PROB 864147420 (nil))
+ -> 157)
+(note 110 109 111 13 [bb 13] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 111 110 112 13 (debug_marker) "../Hardware/LCD.c":524 -1
+     (nil))
+(insn 112 111 113 13 (set (reg:SI 16 a6)
+        (const_int 0 [0])) "../Hardware/LCD.c":524 -1
+     (nil))
+(insn 113 112 114 13 (set (reg:SI 15 a5)
+        (reg/v:SI 96 [ sizey ])) "../Hardware/LCD.c":524 -1
+     (nil))
+(insn 114 113 115 13 (set (reg:SI 14 a4)
+        (reg/v:SI 95 [ bc ])) "../Hardware/LCD.c":524 -1
+     (nil))
+(insn 115 114 116 13 (set (reg:SI 13 a3)
+        (reg/v:SI 94 [ fc ])) "../Hardware/LCD.c":524 -1
+     (nil))
+(insn 116 115 117 13 (set (reg:SI 12 a2)
+        (const_int 32 [0x20])) "../Hardware/LCD.c":524 -1
+     (nil))
+(insn 117 116 118 13 (set (reg:SI 11 a1)
+        (reg/v:SI 91 [ y ])) "../Hardware/LCD.c":524 -1
+     (nil))
+(insn 118 117 119 13 (set (reg:SI 10 a0)
+        (reg:SI 77 [ ivtmp.147 ])) "../Hardware/LCD.c":524 -1
+     (nil))
+(call_insn 119 118 120 13 (parallel [
+            (call (mem:SI (symbol_ref:SI ("LCD_ShowChar") [flags 0x3] <function_decl 06689528 LCD_ShowChar>) [0 LCD_ShowChar S4 A32])
+                (const_int 0 [0]))
+            (clobber (reg:SI 1 ra))
+        ]) "../Hardware/LCD.c":524 -1
+     (expr_list:REG_CALL_DECL (symbol_ref:SI ("LCD_ShowChar") [flags 0x3] <function_decl 06689528 LCD_ShowChar>)
+        (expr_list:REG_EH_REGION (const_int 0 [0])
+            (nil)))
+    (expr_list:HI (use (reg:SI 10 a0))
+        (expr_list:HI (use (reg:SI 11 a1))
+            (expr_list:QI (use (reg:SI 12 a2))
+                (expr_list:HI (use (reg:SI 13 a3))
+                    (expr_list:HI (use (reg:SI 14 a4))
+                        (expr_list:QI (use (reg:SI 15 a5))
+                            (expr_list:QI (use (reg:SI 16 a6))
+                                (nil)))))))))
+(debug_insn 120 119 121 13 (debug_marker) "../Hardware/LCD.c":525 -1
+     (nil))
+(jump_insn 121 120 122 13 (set (pc)
+        (label_ref 137)) "../Hardware/LCD.c":525 -1
+     (nil)
+ -> 137)
+(barrier 122 121 157)
+(code_label 157 122 156 14 110 (nil) [1 uses])
+(note 156 157 12 14 [bb 14] NOTE_INSN_BASIC_BLOCK)
+(insn 12 156 123 14 (set (reg/v:SI 81 [ enshow ])
+        (const_int 1 [0x1])) -1
+     (nil))
+(code_label 123 12 124 15 107 (nil) [2 uses])
+(note 124 123 125 15 [bb 15] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 125 124 126 15 (var_location:QI enshow (subreg:QI (reg/v:SI 81 [ enshow ]) 0)) -1
+     (nil))
+(debug_insn 126 125 127 15 (debug_marker) "../Hardware/LCD.c":529 -1
+     (nil))
+(insn 127 126 128 15 (set (reg:SI 109)
+        (plus:SI (reg/v:SI 83 [ temp ])
+            (const_int 48 [0x30]))) "../Hardware/LCD.c":529 -1
+     (nil))
+(insn 128 127 129 15 (set (reg:SI 110)
+        (zero_extend:SI (subreg:QI (reg:SI 109) 0))) "../Hardware/LCD.c":529 -1
+     (nil))
+(insn 129 128 130 15 (set (reg:SI 16 a6)
+        (const_int 0 [0])) "../Hardware/LCD.c":529 -1
+     (nil))
+(insn 130 129 131 15 (set (reg:SI 15 a5)
+        (reg/v:SI 96 [ sizey ])) "../Hardware/LCD.c":529 -1
+     (nil))
+(insn 131 130 132 15 (set (reg:SI 14 a4)
+        (reg/v:SI 95 [ bc ])) "../Hardware/LCD.c":529 -1
+     (nil))
+(insn 132 131 133 15 (set (reg:SI 13 a3)
+        (reg/v:SI 94 [ fc ])) "../Hardware/LCD.c":529 -1
+     (nil))
+(insn 133 132 134 15 (set (reg:SI 12 a2)
+        (reg:SI 110)) "../Hardware/LCD.c":529 -1
+     (nil))
+(insn 134 133 135 15 (set (reg:SI 11 a1)
+        (reg/v:SI 91 [ y ])) "../Hardware/LCD.c":529 -1
+     (nil))
+(insn 135 134 136 15 (set (reg:SI 10 a0)
+        (reg:SI 77 [ ivtmp.147 ])) "../Hardware/LCD.c":529 -1
+     (nil))
+(call_insn 136 135 137 15 (parallel [
+            (call (mem:SI (symbol_ref:SI ("LCD_ShowChar") [flags 0x3] <function_decl 06689528 LCD_ShowChar>) [0 LCD_ShowChar S4 A32])
+                (const_int 0 [0]))
+            (clobber (reg:SI 1 ra))
+        ]) "../Hardware/LCD.c":529 -1
+     (expr_list:REG_CALL_DECL (symbol_ref:SI ("LCD_ShowChar") [flags 0x3] <function_decl 06689528 LCD_ShowChar>)
+        (expr_list:REG_EH_REGION (const_int 0 [0])
+            (nil)))
+    (expr_list:HI (use (reg:SI 10 a0))
+        (expr_list:HI (use (reg:SI 11 a1))
+            (expr_list:QI (use (reg:SI 12 a2))
+                (expr_list:HI (use (reg:SI 13 a3))
+                    (expr_list:HI (use (reg:SI 14 a4))
+                        (expr_list:QI (use (reg:SI 15 a5))
+                            (expr_list:QI (use (reg:SI 16 a6))
+                                (nil)))))))))
+(code_label 137 136 138 16 108 (nil) [1 uses])
+(note 138 137 139 16 [bb 16] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 139 138 140 16 (var_location:QI enshow (subreg:QI (reg/v:SI 81 [ enshow ]) 0)) -1
+     (nil))
+(debug_insn 140 139 141 16 (var_location:QI t (plus:QI (subreg:QI (reg:SI 86 [ ivtmp.144 ]) 0)
+        (const_int 1 [0x1]))) "../Hardware/LCD.c":517 -1
+     (nil))
+(insn 141 140 142 16 (set (reg:SI 86 [ ivtmp.144 ])
+        (plus:SI (reg:SI 86 [ ivtmp.144 ])
+            (const_int 1 [0x1]))) -1
+     (nil))
+(insn 142 141 143 16 (set (reg:SI 111)
+        (plus:SI (reg:SI 77 [ ivtmp.147 ])
+            (reg:SI 88 [ _61 ]))) -1
+     (nil))
+(insn 143 142 144 16 (set (reg:SI 77 [ ivtmp.147 ])
+        (zero_extend:SI (subreg:HI (reg:SI 111) 0))) -1
+     (nil))
+(insn 144 143 145 16 (set (reg:SI 112)
+        (plus:SI (reg:SI 89 [ ivtmp.148 ])
+            (const_int -1 [0xffffffffffffffff]))) -1
+     (nil))
+(insn 145 144 146 16 (set (reg:SI 89 [ ivtmp.148 ])
+        (zero_extend:SI (subreg:QI (reg:SI 112) 0))) -1
+     (nil))
+(code_label 146 145 147 17 104 (nil) [1 uses])
+(note 147 146 148 17 [bb 17] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 148 147 149 17 (var_location:QI enshow (subreg:QI (reg/v:SI 81 [ enshow ]) 0)) -1
+     (nil))
+(debug_insn 149 148 151 17 (var_location:QI t (subreg:QI (reg:SI 86 [ ivtmp.144 ]) 0)) -1
+     (nil))
+(insn 151 149 152 17 (set (reg:SI 113)
+        (const_int 255 [0xff])) "../Hardware/LCD.c":517 -1
+     (nil))
+(jump_insn 152 151 153 17 (set (pc)
+        (if_then_else (ne (reg:SI 89 [ ivtmp.148 ])
+                (reg:SI 113))
+            (label_ref 150)
+            (pc))) "../Hardware/LCD.c":517 -1
+     (int_list:REG_BR_PROB 955630228 (nil))
+ -> 150)
+(note 153 152 0 18 [bb 18] NOTE_INSN_BASIC_BLOCK)
+
+;; Function LCD_ShowFloatNum1 (LCD_ShowFloatNum1, funcdef_no=45, decl_uid=5084, cgraph_uid=45, symbol_order=53)
+
+
+;; Generating RTL for gimple basic block 2
+
+;; Generating RTL for gimple basic block 3
+
+;; Generating RTL for gimple basic block 4
+
+;; Generating RTL for gimple basic block 5
+
+;; Generating RTL for gimple basic block 6
+
+;; Generating RTL for gimple basic block 7
+
+;; Generating RTL for gimple basic block 8
+
+;; Generating RTL for gimple basic block 9
+
+;; Generating RTL for gimple basic block 10
+
+
+try_optimize_cfg iteration 1
+
+Merging block 3 into block 2...
+Merged blocks 2 and 3.
+Merged 2 and 3 without moving.
+Forwarding edge 10->11 to 12 failed.
+Merging block 12 into block 11...
+Merged blocks 11 and 12.
+Merged 11 and 12 without moving.
+
+
+try_optimize_cfg iteration 2
+
+
+
+;;
+;; Full RTL generated for this function:
+;;
+(note 1 0 12 NOTE_INSN_DELETED)
+(note 12 1 2 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn 2 12 3 2 (set (reg/v:SI 94 [ x ])
+        (reg:SI 10 a0 [ x ])) "../Hardware/LCD.c":544 -1
+     (nil))
+(insn 3 2 4 2 (set (reg/v:SI 95 [ y ])
+        (reg:SI 11 a1 [ y ])) "../Hardware/LCD.c":544 -1
+     (nil))
+(insn 4 3 5 2 (set (reg/v:SF 96 [ num ])
+        (reg:SF 12 a2 [ num ])) "../Hardware/LCD.c":544 -1
+     (nil))
+(insn 5 4 6 2 (set (reg/v:SI 97 [ len ])
+        (reg:SI 13 a3 [ len ])) "../Hardware/LCD.c":544 -1
+     (nil))
+(insn 6 5 7 2 (set (reg/v:SI 98 [ fc ])
+        (reg:SI 14 a4 [ fc ])) "../Hardware/LCD.c":544 -1
+     (nil))
+(insn 7 6 8 2 (set (reg/v:SI 99 [ bc ])
+        (reg:SI 15 a5 [ bc ])) "../Hardware/LCD.c":544 -1
+     (nil))
+(insn 8 7 9 2 (set (reg/v:SI 100 [ sizey ])
+        (reg:SI 16 a6 [ sizey ])) "../Hardware/LCD.c":544 -1
+     (nil))
+(note 9 8 14 2 NOTE_INSN_FUNCTION_BEG)
+(debug_insn 14 9 15 2 (debug_marker) "../Hardware/LCD.c":545 -1
+     (nil))
+(debug_insn 15 14 16 2 (debug_marker) "../Hardware/LCD.c":546 -1
+     (nil))
+(debug_insn 16 15 17 2 (debug_marker) "../Hardware/LCD.c":547 -1
+     (nil))
+(insn 17 16 18 2 (set (reg:SI 101)
+        (lshiftrt:SI (reg/v:SI 100 [ sizey ])
+            (const_int 1 [0x1]))) "../Hardware/LCD.c":547 -1
+     (nil))
+(insn 18 17 19 2 (set (reg/v:SI 87 [ sizex ])
+        (zero_extend:SI (subreg:QI (reg:SI 101) 0))) "../Hardware/LCD.c":547 -1
+     (nil))
+(debug_insn 19 18 20 2 (var_location:QI sizex (subreg:QI (reg/v:SI 87 [ sizex ]) 0)) "../Hardware/LCD.c":547 -1
+     (nil))
+(debug_insn 20 19 21 2 (debug_marker) "../Hardware/LCD.c":548 -1
+     (nil))
+(insn 21 20 22 2 (set (reg:SI 102)
+        (high:SI (symbol_ref/u:SI ("*.LC0") [flags 0x82]))) "../Hardware/LCD.c":548 -1
+     (nil))
+(insn 22 21 23 2 (set (reg:SF 11 a1)
+        (mem/u/c:SF (lo_sum:SI (reg:SI 102)
+                (symbol_ref/u:SI ("*.LC0") [flags 0x82])) [0  S4 A32])) "../Hardware/LCD.c":548 -1
+     (expr_list:REG_EQUAL (const_double:SF 1.0e+2 [0x0.c8p+7])
+        (nil)))
+(insn 23 22 24 2 (set (reg:SF 10 a0)
+        (reg/v:SF 96 [ num ])) "../Hardware/LCD.c":548 -1
+     (nil))
+(call_insn/u 24 23 25 2 (parallel [
+            (set (reg:SF 10 a0)
+                (call (mem:SI (symbol_ref:SI ("__mulsf3") [flags 0x41]) [0  S4 A32])
+                    (const_int 0 [0])))
+            (clobber (reg:SI 1 ra))
+        ]) "../Hardware/LCD.c":548 -1
+     (expr_list:REG_CALL_DECL (symbol_ref:SI ("__mulsf3") [flags 0x41])
+        (expr_list:REG_EH_REGION (const_int -2147483648 [0xffffffff80000000])
+            (nil)))
+    (expr_list (use (reg:SF 11 a1))
+        (expr_list (use (reg:SF 10 a0))
+            (nil))))
+(insn 25 24 26 2 (set (reg:SF 103)
+        (reg:SF 10 a0)) "../Hardware/LCD.c":548 -1
+     (expr_list:REG_EQUAL (mult:SF (reg/v:SF 96 [ num ])
+            (const_double:SF 1.0e+2 [0x0.c8p+7]))
+        (nil)))
+(insn 26 25 27 2 (set (reg:SF 10 a0)
+        (reg:SF 103)) "../Hardware/LCD.c":548 -1
+     (nil))
+(call_insn/u 27 26 28 2 (parallel [
+            (set (reg:SI 10 a0)
+                (call (mem:SI (symbol_ref:SI ("__fixunssfsi") [flags 0x41]) [0  S4 A32])
+                    (const_int 0 [0])))
+            (clobber (reg:SI 1 ra))
+        ]) "../Hardware/LCD.c":548 -1
+     (expr_list:REG_CALL_DECL (symbol_ref:SI ("__fixunssfsi") [flags 0x41])
+        (expr_list:REG_EH_REGION (const_int -2147483648 [0xffffffff80000000])
+            (nil)))
+    (expr_list (use (reg:SF 10 a0))
+        (nil)))
+(insn 28 27 29 2 (set (reg:SI 105)
+        (reg:SI 10 a0)) "../Hardware/LCD.c":548 -1
+     (expr_list:REG_EQUAL (unsigned_fix:SI (reg:SF 103))
+        (nil)))
+(insn 29 28 30 2 (set (reg:HI 104)
+        (subreg:HI (reg:SI 105) 0)) "../Hardware/LCD.c":548 -1
+     (nil))
+(insn 30 29 31 2 (set (reg/v:SI 88 [ num1 ])
+        (zero_extend:SI (reg:HI 104))) "../Hardware/LCD.c":548 -1
+     (nil))
+(debug_insn 31 30 32 2 (var_location:HI num1 (subreg:HI (reg/v:SI 88 [ num1 ]) 0)) "../Hardware/LCD.c":548 -1
+     (nil))
+(debug_insn 32 31 33 2 (debug_marker) "../Hardware/LCD.c":549 -1
+     (nil))
+(debug_insn 33 32 11 2 (var_location:QI t (const_int 0 [0])) "../Hardware/LCD.c":549 -1
+     (nil))
+(insn 11 33 34 2 (set (reg/v:SI 86 [ t ])
+        (const_int 0 [0])) "../Hardware/LCD.c":549 -1
+     (nil))
+(jump_insn 34 11 35 2 (set (pc)
+        (label_ref 127)) "../Hardware/LCD.c":549 -1
+     (nil)
+ -> 127)
+(barrier 35 34 131)
+(code_label 131 35 36 4 118 (nil) [1 uses])
+(note 36 131 37 4 [bb 4] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 37 36 38 4 (debug_marker) "../Hardware/LCD.c":551 -1
+     (nil))
+(insn 38 37 39 4 (set (reg:SI 73 [ _2 ])
+        (reg/v:SI 88 [ num1 ])) "../Hardware/LCD.c":551 -1
+     (nil))
+(insn 39 38 40 4 (set (reg:SI 106)
+        (plus:SI (reg/v:SI 97 [ len ])
+            (const_int -1 [0xffffffffffffffff]))) "../Hardware/LCD.c":551 -1
+     (nil))
+(insn 40 39 41 4 (set (reg:QI 107)
+        (subreg:QI (reg:SI 106) 0)) "../Hardware/LCD.c":551 -1
+     (nil))
+(insn 41 40 42 4 (set (reg:SI 108)
+        (minus:SI (subreg:SI (reg:QI 107) 0)
+            (reg/v:SI 86 [ t ]))) "../Hardware/LCD.c":551 -1
+     (nil))
+(insn 42 41 43 4 (set (reg/v:SI 91 [ n ])
+        (zero_extend:SI (subreg:QI (reg:SI 108) 0))) "../Hardware/LCD.c":551 -1
+     (nil))
+(debug_insn 43 42 44 4 (var_location:QI m (const_int 10 [0xa])) "../Hardware/LCD.c":551 -1
+     (nil))
+(debug_insn 44 43 45 4 (var_location:QI n (subreg:QI (reg/v:SI 91 [ n ]) 0)) "../Hardware/LCD.c":551 -1
+     (nil))
+(debug_insn 45 44 46 4 (debug_marker) "../Hardware/LCD.c":456 -1
+     (nil))
+(debug_insn 46 45 47 4 (var_location:SI result (const_int 1 [0x1])) "../Hardware/LCD.c":456 -1
+     (nil))
+(debug_insn 47 46 10 4 (debug_marker) "../Hardware/LCD.c":457 -1
+     (nil))
+(insn 10 47 48 4 (set (reg/v:SI 90 [ result ])
+        (const_int 1 [0x1])) "../Hardware/LCD.c":456 -1
+     (nil))
+(jump_insn 48 10 49 4 (set (pc)
+        (label_ref 55)) "../Hardware/LCD.c":551 -1
+     (nil)
+ -> 55)
+(barrier 49 48 62)
+(code_label 62 49 50 5 116 (nil) [1 uses])
+(note 50 62 51 5 [bb 5] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 51 50 52 5 (debug_marker) "../Hardware/LCD.c":457 -1
+     (nil))
+(insn 52 51 53 5 (set (reg:SI 109)
+        (const_int 10 [0xa])) "../Hardware/LCD.c":457 -1
+     (nil))
+(insn 53 52 54 5 (set (reg/v:SI 90 [ result ])
+        (mult:SI (reg/v:SI 90 [ result ])
+            (reg:SI 109))) "../Hardware/LCD.c":457 -1
+     (nil))
+(debug_insn 54 53 55 5 (var_location:SI result (reg/v:SI 90 [ result ])) "../Hardware/LCD.c":457 -1
+     (nil))
+(code_label 55 54 56 6 115 (nil) [1 uses])
+(note 56 55 57 6 [bb 6] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 57 56 58 6 (var_location:SI result (reg/v:SI 90 [ result ])) -1
+     (nil))
+(debug_insn 58 57 59 6 (var_location:QI n (subreg:QI (reg/v:SI 91 [ n ]) 0)) -1
+     (nil))
+(insn 59 58 60 6 (set (reg:SI 110)
+        (plus:SI (reg/v:SI 91 [ n ])
+            (const_int -1 [0xffffffffffffffff]))) "../Hardware/LCD.c":457 -1
+     (nil))
+(insn 60 59 61 6 (set (reg/v:SI 91 [ n ])
+        (zero_extend:SI (subreg:QI (reg:SI 110) 0))) "../Hardware/LCD.c":457 -1
+     (nil))
+(debug_insn 61 60 63 6 (var_location:QI n (subreg:QI (reg/v:SI 91 [ n ]) 0)) "../Hardware/LCD.c":457 -1
+     (nil))
+(insn 63 61 64 6 (set (reg:SI 111)
+        (const_int 255 [0xff])) "../Hardware/LCD.c":457 -1
+     (nil))
+(jump_insn 64 63 65 6 (set (pc)
+        (if_then_else (ne (reg/v:SI 91 [ n ])
+                (reg:SI 111))
+            (label_ref 62)
+            (pc))) "../Hardware/LCD.c":457 -1
+     (int_list:REG_BR_PROB 955630228 (nil))
+ -> 62)
+(note 65 64 66 7 [bb 7] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 66 65 67 7 (debug_marker) "../Hardware/LCD.c":458 -1
+     (nil))
+(debug_insn 67 66 68 7 (var_location:QI m (clobber (const_int 0 [0]))) "../Hardware/LCD.c":551 -1
+     (nil))
+(debug_insn 68 67 69 7 (var_location:QI n (clobber (const_int 0 [0]))) "../Hardware/LCD.c":551 -1
+     (nil))
+(debug_insn 69 68 70 7 (var_location:SI result (clobber (const_int 0 [0]))) "../Hardware/LCD.c":551 -1
+     (nil))
+(insn 70 69 71 7 (set (reg:SI 113)
+        (udiv:SI (reg:SI 73 [ _2 ])
+            (reg/v:SI 90 [ result ]))) "../Hardware/LCD.c":551 -1
+     (nil))
+(insn 71 70 72 7 (set (reg:SI 115)
+        (const_int 10 [0xa])) "../Hardware/LCD.c":551 -1
+     (nil))
+(insn 72 71 75 7 (set (reg:SI 116)
+        (umod:SI (reg:SI 113)
+            (reg:SI 115))) "../Hardware/LCD.c":551 -1
+     (nil))
+(insn 75 72 76 7 (set (reg/v:SI 89 [ temp ])
+        (zero_extend:SI (subreg:QI (reg:SI 116) 0))) "../Hardware/LCD.c":551 -1
+     (nil))
+(debug_insn 76 75 77 7 (var_location:QI temp (subreg:QI (reg/v:SI 89 [ temp ]) 0)) "../Hardware/LCD.c":551 -1
+     (nil))
+(debug_insn 77 76 78 7 (debug_marker) "../Hardware/LCD.c":552 -1
+     (nil))
+(insn 78 77 79 7 (set (reg:SI 78 [ _9 ])
+        (plus:SI (reg/v:SI 97 [ len ])
+            (const_int -2 [0xfffffffffffffffe]))) "../Hardware/LCD.c":552 -1
+     (nil))
+(insn 79 78 80 7 (set (reg:SI 93 [ _54 ])
+        (zero_extend:SI (subreg:HI (reg/v:SI 87 [ sizex ]) 0))) -1
+     (nil))
+(jump_insn 80 79 81 7 (set (pc)
+        (if_then_else (ne (reg/v:SI 86 [ t ])
+                (reg:SI 78 [ _9 ]))
+            (label_ref 104)
+            (pc))) "../Hardware/LCD.c":552 -1
+     (int_list:REG_BR_PROB 856416484 (nil))
+ -> 104)
+(note 81 80 82 8 [bb 8] NOTE_INSN_BASIC_BLOCK)
+(insn 82 81 83 8 (set (reg:SI 120)
+        (plus:SI (reg/v:SI 86 [ t ])
+            (const_int 1 [0x1]))) -1
+     (nil))
+(insn 83 82 84 8 (set (reg/v:SI 86 [ t ])
+        (zero_extend:SI (subreg:QI (reg:SI 120) 0))) -1
+     (nil))
+(debug_insn 84 83 85 8 (debug_marker) "../Hardware/LCD.c":554 -1
+     (nil))
+(insn 85 84 86 8 (set (reg:HI 121)
+        (subreg:HI (reg:SI 78 [ _9 ]) 0)) "../Hardware/LCD.c":554 -1
+     (nil))
+(insn 86 85 87 8 (set (reg:SI 122)
+        (mult:SI (reg:SI 93 [ _54 ])
+            (subreg:SI (reg:HI 121) 0))) "../Hardware/LCD.c":554 -1
+     (nil))
+(insn 87 86 88 8 (set (reg:HI 123)
+        (subreg:HI (reg:SI 122) 0)) "../Hardware/LCD.c":554 -1
+     (nil))
+(insn 88 87 89 8 (set (reg:SI 124)
+        (plus:SI (reg/v:SI 94 [ x ])
+            (subreg:SI (reg:HI 123) 0))) "../Hardware/LCD.c":554 -1
+     (nil))
+(insn 89 88 90 8 (set (reg:SI 125)
+        (zero_extend:SI (subreg:HI (reg:SI 124) 0))) "../Hardware/LCD.c":554 -1
+     (nil))
+(insn 90 89 91 8 (set (reg:SI 16 a6)
+        (const_int 0 [0])) "../Hardware/LCD.c":554 -1
+     (nil))
+(insn 91 90 92 8 (set (reg:SI 15 a5)
+        (reg/v:SI 100 [ sizey ])) "../Hardware/LCD.c":554 -1
+     (nil))
+(insn 92 91 93 8 (set (reg:SI 14 a4)
+        (reg/v:SI 99 [ bc ])) "../Hardware/LCD.c":554 -1
+     (nil))
+(insn 93 92 94 8 (set (reg:SI 13 a3)
+        (reg/v:SI 98 [ fc ])) "../Hardware/LCD.c":554 -1
+     (nil))
+(insn 94 93 95 8 (set (reg:SI 12 a2)
+        (const_int 46 [0x2e])) "../Hardware/LCD.c":554 -1
+     (nil))
+(insn 95 94 96 8 (set (reg:SI 11 a1)
+        (reg/v:SI 95 [ y ])) "../Hardware/LCD.c":554 -1
+     (nil))
+(insn 96 95 97 8 (set (reg:SI 10 a0)
+        (reg:SI 125)) "../Hardware/LCD.c":554 -1
+     (nil))
+(call_insn 97 96 98 8 (parallel [
+            (call (mem:SI (symbol_ref:SI ("LCD_ShowChar") [flags 0x3] <function_decl 06689528 LCD_ShowChar>) [0 LCD_ShowChar S4 A32])
+                (const_int 0 [0]))
+            (clobber (reg:SI 1 ra))
+        ]) "../Hardware/LCD.c":554 -1
+     (expr_list:REG_CALL_DECL (symbol_ref:SI ("LCD_ShowChar") [flags 0x3] <function_decl 06689528 LCD_ShowChar>)
+        (expr_list:REG_EH_REGION (const_int 0 [0])
+            (nil)))
+    (expr_list:HI (use (reg:SI 10 a0))
+        (expr_list:HI (use (reg:SI 11 a1))
+            (expr_list:QI (use (reg:SI 12 a2))
+                (expr_list:HI (use (reg:SI 13 a3))
+                    (expr_list:HI (use (reg:SI 14 a4))
+                        (expr_list:QI (use (reg:SI 15 a5))
+                            (expr_list:QI (use (reg:SI 16 a6))
+                                (nil)))))))))
+(debug_insn 98 97 99 8 (debug_marker) "../Hardware/LCD.c":555 -1
+     (nil))
+(debug_insn 99 98 100 8 (var_location:QI t (plus:QI (subreg:QI (reg/v:SI 86 [ t ]) 0)
+        (const_int 1 [0x1]))) "../Hardware/LCD.c":555 -1
+     (nil))
+(debug_insn 100 99 101 8 (debug_marker) "../Hardware/LCD.c":556 -1
+     (nil))
+(insn 101 100 102 8 (set (reg:SI 126)
+        (plus:SI (reg/v:SI 97 [ len ])
+            (const_int 1 [0x1]))) "../Hardware/LCD.c":556 -1
+     (nil))
+(insn 102 101 103 8 (set (reg/v:SI 97 [ len ])
+        (zero_extend:SI (subreg:QI (reg:SI 126) 0))) "../Hardware/LCD.c":556 -1
+     (nil))
+(debug_insn 103 102 104 8 (var_location:QI len (subreg:QI (reg/v:SI 97 [ len ]) 0)) "../Hardware/LCD.c":556 -1
+     (nil))
+(code_label 104 103 105 9 117 (nil) [1 uses])
+(note 105 104 106 9 [bb 9] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 106 105 107 9 (var_location:QI t (subreg:QI (reg/v:SI 86 [ t ]) 0)) -1
+     (nil))
+(debug_insn 107 106 108 9 (var_location:QI len (subreg:QI (reg/v:SI 97 [ len ]) 0)) -1
+     (nil))
+(debug_insn 108 107 109 9 (debug_marker) "../Hardware/LCD.c":558 -1
+     (nil))
+(insn 109 108 110 9 (set (reg:SI 127)
+        (plus:SI (reg/v:SI 89 [ temp ])
+            (const_int 48 [0x30]))) "../Hardware/LCD.c":558 -1
+     (nil))
+(insn 110 109 111 9 (set (reg:SI 128)
+        (zero_extend:SI (subreg:QI (reg:SI 127) 0))) "../Hardware/LCD.c":558 -1
+     (nil))
+(insn 111 110 112 9 (set (reg:HI 129)
+        (subreg:HI (reg/v:SI 86 [ t ]) 0)) "../Hardware/LCD.c":558 -1
+     (nil))
+(insn 112 111 113 9 (set (reg:SI 130)
+        (mult:SI (reg:SI 93 [ _54 ])
+            (subreg:SI (reg:HI 129) 0))) "../Hardware/LCD.c":558 -1
+     (nil))
+(insn 113 112 114 9 (set (reg:HI 131)
+        (subreg:HI (reg:SI 130) 0)) "../Hardware/LCD.c":558 -1
+     (nil))
+(insn 114 113 115 9 (set (reg:SI 132)
+        (plus:SI (reg/v:SI 94 [ x ])
+            (subreg:SI (reg:HI 131) 0))) "../Hardware/LCD.c":558 -1
+     (nil))
+(insn 115 114 116 9 (set (reg:SI 133)
+        (zero_extend:SI (subreg:HI (reg:SI 132) 0))) "../Hardware/LCD.c":558 -1
+     (nil))
+(insn 116 115 117 9 (set (reg:SI 16 a6)
+        (const_int 0 [0])) "../Hardware/LCD.c":558 -1
+     (nil))
+(insn 117 116 118 9 (set (reg:SI 15 a5)
+        (reg/v:SI 100 [ sizey ])) "../Hardware/LCD.c":558 -1
+     (nil))
+(insn 118 117 119 9 (set (reg:SI 14 a4)
+        (reg/v:SI 99 [ bc ])) "../Hardware/LCD.c":558 -1
+     (nil))
+(insn 119 118 120 9 (set (reg:SI 13 a3)
+        (reg/v:SI 98 [ fc ])) "../Hardware/LCD.c":558 -1
+     (nil))
+(insn 120 119 121 9 (set (reg:SI 12 a2)
+        (reg:SI 128)) "../Hardware/LCD.c":558 -1
+     (nil))
+(insn 121 120 122 9 (set (reg:SI 11 a1)
+        (reg/v:SI 95 [ y ])) "../Hardware/LCD.c":558 -1
+     (nil))
+(insn 122 121 123 9 (set (reg:SI 10 a0)
+        (reg:SI 133)) "../Hardware/LCD.c":558 -1
+     (nil))
+(call_insn 123 122 124 9 (parallel [
+            (call (mem:SI (symbol_ref:SI ("LCD_ShowChar") [flags 0x3] <function_decl 06689528 LCD_ShowChar>) [0 LCD_ShowChar S4 A32])
+                (const_int 0 [0]))
+            (clobber (reg:SI 1 ra))
+        ]) "../Hardware/LCD.c":558 -1
+     (expr_list:REG_CALL_DECL (symbol_ref:SI ("LCD_ShowChar") [flags 0x3] <function_decl 06689528 LCD_ShowChar>)
+        (expr_list:REG_EH_REGION (const_int 0 [0])
+            (nil)))
+    (expr_list:HI (use (reg:SI 10 a0))
+        (expr_list:HI (use (reg:SI 11 a1))
+            (expr_list:QI (use (reg:SI 12 a2))
+                (expr_list:HI (use (reg:SI 13 a3))
+                    (expr_list:HI (use (reg:SI 14 a4))
+                        (expr_list:QI (use (reg:SI 15 a5))
+                            (expr_list:QI (use (reg:SI 16 a6))
+                                (nil)))))))))
+(insn 124 123 125 9 (set (reg:SI 134)
+        (plus:SI (reg/v:SI 86 [ t ])
+            (const_int 1 [0x1]))) "../Hardware/LCD.c":549 -1
+     (nil))
+(insn 125 124 126 9 (set (reg/v:SI 86 [ t ])
+        (zero_extend:SI (subreg:QI (reg:SI 134) 0))) "../Hardware/LCD.c":549 -1
+     (nil))
+(debug_insn 126 125 127 9 (var_location:QI t (subreg:QI (reg/v:SI 86 [ t ]) 0)) "../Hardware/LCD.c":549 -1
+     (nil))
+(code_label 127 126 128 10 114 (nil) [1 uses])
+(note 128 127 129 10 [bb 10] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 129 128 130 10 (var_location:QI t (subreg:QI (reg/v:SI 86 [ t ]) 0)) -1
+     (nil))
+(debug_insn 130 129 132 10 (var_location:QI len (subreg:QI (reg/v:SI 97 [ len ]) 0)) -1
+     (nil))
+(jump_insn 132 130 133 10 (set (pc)
+        (if_then_else (gtu (reg/v:SI 97 [ len ])
+                (reg/v:SI 86 [ t ]))
+            (label_ref 131)
+            (pc))) "../Hardware/LCD.c":549 -1
+     (int_list:REG_BR_PROB 955630228 (nil))
+ -> 131)
+(note 133 132 0 11 [bb 11] NOTE_INSN_BASIC_BLOCK)
+
+;; Function LCD_ShowPicture (LCD_ShowPicture, funcdef_no=46, decl_uid=5090, cgraph_uid=46, symbol_order=54)
+
+
+;; Generating RTL for gimple basic block 2
+
+;; Generating RTL for gimple basic block 3
+
+;; Generating RTL for gimple basic block 4
+
+;; Generating RTL for gimple basic block 5
+
+;; Generating RTL for gimple basic block 6
+
+;; Generating RTL for gimple basic block 7
+Edge 6->4 redirected to 10
+
+
+try_optimize_cfg iteration 1
+
+Merging block 3 into block 2...
+Merged blocks 2 and 3.
+Merged 2 and 3 without moving.
+Forwarding edge 8->9 to 10 failed.
+Merging block 10 into block 9...
+Merged blocks 9 and 10.
+Merged 9 and 10 without moving.
+
+
+try_optimize_cfg iteration 2
+
+
+
+;;
+;; Full RTL generated for this function:
+;;
+(note 1 0 11 NOTE_INSN_DELETED)
+(note 11 1 2 2 [bb 2] NOTE_INSN_BASIC_BLOCK)
+(insn 2 11 3 2 (set (reg/v:SI 85 [ x ])
+        (reg:SI 10 a0 [ x ])) "../Hardware/LCD.c":572 -1
+     (nil))
+(insn 3 2 4 2 (set (reg/v:SI 86 [ y ])
+        (reg:SI 11 a1 [ y ])) "../Hardware/LCD.c":572 -1
+     (nil))
+(insn 4 3 5 2 (set (reg/v:SI 87 [ length ])
+        (reg:SI 12 a2 [ length ])) "../Hardware/LCD.c":572 -1
+     (nil))
+(insn 5 4 6 2 (set (reg/v:SI 88 [ width ])
+        (reg:SI 13 a3 [ width ])) "../Hardware/LCD.c":572 -1
+     (nil))
+(insn 6 5 7 2 (set (reg/v/f:SI 89 [ pic ])
+        (reg:SI 14 a4 [ pic ])) "../Hardware/LCD.c":572 -1
+     (nil))
+(note 7 6 13 2 NOTE_INSN_FUNCTION_BEG)
+(debug_insn 13 7 14 2 (debug_marker) "../Hardware/LCD.c":573 -1
+     (nil))
+(debug_insn 14 13 15 2 (debug_marker) "../Hardware/LCD.c":574 -1
+     (nil))
+(debug_insn 15 14 16 2 (var_location:SI k (const_int 0 [0])) "../Hardware/LCD.c":574 -1
+     (nil))
+(debug_insn 16 15 17 2 (debug_marker) "../Hardware/LCD.c":575 -1
+     (nil))
+(insn 17 16 18 2 (set (reg:SI 90)
+        (plus:SI (reg/v:SI 88 [ width ])
+            (const_int -1 [0xffffffffffffffff]))) "../Hardware/LCD.c":575 -1
+     (nil))
+(insn 18 17 19 2 (set (reg:HI 91)
+        (subreg:HI (reg:SI 90) 0)) "../Hardware/LCD.c":575 -1
+     (nil))
+(insn 19 18 20 2 (set (reg:SI 92)
+        (plus:SI (reg/v:SI 86 [ y ])
+            (subreg:SI (reg:HI 91) 0))) "../Hardware/LCD.c":575 -1
+     (nil))
+(insn 20 19 21 2 (set (reg:SI 93)
+        (zero_extend:SI (subreg:HI (reg:SI 92) 0))) "../Hardware/LCD.c":575 -1
+     (nil))
+(insn 21 20 22 2 (set (reg:SI 94)
+        (plus:SI (reg/v:SI 87 [ length ])
+            (const_int -1 [0xffffffffffffffff]))) "../Hardware/LCD.c":575 -1
+     (nil))
+(insn 22 21 23 2 (set (reg:HI 95)
+        (subreg:HI (reg:SI 94) 0)) "../Hardware/LCD.c":575 -1
+     (nil))
+(insn 23 22 24 2 (set (reg:SI 96)
+        (plus:SI (reg/v:SI 85 [ x ])
+            (subreg:SI (reg:HI 95) 0))) "../Hardware/LCD.c":575 -1
+     (nil))
+(insn 24 23 25 2 (set (reg:SI 97)
+        (zero_extend:SI (subreg:HI (reg:SI 96) 0))) "../Hardware/LCD.c":575 -1
+     (nil))
+(insn 25 24 26 2 (set (reg:SI 13 a3)
+        (reg:SI 93)) "../Hardware/LCD.c":575 -1
+     (nil))
+(insn 26 25 27 2 (set (reg:SI 12 a2)
+        (reg:SI 97)) "../Hardware/LCD.c":575 -1
+     (nil))
+(insn 27 26 28 2 (set (reg:SI 11 a1)
+        (reg/v:SI 86 [ y ])) "../Hardware/LCD.c":575 -1
+     (nil))
+(insn 28 27 29 2 (set (reg:SI 10 a0)
+        (reg/v:SI 85 [ x ])) "../Hardware/LCD.c":575 -1
+     (nil))
+(call_insn 29 28 30 2 (parallel [
+            (call (mem:SI (symbol_ref:SI ("LCD_Address_Set") [flags 0x41] <function_decl 06874f78 LCD_Address_Set>) [0 LCD_Address_Set S4 A32])
+                (const_int 0 [0]))
+            (clobber (reg:SI 1 ra))
+        ]) "../Hardware/LCD.c":575 -1
+     (expr_list:REG_CALL_DECL (symbol_ref:SI ("LCD_Address_Set") [flags 0x41] <function_decl 06874f78 LCD_Address_Set>)
+        (nil))
+    (expr_list:HI (use (reg:SI 10 a0))
+        (expr_list:HI (use (reg:SI 11 a1))
+            (expr_list:HI (use (reg:SI 12 a2))
+                (expr_list:HI (use (reg:SI 13 a3))
+                    (nil))))))
+(debug_insn 30 29 31 2 (debug_marker) "../Hardware/LCD.c":576 -1
+     (nil))
+(debug_insn 31 30 32 2 (var_location:HI i (const_int 0 [0])) "../Hardware/LCD.c":576 -1
+     (nil))
+(insn 32 31 33 2 (set (reg:SI 84 [ _41 ])
+        (ashift:SI (reg/v:SI 88 [ width ])
+            (const_int 1 [0x1]))) -1
+     (nil))
+(insn 33 32 10 2 (set (reg:SI 82 [ ivtmp.181 ])
+        (reg/v/f:SI 89 [ pic ])) -1
+     (nil))
+(insn 10 33 34 2 (set (reg/v:SI 77 [ i ])
+        (const_int 0 [0])) "../Hardware/LCD.c":576 -1
+     (nil))
+(jump_insn 34 10 35 2 (set (pc)
+        (label_ref 62)) "../Hardware/LCD.c":576 -1
+     (nil)
+ -> 62)
+(barrier 35 34 55)
+(code_label 55 35 36 4 122 (nil) [1 uses])
+(note 36 55 37 4 [bb 4] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 37 36 38 4 (debug_marker) "../Hardware/LCD.c":580 -1
+     (nil))
+(insn 38 37 39 4 (set (reg/f:SI 81 [ _36 ])
+        (reg:SI 80 [ ivtmp.169 ])) -1
+     (nil))
+(insn 39 38 40 4 (set (reg:SI 98)
+        (zero_extend:SI (mem:QI (reg/f:SI 81 [ _36 ]) [0 MEM[base: _36, offset: 0B]+0 S1 A8]))) "../Hardware/LCD.c":580 -1
+     (nil))
+(insn 40 39 41 4 (set (reg:SI 10 a0)
+        (reg:SI 98)) "../Hardware/LCD.c":580 -1
+     (nil))
+(call_insn 41 40 42 4 (parallel [
+            (call (mem:SI (symbol_ref:SI ("LCD_WR_DATA8") [flags 0x41] <function_decl 06874e10 LCD_WR_DATA8>) [0 LCD_WR_DATA8 S4 A32])
+                (const_int 0 [0]))
+            (clobber (reg:SI 1 ra))
+        ]) "../Hardware/LCD.c":580 -1
+     (expr_list:REG_CALL_DECL (symbol_ref:SI ("LCD_WR_DATA8") [flags 0x41] <function_decl 06874e10 LCD_WR_DATA8>)
+        (nil))
+    (expr_list:QI (use (reg:SI 10 a0))
+        (nil)))
+(debug_insn 42 41 43 4 (debug_marker) "../Hardware/LCD.c":581 -1
+     (nil))
+(insn 43 42 44 4 (set (reg:SI 99)
+        (zero_extend:SI (mem:QI (plus:SI (reg/f:SI 81 [ _36 ])
+                    (const_int 1 [0x1])) [0 MEM[base: _36, offset: 1B]+0 S1 A8]))) "../Hardware/LCD.c":581 -1
+     (nil))
+(insn 44 43 45 4 (set (reg:SI 10 a0)
+        (reg:SI 99)) "../Hardware/LCD.c":581 -1
+     (nil))
+(call_insn 45 44 46 4 (parallel [
+            (call (mem:SI (symbol_ref:SI ("LCD_WR_DATA8") [flags 0x41] <function_decl 06874e10 LCD_WR_DATA8>) [0 LCD_WR_DATA8 S4 A32])
+                (const_int 0 [0]))
+            (clobber (reg:SI 1 ra))
+        ]) "../Hardware/LCD.c":581 -1
+     (expr_list:REG_CALL_DECL (symbol_ref:SI ("LCD_WR_DATA8") [flags 0x41] <function_decl 06874e10 LCD_WR_DATA8>)
+        (nil))
+    (expr_list:QI (use (reg:SI 10 a0))
+        (nil)))
+(debug_insn 46 45 47 4 (debug_marker) "../Hardware/LCD.c":582 -1
+     (nil))
+(debug_insn 47 46 48 4 (var_location:SI k (clobber (const_int 0 [0]))) "../Hardware/LCD.c":582 -1
+     (nil))
+(insn 48 47 49 4 (set (reg:SI 100)
+        (plus:SI (reg/v:SI 78 [ j ])
+            (const_int 1 [0x1]))) "../Hardware/LCD.c":578 -1
+     (nil))
+(insn 49 48 50 4 (set (reg/v:SI 78 [ j ])
+        (zero_extend:SI (subreg:HI (reg:SI 100) 0))) "../Hardware/LCD.c":578 -1
+     (nil))
+(debug_insn 50 49 51 4 (var_location:HI j (subreg:HI (reg/v:SI 78 [ j ]) 0)) "../Hardware/LCD.c":578 -1
+     (nil))
+(insn 51 50 71 4 (set (reg:SI 80 [ ivtmp.169 ])
+        (plus:SI (reg:SI 80 [ ivtmp.169 ])
+            (const_int 2 [0x2]))) -1
+     (nil))
+(jump_insn 71 51 72 4 (set (pc)
+        (label_ref 66)) -1
+     (nil)
+ -> 66)
+(barrier 72 71 74)
+(code_label 74 72 73 5 124 (nil) [1 uses])
+(note 73 74 8 5 [bb 5] NOTE_INSN_BASIC_BLOCK)
+(insn 8 73 9 5 (set (reg:SI 80 [ ivtmp.169 ])
+        (reg:SI 82 [ ivtmp.181 ])) -1
+     (nil))
+(insn 9 8 66 5 (set (reg/v:SI 78 [ j ])
+        (const_int 0 [0])) "../Hardware/LCD.c":578 -1
+     (nil))
+(code_label 66 9 52 6 123 (nil) [1 uses])
+(note 52 66 53 6 [bb 6] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 53 52 54 6 (var_location:SI k (clobber (const_int 0 [0]))) -1
+     (nil))
+(debug_insn 54 53 56 6 (var_location:HI j (subreg:HI (reg/v:SI 78 [ j ]) 0)) -1
+     (nil))
+(jump_insn 56 54 57 6 (set (pc)
+        (if_then_else (ne (reg/v:SI 78 [ j ])
+                (reg/v:SI 88 [ width ]))
+            (label_ref 55)
+            (pc))) "../Hardware/LCD.c":578 -1
+     (int_list:REG_BR_PROB 955630228 (nil))
+ -> 55)
+(note 57 56 58 7 [bb 7] NOTE_INSN_BASIC_BLOCK)
+(insn 58 57 59 7 (set (reg:SI 101)
+        (plus:SI (reg/v:SI 77 [ i ])
+            (const_int 1 [0x1]))) "../Hardware/LCD.c":576 -1
+     (nil))
+(insn 59 58 60 7 (set (reg/v:SI 77 [ i ])
+        (zero_extend:SI (subreg:HI (reg:SI 101) 0))) "../Hardware/LCD.c":576 -1
+     (nil))
+(debug_insn 60 59 61 7 (var_location:HI i (subreg:HI (reg/v:SI 77 [ i ]) 0)) "../Hardware/LCD.c":576 -1
+     (nil))
+(insn 61 60 62 7 (set (reg:SI 82 [ ivtmp.181 ])
+        (plus:SI (reg:SI 82 [ ivtmp.181 ])
+            (reg:SI 84 [ _41 ]))) -1
+     (nil))
+(code_label 62 61 63 8 121 (nil) [1 uses])
+(note 63 62 64 8 [bb 8] NOTE_INSN_BASIC_BLOCK)
+(debug_insn 64 63 65 8 (var_location:SI k (clobber (const_int 0 [0]))) -1
+     (nil))
+(debug_insn 65 64 67 8 (var_location:HI i (subreg:HI (reg/v:SI 77 [ i ]) 0)) -1
+     (nil))
+(jump_insn 67 65 68 8 (set (pc)
+        (if_then_else (ne (reg/v:SI 77 [ i ])
+                (reg/v:SI 87 [ length ]))
+            (label_ref:SI 74)
+            (pc))) "../Hardware/LCD.c":576 180 {*branchsi}
+     (int_list:REG_BR_PROB 955630228 (nil))
+ -> 74)
+(note 68 67 0 9 [bb 9] NOTE_INSN_BASIC_BLOCK)

@@ -1,0 +1,68 @@
+{
+	"details": [
+		{
+			"file": "User/main.c",
+			"encoding": "utf8"
+		},
+		{
+			"file": "Hardware/EC_01G.c",
+			"encoding": "utf8"
+		},
+		{
+			"file": "Hardware/TFT_LCD_Font.h",
+			"encoding": "utf8"
+		},
+		{
+			"file": "Hardware/ICM42688.c",
+			"encoding": "utf8"
+		},
+		{
+			"file": "Hardware/ADC.c",
+			"encoding": "utf8"
+		},
+		{
+			"file": "Hardware/Angle.c",
+			"encoding": "utf8"
+		},
+		{
+			"file": "Hardware/ICM42688.h",
+			"encoding": "utf8"
+		},
+		{
+			"file": "Hardware/MyRTC.c",
+			"encoding": "utf8"
+		},
+		{
+			"file": "Hardware/MySPI.c",
+			"encoding": "utf8"
+		},
+		{
+			"file": "Hardware/MySPI.h",
+			"encoding": "utf8"
+		},
+		{
+			"file": "Hardware/Sensor.c",
+			"encoding": "utf8"
+		},
+		{
+			"file": "Hardware/Serial.c",
+			"encoding": "utf8"
+		},
+		{
+			"file": "Hardware/TFT_LCD_Init.c",
+			"encoding": "utf8"
+		},
+		{
+			"file": "Hardware/TFT_LCD_Init.h",
+			"encoding": "utf8"
+		},
+		{
+			"file": "Hardware/TFT_LCD.c",
+			"encoding": "utf8"
+		},
+		{
+			"file": "Hardware/Timer.c",
+			"encoding": "utf8"
+		}
+	]
+}
