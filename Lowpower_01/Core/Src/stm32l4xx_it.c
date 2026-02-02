@@ -220,7 +220,16 @@ void RTC_WKUP_IRQHandler(void)
 void EXTI9_5_IRQHandler(void)
 {
   /* USER CODE BEGIN EXTI9_5_IRQn 0 */
-
+  // 检查是否是ACC_INT1引脚触发的中断
+  if (__HAL_GPIO_EXTI_GET_IT(ACC_INT1_Pin) != 0x00u) {
+    // LIS3DH运动检测中断唤醒：设置全局唤醒标志
+    // 注意：中断服务程序中只设置标志，具体处理延迟到主循环，避免在中断中执行耗时操作
+    extern volatile uint8_t g_wakeup_source_acc;
+    g_wakeup_source_acc = 1;
+    
+    // 调试：EXTI中断已触发（此标志会在主循环中处理并打印详细信息）
+    // 注意：在STOP2唤醒时，串口可能还未恢复，这里无法打印
+  }
   /* USER CODE END EXTI9_5_IRQn 0 */
   HAL_GPIO_EXTI_IRQHandler(ACC_INT1_Pin);
   /* USER CODE BEGIN EXTI9_5_IRQn 1 */

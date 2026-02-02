@@ -2399,6 +2399,7 @@ uint32_t HAL_RTCEx_BKUPRead(RTC_HandleTypeDef *hrtc, uint32_t BackupRegister)
   * @}
   */
 
+
 /**
   * @}
   */

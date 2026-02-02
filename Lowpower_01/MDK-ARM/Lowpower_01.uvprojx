@@ -408,6 +408,21 @@
               <FileType>1</FileType>
               <FilePath>../Core/Src/stm32l4xx_hal_msp.c</FilePath>
             </File>
+            <File>
+              <FileName>bsp_debug.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Core\Src\bsp_debug.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_lis3dh.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Core\Src\bsp_lis3dh.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_lowpower.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Core\Src\bsp_lowpower.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

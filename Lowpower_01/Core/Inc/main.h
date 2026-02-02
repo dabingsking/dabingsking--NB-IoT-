@@ -83,6 +83,9 @@ void Error_Handler(void);
 
 /* USER CODE BEGIN Private defines */
 
+// LIS3DH唤醒标志（EXTI9_5中断服务程序设置，主循环检测）
+extern volatile uint8_t g_wakeup_source_acc;
+
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus
