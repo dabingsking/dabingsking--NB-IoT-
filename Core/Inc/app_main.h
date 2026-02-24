@@ -10,6 +10,7 @@ extern "C" {
 #endif
 
 #include <stdint.h>
+#include "bsp_lowpower.h"
 
 /* 应用状态枚举 */
 typedef enum {
@@ -21,15 +22,6 @@ typedef enum {
     APP_STATE_PRE_SLEEP,       /* 睡眠准备 */
     APP_STATE_SLEEP,           /* 进入 STOP2 */
 } APP_State_t;
-
-/* 唤醒原因枚举 */
-typedef enum {
-    WAKEUP_REASON_POWER_ON = 0, /* 首次上电 / 硬复位 */
-    WAKEUP_REASON_RTC,          /* RTC 定时唤醒 */
-    WAKEUP_REASON_ACC,          /* LIS3DH 加速度计中断唤醒 */
-    WAKEUP_REASON_HALL,         /* 霍尔传感器中断唤醒（预留） */
-    WAKEUP_REASON_UNKNOWN,      /* 未知唤醒源 */
-} WakeupReason_t;
 
 /* 传感器采集结果 */
 typedef struct {
