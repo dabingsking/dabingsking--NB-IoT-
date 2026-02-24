@@ -114,6 +114,15 @@ void LP_EnterStop2(void)
 }
 
 /**
+ * @brief  STOP2 唤醒后外设重初始化回调（弱定义，由用户在 main.c 中覆盖）
+ * @note   在 SystemClock_Config() 恢复后调用，用于重新初始化 UART/I2C 等外设
+ */
+__weak void LP_PeriphReinit_Callback(void)
+{
+    /* 默认空实现，用户在 main.c USER CODE 区域覆盖此函数 */
+}
+
+/**
  * @brief  退出STOP2模式后的恢复处理
  * @note   STOP2唤醒后的必要操作：
  *         1. 恢复系统时钟
@@ -126,15 +135,8 @@ void LP_ExitStop2(void)
     SystemClock_Config();
     HAL_Delay(2);
 
-    /* 步骤2：重新初始化外设（时钟恢复后才能正常工作） */
-    extern void MX_USART1_UART_Init(void);
-    extern void MX_USART2_UART_Init(void);
-    extern void MX_I2C1_Init(void);
-    MX_USART1_UART_Init();
-    MX_USART2_UART_Init();
-    HAL_Delay(10);
-    MX_I2C1_Init();
-    HAL_Delay(10);
+    /* 步骤2：重新初始化外设（通过回调，避免直接依赖 static MX 函数） */
+    LP_PeriphReinit_Callback();
 
     /* 步骤3：清除 STOP2 唤醒标志 */
     LP_ClearStop2WakeupFlag();

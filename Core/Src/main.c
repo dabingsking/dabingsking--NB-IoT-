@@ -71,10 +71,10 @@ UART_HandleTypeDef huart2;
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_ADC1_Init(void);
-void MX_I2C1_Init(void);
+static void MX_I2C1_Init(void);
 static void MX_RTC_Init(void);
-void MX_USART2_UART_Init(void);
-void MX_USART1_UART_Init(void);
+static void MX_USART2_UART_Init(void);
+static void MX_USART1_UART_Init(void);
 static void MX_TIM2_Init(void);
 /* USER CODE BEGIN PFP */
 
@@ -287,7 +287,7 @@ static void MX_ADC1_Init(void)
   * @param None
   * @retval None
   */
-void MX_I2C1_Init(void)
+static void MX_I2C1_Init(void)
 {
 
   /* USER CODE BEGIN I2C1_Init 0 */
@@ -371,7 +371,7 @@ static void MX_RTC_Init(void)
   * @param None
   * @retval None
   */
-void MX_USART1_UART_Init(void)
+static void MX_USART1_UART_Init(void)
 {
 
   /* USER CODE BEGIN USART1_Init 0 */
@@ -437,7 +437,7 @@ static void MX_TIM2_Init(void)
   * @param None
   * @retval None
   */
-void MX_USART2_UART_Init(void)
+static void MX_USART2_UART_Init(void)
 {
 
   /* USER CODE BEGIN USART2_Init 0 */
@@ -537,6 +537,18 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+/**
+ * @brief  STOP2 唤醒后外设重初始化（覆盖 bsp_lowpower.c 中的弱定义）
+ */
+void LP_PeriphReinit_Callback(void)
+{
+    MX_USART1_UART_Init();
+    MX_USART2_UART_Init();
+    HAL_Delay(10);
+    MX_I2C1_Init();
+    HAL_Delay(10);
+}
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {

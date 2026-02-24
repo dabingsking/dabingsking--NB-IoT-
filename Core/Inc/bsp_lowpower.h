@@ -39,6 +39,12 @@ void LP_ConfigRtcWakeupSeconds(uint32_t seconds);
 WakeupReason_t LP_IdentifyWakeupReason(void);
 
 /**
+ * @brief  STOP2 唤醒后外设重初始化回调（弱定义）
+ * @note   用户在 main.c USER CODE 区域覆盖此函数，调用 MX_USART1_UART_Init 等
+ */
+void LP_PeriphReinit_Callback(void);
+
+/**
  * @brief  进入STOP2低功耗模式
  * @retval None
  * @note   函数执行后会进入STOP2模式，程序在此处停止
