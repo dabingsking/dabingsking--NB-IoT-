@@ -20,6 +20,7 @@
 #include "bsp_power.h"
 #include "main.h"
 #include <string.h>
+#include "service_nb.h"
 
 /* ------------------------------------------------------------------ */
 /* 私有变量                                                             */
@@ -52,6 +53,13 @@ static void state_init(void)
     BSP_Debug_Printf("[APP] Init done, RTC wakeup=%lu s\r\n",
                      APP_RTC_WAKEUP_PERIOD_S);
 
+    /* 诊断：读取三轴加速度，确认轴方向（平放时哪个轴约为±1g） */
+    {
+        float ax = 0.f, ay = 0.f, az = 0.f;
+        LIS3DH_ReadAccelG(&ax, &ay, &az);
+        BSP_Debug_Printf("[LIS3DH] ax=%.3f ay=%.3f az=%.3f g\r\n", ax, ay, az);
+    }
+
     s_state = APP_STATE_PRE_SLEEP;
 }
 
@@ -67,10 +75,14 @@ static void state_wakeup_restore(void)
     s_wakeup_reason = LP_IdentifyWakeupReason();
     BSP_Debug_Printf("[APP] Wakeup reason=%d\r\n", (int)s_wakeup_reason);
 
-    /* 若为 ACC 唤醒，读取 INT1_SRC 清除锁存 */
-    if (s_wakeup_reason == WAKEUP_REASON_ACC) {
+    /* 无论何种唤醒原因，始终读取 INT1_SRC 清除 LIS3DH 锁存
+     * 若 INT1 引脚保持高电平（锁存未清除），下次进入 STOP2 会立即被唤醒 */
+    {
         uint8_t src = 0;
         LIS3DH_ReadInt1Src(&src);
+        if (src & 0x40u) {  /* IA=1 表示确实有中断事件 */
+            BSP_Debug_Printf("[APP] LIS3DH INT1_SRC=0x%02X\r\n", src);
+        }
     }
 
     /* 重新使能 EXTI */
@@ -92,12 +104,11 @@ static void state_collect_data(void)
     s_sensor.hall_state = BSP_Hall_ReadStateDebounced();
 
     {
-        float ax = 0.f, ay = 0.f, az = 0.f;
-        if (LIS3DH_ReadAccelG(&ax, &ay, &az) == HAL_OK) {
-            float mag2 = ax * ax + ay * ay + az * az;
-            /* 合加速度偏离 1g 超过 0.5g 视为异常 */
-            float diff = mag2 - 1.0f;
-            s_sensor.acc_alarm = (diff > 0.25f || diff < -0.25f) ? 1u : 0u;
+        LIS3DH_Tilt_t tilt = {0};
+        if (LIS3DH_CalcTiltAngle(&tilt) == HAL_OK) {
+            s_sensor.acc_alarm = tilt.cover_open;
+            BSP_Debug_Printf("[LIS3DH] pitch=%.1f roll=%.1f cover=%u\r\n",
+                             tilt.pitch_deg, tilt.roll_deg, tilt.cover_open);
         }
     }
 
@@ -105,19 +116,24 @@ static void state_collect_data(void)
     if (s_wakeup_reason == WAKEUP_REASON_RTC ||
         s_wakeup_reason == WAKEUP_REASON_POWER_ON) {
 
-        /* 雷达测距 */
+        /* 雷达测距：上电后等500ms让模块稳定 */
         BSP_Power_RadarOn();
-        HAL_Delay(50);
+        HAL_Delay(500);
+        uint8_t radar_pwr = HAL_GPIO_ReadPin(RADAR_PWR_CTRL_GPIO_Port, RADAR_PWR_CTRL_Pin);
+        BSP_Debug_Printf("[RADAR] PWR_CTRL pin=%u\r\n", radar_pwr);
         s_sensor.water_cm = BSP_Radar_Measure();
         BSP_Power_RadarOff();
 
-        /* MQ4 气体采集（阻塞预热） */
+        /* MQ4 气体采集（阻塞预热30s） */
         BSP_Power_GasOn();
+        BSP_Debug_Printf("[MQ4] Preheating %lu ms...\r\n", (uint32_t)BSP_MQ4_PREHEAT_MS);
         HAL_Delay(BSP_MQ4_PREHEAT_MS);
         uint16_t adc = BSP_MQ4_ReadAdcAverage(BSP_MQ4_SAMPLE_COUNT,
                                                BSP_MQ4_SAMPLE_INTERVAL_MS);
-        s_sensor.gas_ppm = BSP_MQ4_Sensor_mV_ToPpmEst(
-                               BSP_MQ4_AdcToSensor_mV(adc));
+        uint16_t sensor_mv = BSP_MQ4_AdcToSensor_mV(adc);
+        s_sensor.gas_ppm = BSP_MQ4_Sensor_mV_ToPpmEst(sensor_mv);
+        BSP_Debug_Printf("[MQ4] adc=%u sensor_mv=%u gas_ppm=%u\r\n",
+                         adc, sensor_mv, s_sensor.gas_ppm);
         BSP_Power_GasOff();
     }
 
@@ -134,7 +150,7 @@ static void state_check_anomaly(void)
 
     if (s_sensor.gas_ppm   > APP_GAS_THRESHOLD_PPM)   anomaly = 1u;
     if (s_sensor.water_cm  < APP_WATER_THRESHOLD_CM)   anomaly = 1u;
-    if (s_sensor.hall_state != 0u)                     anomaly = 1u;
+    if (s_sensor.hall_state == HALL_STATE_OPEN)         anomaly = 1u;
     if (s_sensor.acc_alarm  != 0u)                     anomaly = 1u;
 
     s_sensor.anomaly = anomaly;
@@ -151,17 +167,46 @@ static void state_check_anomaly(void)
 static void state_nb_iot_comm(void)
 {
     BSP_LED_SetRGB(0, 1, 1);
-    /* TODO: 实现 EC-01G AT + MQTT 上报 */
-    BSP_Debug_Printf("[APP] NB-IoT report placeholder\r\n");
+    NB_Status_t ret = NB_ReportData(&s_sensor);
+    if (ret != NB_OK) {
+        BSP_Debug_Printf("[APP] NB report failed: %d, will retry next wakeup\r\n",
+                         (int)ret);
+    }
     s_state = APP_STATE_PRE_SLEEP;
 }
 
 static void state_pre_sleep(void)
 {
     if (s_no_stop2) {
-        /* 调试模式：蓝灯待机，不进入 STOP2 */
+        /* 调试模式：蓝灯常亮，持续采集并打印传感器数据 */
         BSP_LED_SetRGB(0, 0, 1);
+
+        /* 霍尔 + 加速度 */
+        uint8_t hall = BSP_Hall_ReadStateDebounced();
+        LIS3DH_Tilt_t tilt = {0};
+        LIS3DH_CalcTiltAngle(&tilt);
+
+        BSP_Debug_Printf("[DEBUG] hall=%u acc_cover=%u pitch=%.1f roll=%.1f\r\n",
+                         hall, tilt.cover_open, tilt.pitch_deg, tilt.roll_deg);
+
+        /* 雷达 */
+        BSP_Power_RadarOn();
         HAL_Delay(500);
+        uint16_t water = BSP_Radar_Measure();
+        BSP_Power_RadarOff();
+        BSP_Debug_Printf("[DEBUG] water=%u cm\r\n", water);
+
+        /* MQ4 */
+        BSP_Power_GasOn();
+        HAL_Delay(500);  /* 调试模式不等30s预热，快速采样看趋势 */
+        uint16_t adc = BSP_MQ4_ReadAdcAverage(3, 100);
+        uint16_t sensor_mv = BSP_MQ4_AdcToSensor_mV(adc);
+        uint16_t gas_ppm = BSP_MQ4_Sensor_mV_ToPpmEst(sensor_mv);
+        BSP_Power_GasOff();
+        BSP_Debug_Printf("[DEBUG] adc=%u sensor_mv=%u gas_ppm=%u\r\n",
+                         adc, sensor_mv, gas_ppm);
+
+        HAL_Delay(3000);  /* 每3秒打印一次 */
         return;
     }
 
@@ -169,6 +214,14 @@ static void state_pre_sleep(void)
     BSP_Power_GasOff();
     BSP_Power_RadarOff();
     BSP_LED_AllOff();
+
+    /* 诊断：进入 STOP2 前检查 INT1 引脚电平，若为高则说明中断锁存未清除 */
+    {
+        uint8_t int1_pin = HAL_GPIO_ReadPin(ACC_INT1_GPIO_Port, ACC_INT1_Pin);
+        uint8_t int1_src = 0;
+        LIS3DH_ReadInt1Src(&int1_src);
+        BSP_Debug_Printf("[PRE_SLEEP] INT1_pin=%u INT1_SRC=%02X\r\n", int1_pin, int1_src);
+    }
 
     /* 确保 EXTI 唤醒源就绪 */
     __HAL_GPIO_EXTI_CLEAR_IT(ACC_INT1_Pin);
