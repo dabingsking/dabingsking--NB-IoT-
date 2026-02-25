@@ -25,7 +25,7 @@
 /* ------------------------------------------------------------------ */
 /* 私有变量                                                             */
 /* ------------------------------------------------------------------ */
-static char              g_rx_buf[EC01G_RX_BUF_SIZE];
+static volatile char     g_rx_buf[EC01G_RX_BUF_SIZE];
 static volatile uint16_t g_rx_len = 0;
 static int8_t            g_socket_id = -1;
 
@@ -38,7 +38,7 @@ extern UART_HandleTypeDef huart2;
 static void ClearRxBuf(void)
 {
     g_rx_len = 0;
-    memset(g_rx_buf, 0, sizeof(g_rx_buf));
+    memset((void *)g_rx_buf, 0, sizeof(g_rx_buf));
 }
 
 /**
@@ -53,12 +53,12 @@ static EC01G_Status_t SendCmd(const char *cmd, const char *expect,
 
     uint32_t start = HAL_GetTick();
     while ((HAL_GetTick() - start) < timeout_ms) {
-        if (strstr(g_rx_buf, expect) != NULL) {
+        if (strstr((const char *)g_rx_buf, expect) != NULL) {
             return EC01G_OK;
         }
     }
     BSP_Debug_Printf("[EC01G] Timeout waiting '%s', got: %s\r\n",
-                     expect, g_rx_buf);
+                     expect, (const char *)g_rx_buf);
     return EC01G_ERR_TIMEOUT;
 }
 
@@ -82,7 +82,7 @@ static void BytesToHex(const uint8_t *in, uint16_t len, char *out)
 
 void BSP_EC01G_UART_RxCallback(uint8_t byte)
 {
-    if (g_rx_len < EC01G_RX_BUF_SIZE - 1u) {
+    if (g_rx_len < EC01G_RX_BUF_SIZE - 2u) {
         g_rx_buf[g_rx_len++] = (char)byte;
         g_rx_buf[g_rx_len]   = '\0';
     }
@@ -117,12 +117,12 @@ EC01G_Status_t BSP_EC01G_CheckNetwork(void)
                           EC01G_TX_TIMEOUT_MS);
         HAL_Delay(1000);
         /* 注册状态：,1 = 本地注册，,5 = 漫游注册 */
-        if (strstr(g_rx_buf, ",1") != NULL ||
-            strstr(g_rx_buf, ",5") != NULL) {
+        if (strstr((const char *)g_rx_buf, ",1") != NULL ||
+            strstr((const char *)g_rx_buf, ",5") != NULL) {
             BSP_Debug_Printf("[EC01G] Network registered\r\n");
             return EC01G_OK;
         }
-        BSP_Debug_Printf("[EC01G] CEREG resp: %s\r\n", g_rx_buf);
+        BSP_Debug_Printf("[EC01G] CEREG resp: %s\r\n", (const char *)g_rx_buf);
     }
     BSP_Debug_Printf("[EC01G] Network registration timeout\r\n");
     return EC01G_ERR_NETWORK;
@@ -163,7 +163,7 @@ EC01G_Status_t BSP_EC01G_TCPSend(const uint8_t *data, uint16_t len)
     static char full_cmd[600];
     int prefix_len = snprintf(full_cmd, sizeof(full_cmd),
                               "AT+NSOSD=%d,%u,", g_socket_id, (unsigned)len);
-    if (prefix_len < 0 || (prefix_len + len * 2 + 2) >= (int)sizeof(full_cmd)) {
+    if (prefix_len < 0 || (prefix_len + len * 2 + 3) >= (int)sizeof(full_cmd)) {
         return EC01G_ERR_SOCKET;
     }
     BytesToHex(data, len, full_cmd + prefix_len);
