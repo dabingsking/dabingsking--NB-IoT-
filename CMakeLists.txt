@@ -45,7 +45,9 @@ add_executable(${CMAKE_PROJECT_NAME}
         Core/Src/bsp_led.c
         Core/Src/bsp_button.c
         Core/Src/bsp_radar.c
-        Core/Src/bsp_hall.c)
+        Core/Src/bsp_hall.c
+        Core/Src/bsp_ec01g.c
+        Core/Src/service_nb.c)
 
 # Add STM32CubeMX generated sources
 add_subdirectory(cmake/stm32cubemx)
