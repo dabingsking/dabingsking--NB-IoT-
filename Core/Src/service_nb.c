@@ -1,10 +1,10 @@
 /**
  * @file    service_nb.c
- * @brief   NB-IoT 服务层 - 巴法云 TCP 9501 上报实现
+ * @brief   NB-IoT 服务层 - 巴法云 TCP 8344 上报实现
  *
- * 巴法云 TCP 协议：
- *   鉴权：uid#topic#\r\n          → 服务器回复 cmd=1&res=1\r\n
- *   发布：uid#topic#msg#\r\n      → 服务器可能回复 cmd=2&res=1\r\n
+ * 巴法云 TCP 协议（key-value 格式）：
+ *   鉴权：cmd=1&uid=<uid>&topic=<topic>\r\n  → 服务器回复 cmd=1&res=1\r\n
+ *   发布：cmd=2&uid=<uid>&topic=<topic>&msg=<msg>\r\n
  */
 
 #include "service_nb.h"
@@ -20,7 +20,7 @@
 #define BEMFA_UID    "dff51e3cf58147c687884a86b88b72ea"
 #define BEMFA_TOPIC  "AKRPL60J0004"
 #define BEMFA_HOST   "bemfa.com"
-#define BEMFA_PORT   9501u
+#define BEMFA_PORT   8344u
 
 /* ------------------------------------------------------------------ */
 /* 公开函数                                                             */
@@ -53,7 +53,8 @@ NB_Status_t NB_ReportData(const SensorData_t *data)
 
     /* ---- Step 4: 鉴权（订阅） ---- */
     char auth_msg[96];
-    snprintf(auth_msg, sizeof(auth_msg), BEMFA_UID "#" BEMFA_TOPIC "#\r\n");
+    snprintf(auth_msg, sizeof(auth_msg),
+             "cmd=1&uid=" BEMFA_UID "&topic=" BEMFA_TOPIC "\r\n");
     ec_ret = BSP_EC01G_TCPSend((uint8_t *)auth_msg, (uint16_t)strlen(auth_msg));
     if (ec_ret != EC01G_OK) {
         BSP_Debug_Printf("[NB] Auth send failed\r\n");
@@ -75,7 +76,7 @@ NB_Status_t NB_ReportData(const SensorData_t *data)
 
     char pub_msg[300];
     snprintf(pub_msg, sizeof(pub_msg),
-             BEMFA_UID "#" BEMFA_TOPIC "#%s#\r\n", json_buf);
+             "cmd=2&uid=" BEMFA_UID "&topic=" BEMFA_TOPIC "&msg=%s\r\n", json_buf);
 
     ec_ret = BSP_EC01G_TCPSend((uint8_t *)pub_msg, (uint16_t)strlen(pub_msg));
     if (ec_ret != EC01G_OK) {
