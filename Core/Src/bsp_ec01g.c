@@ -191,3 +191,15 @@ EC01G_Status_t BSP_EC01G_EnablePSM(void)
     /* TAU=00000001 (2s)，Active Time=00000000 (0s) → 立即进 PSM */
     return SendCmd("AT+CPSMS=1,,,\"00000001\",\"00000000\"\r\n", "OK", 3000);
 }
+
+EC01G_Status_t BSP_EC01G_WaitResponse(const char *expect, uint32_t timeout_ms)
+{
+    uint32_t start = HAL_GetTick();
+    while ((HAL_GetTick() - start) < timeout_ms) {
+        if (strstr((const char *)g_rx_buf, expect) != NULL) {
+            return EC01G_OK;
+        }
+    }
+    BSP_Debug_Printf("[EC01G] WaitResponse timeout, expect '%s'\r\n", expect);
+    return EC01G_ERR_TIMEOUT;
+}

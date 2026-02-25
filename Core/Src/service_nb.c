@@ -61,7 +61,16 @@ NB_Status_t NB_ReportData(const SensorData_t *data)
         BSP_EC01G_TCPClose();
         return NB_ERR_SEND;
     }
-    HAL_Delay(1000);  /* 等待服务器鉴权回复 */
+    /*
+     * 等待服务器鉴权响应：
+     * EC-01G 下行数据以 +NSODR:<socket>,<len>,<HEX> 格式上报，
+     * 检测到 +NSODR: 即表示服务器已回复（cmd=1&res=1 的 hex 编码形式）。
+     */
+    if (BSP_EC01G_WaitResponse("+NSODR:", 5000) != EC01G_OK) {
+        BSP_Debug_Printf("[NB] Auth response timeout\r\n");
+        BSP_EC01G_TCPClose();
+        return NB_ERR_CONNECT;
+    }
 
     /* ---- Step 5: 组装 JSON 并发布 ---- */
     char json_buf[160];
@@ -84,7 +93,8 @@ NB_Status_t NB_ReportData(const SensorData_t *data)
         BSP_EC01G_TCPClose();
         return NB_ERR_SEND;
     }
-    HAL_Delay(500);  /* 等待发送完成 */
+    /* 等待 modem 发送完成（+NSODR: 或 500ms 超时均可继续） */
+    BSP_EC01G_WaitResponse("+NSODR:", 500);
 
     /* ---- Step 6: 关闭 TCP ---- */
     BSP_EC01G_TCPClose();

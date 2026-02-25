@@ -36,6 +36,9 @@ EC01G_Status_t BSP_EC01G_TCPClose(void);
 /* 配置 PSM 模式（AT+CPSMS），通信完成后调用 */
 EC01G_Status_t BSP_EC01G_EnablePSM(void);
 
+/* 等待 RX 缓冲出现 expect 字符串（不清缓冲），用于等待服务器下行 URC */
+EC01G_Status_t BSP_EC01G_WaitResponse(const char *expect, uint32_t timeout_ms);
+
 /* 由 USART2_IRQHandler 调用，将接收到的字节填入内部缓冲 */
 void BSP_EC01G_UART_RxCallback(uint8_t byte);
 
