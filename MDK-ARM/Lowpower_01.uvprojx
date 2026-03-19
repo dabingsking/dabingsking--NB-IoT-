@@ -454,6 +454,11 @@
               <FilePath>..\Core\Src\bsp_hall.c</FilePath>
             </File>
             <File>
+              <FileName>app_main.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Core\Src\app_main.c</FilePath>
+            </File>
+            <File>
               <FileName>bsp_ec01g.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Core\Src\bsp_ec01g.c</FilePath>
@@ -462,11 +467,6 @@
               <FileName>service_nb.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Core\Src\service_nb.c</FilePath>
-            </File>
-            <File>
-              <FileName>app_main.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Core\Src\app_main.c</FilePath>
             </File>
           </Files>
         </Group>

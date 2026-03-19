@@ -1,0 +1,32 @@
+
+
+# 编译产物
+build/
+*.o
+*.d
+*.a
+*.elf
+*.hex
+*.bin
+*.map
+*.lst
+MDK-ARM/Lowpower_01/
+MDK-ARM/startup_stm32l431xx.lst
+
+# IDE 私有文件
+.idea/
+.claude/
+*.uvguix.*
+MDK-ARM/.vscode/
+MDK-ARM/DebugConfig/
+MDK-ARM/Lowpower_01.uvoptx
+
+# CMake 生成文件
+CMakePresets.json
+cmake/
+
+# STM32CubeMX 生成文件（已纳入版本控制的 .ioc 保留，其余忽略）
+.mxproject
+
+# 调试配置
+dap.cfg

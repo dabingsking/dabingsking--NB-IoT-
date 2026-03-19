@@ -27,7 +27,7 @@ typedef enum {
 typedef struct {
     uint16_t water_cm;    /* 水位距离（cm），0xFFFF=无效 */
     uint16_t gas_ppm;     /* 气体浓度（ppm估算） */
-    uint8_t  hall_state;  /* 霍尔状态：0=关闭，1=打开 */
+    uint8_t  hall_state;  /* 霍尔状态：1=闭合（正常），0=打开（异常） */
     uint8_t  acc_alarm;   /* 加速度报警：0=正常，1=异常 */
     uint8_t  anomaly;     /* 综合异常标志 */
 } SensorData_t;
@@ -35,10 +35,13 @@ typedef struct {
 /* 异常判断阈值 */
 #define APP_GAS_THRESHOLD_PPM    1000u   /* 气体报警阈值 */
 #define APP_WATER_THRESHOLD_CM   50u     /* 水位报警阈值（低于此值报警） */
-#define APP_RTC_WAKEUP_PERIOD_S  43200u  /* RTC 唤醒周期：12小时 */
+#define APP_RTC_WAKEUP_PERIOD_S  5u  /* RTC 唤醒周期：12小时 为方便调试改为5s*/
 
 /* 应用层入口 */
 void App_Run(void);
+
+/* 运行时设置 RTC 唤醒周期（秒），下次进入 STOP2 时生效 */
+void App_SetWakeupPeriod(uint32_t seconds);
 
 #ifdef __cplusplus
 }

@@ -30,6 +30,7 @@ static WakeupReason_t s_wakeup_reason = WAKEUP_REASON_POWER_ON;
 static SensorData_t   s_sensor        = {0};
 static uint8_t        s_no_stop2      = 0;  /* 调试：禁止 STOP2 */
 static uint8_t        s_btn_init_held = 0;  /* 上电时按键是否按住 */
+static uint32_t       s_wakeup_period_s = APP_RTC_WAKEUP_PERIOD_S; /* 运行时可调唤醒周期 */
 
 /* ------------------------------------------------------------------ */
 /* 私有函数                                                             */
@@ -38,7 +39,9 @@ static uint8_t        s_btn_init_held = 0;  /* 上电时按键是否按住 */
 static void state_init(void)
 {
     /* 配置 RTC 唤醒定时器 */
-    LP_ConfigRtcWakeupSeconds(APP_RTC_WAKEUP_PERIOD_S);
+    if (LP_ConfigRtcWakeupSeconds(s_wakeup_period_s) != HAL_OK) {
+        BSP_Debug_Printf("[APP] RTC wakeup timer init failed\r\n");
+    }
 
     /* 上电安全模式：按键按住则禁止 STOP2 */
     HAL_Delay(50);
@@ -50,15 +53,7 @@ static void state_init(void)
     }
 
     BSP_LED_SetRGB(0, 0, 1);
-    BSP_Debug_Printf("[APP] Init done, RTC wakeup=%lu s\r\n",
-                     APP_RTC_WAKEUP_PERIOD_S);
-
-    /* 诊断：读取三轴加速度，确认轴方向（平放时哪个轴约为±1g） */
-    {
-        float ax = 0.f, ay = 0.f, az = 0.f;
-        LIS3DH_ReadAccelG(&ax, &ay, &az);
-        BSP_Debug_Printf("[LIS3DH] ax=%.3f ay=%.3f az=%.3f g\r\n", ax, ay, az);
-    }
+    BSP_Debug_Printf("[APP] Init done, RTC wakeup=%lu s\r\n", s_wakeup_period_s);
 
     s_state = APP_STATE_PRE_SLEEP;
 }
@@ -119,14 +114,11 @@ static void state_collect_data(void)
         /* 雷达测距：上电后等500ms让模块稳定 */
         BSP_Power_RadarOn();
         HAL_Delay(500);
-        uint8_t radar_pwr = HAL_GPIO_ReadPin(RADAR_PWR_CTRL_GPIO_Port, RADAR_PWR_CTRL_Pin);
-        BSP_Debug_Printf("[RADAR] PWR_CTRL pin=%u\r\n", radar_pwr);
         s_sensor.water_cm = BSP_Radar_Measure();
         BSP_Power_RadarOff();
 
         /* MQ4 气体采集（阻塞预热30s） */
         BSP_Power_GasOn();
-        BSP_Debug_Printf("[MQ4] Preheating %lu ms...\r\n", (uint32_t)BSP_MQ4_PREHEAT_MS);
         HAL_Delay(BSP_MQ4_PREHEAT_MS);
         uint16_t adc = BSP_MQ4_ReadAdcAverage(BSP_MQ4_SAMPLE_COUNT,
                                                BSP_MQ4_SAMPLE_INTERVAL_MS);
@@ -169,8 +161,17 @@ static void state_nb_iot_comm(void)
     BSP_LED_SetRGB(0, 1, 1);
     NB_Status_t ret = NB_ReportData(&s_sensor);
     if (ret != NB_OK) {
-        BSP_Debug_Printf("[APP] NB report failed: %d, will retry next wakeup\r\n",
-                         (int)ret);
+        BSP_Debug_Printf("[APP] NB report failed: %d, retry 1/2\r\n", (int)ret);
+        HAL_Delay(2000);
+        ret = NB_ReportData(&s_sensor);
+    }
+    if (ret != NB_OK) {
+        BSP_Debug_Printf("[APP] NB report failed: %d, retry 2/2\r\n", (int)ret);
+        HAL_Delay(2000);
+        ret = NB_ReportData(&s_sensor);
+    }
+    if (ret != NB_OK) {
+        BSP_Debug_Printf("[APP] NB report failed after 3 attempts: %d\r\n", (int)ret);
     }
     s_state = APP_STATE_PRE_SLEEP;
 }
@@ -215,20 +216,22 @@ static void state_pre_sleep(void)
     BSP_Power_RadarOff();
     BSP_LED_AllOff();
 
-    /* 诊断：进入 STOP2 前检查 INT1 引脚电平，若为高则说明中断锁存未清除 */
-    {
-        uint8_t int1_pin = HAL_GPIO_ReadPin(ACC_INT1_GPIO_Port, ACC_INT1_Pin);
-        uint8_t int1_src = 0;
-        LIS3DH_ReadInt1Src(&int1_src);
-        BSP_Debug_Printf("[PRE_SLEEP] INT1_pin=%u INT1_SRC=%02X\r\n", int1_pin, int1_src);
-    }
-
     /* 确保 EXTI 唤醒源就绪 */
     __HAL_GPIO_EXTI_CLEAR_IT(ACC_INT1_Pin);
     HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
 
     /* 清除 PWR 唤醒标志 */
     __HAL_PWR_CLEAR_FLAG(PWR_FLAG_WU);
+
+    /* 重新设置 RTC 唤醒定时器，确保进入 STOP2 前从 0 开始计数 */
+    if (LP_ConfigRtcWakeupSeconds(s_wakeup_period_s) != HAL_OK) {
+        BSP_Debug_Printf("[APP] RTC wakeup timer config failed, skip STOP2\r\n");
+        HAL_Delay(500);
+        s_state = APP_STATE_PRE_SLEEP;
+        return;
+    }
+
+    BSP_Debug_Printf("[APP] Entering STOP2, wakeup in %lu s\r\n", s_wakeup_period_s);
 
     s_state = APP_STATE_SLEEP;
 }
@@ -279,4 +282,10 @@ void App_Run(void)
         default:                       s_state = APP_STATE_PRE_SLEEP; break;
         }
     }
+}
+
+void App_SetWakeupPeriod(uint32_t seconds)
+{
+    if (seconds < 1u) seconds = 1u;
+    s_wakeup_period_s = seconds;
 }

@@ -11,8 +11,8 @@
 
 #include "bsp_lowpower.h"
 #include "main.h"
-#include "stm32l4xx_hal_pwr_ex.h"  
-#include "stm32l4xx_hal.h"  
+#include "stm32l4xx_hal_pwr_ex.h"
+#include "stm32l4xx_hal.h"
 
 extern void SystemClock_Config(void);
 
@@ -20,6 +20,18 @@ extern RTC_HandleTypeDef hrtc;
 
 #define RTC_BKP_FLAG_STOP2_WAKEUP  RTC_BKP_DR0
 #define STOP2_WAKEUP_FLAG_VALUE     (0x1234u)
+
+/* 唤醒源标志：在 EXTI 回调中由各 BSP 模块置位，ISR 执行后 EXTI 挂起位已清除
+ * 因此不能在 LP_IdentifyWakeupReason() 中再读 EXTI->PR1 */
+volatile uint8_t g_lp_acc_wakeup_flag  = 0u;
+volatile uint8_t g_lp_rtc_wakeup_flag  = 0u;
+volatile uint8_t g_lp_hall_wakeup_flag = 0u;
+
+void HAL_RTCEx_WakeUpTimerEventCallback(RTC_HandleTypeDef *hrtc)
+{
+    (void)hrtc;
+    g_lp_rtc_wakeup_flag = 1u;
+}
 
 /**
  * @brief  判断是否为STOP2唤醒
@@ -97,10 +109,9 @@ void LP_EnterStop2(void)
   // 2. EXTI中断已使能（NVIC）
   // 3. EXTI事件模式已使能（关键！）
   
-  // 使能EXTI8的事件模式（不仅仅是中断模式）
-  // STOP2唤醒需要EXTI事件，不仅仅是中断
-  // 设置EXTI->EMR1寄存器的对应位
-  EXTI->EMR1 |= (1 << 8);  
+  // 使用中断模式（IMR1）唤醒即可，不需要事件模式（EMR1）
+  // 事件模式会干扰 WFI，导致 STOP2 无法正常进入或立即被唤醒
+  EXTI->EMR1 &= ~(1u << 8u);  /* 确保 EXTI8 事件模式关闭 */
   
   // 步骤4：禁用调试模式
   // 在STOP2模式下，调试器会阻止系统进入低功耗，导致系统复位
@@ -131,14 +142,32 @@ __weak void LP_PeriphReinit_Callback(void)
  */
 void LP_ExitStop2(void)
 {
-    /* 步骤1：恢复系统时钟到 80MHz */
-    SystemClock_Config();
-    HAL_Delay(2);
+    /* STOP2 唤醒后 MSI 在 4MHz 运行，PLL 已关闭，但 RCC 配置寄存器保留。
+     * 只需重新使能 PLL 并切回，不需要全量重配置时钟。 */
 
-    /* 步骤2：重新初始化外设（通过回调，避免直接依赖 static MX 函数） */
+    /* 等待 MSI 就绪 */
+    while (__HAL_RCC_GET_FLAG(RCC_FLAG_MSIRDY) == 0U) {}
+
+    /* 重新使能 PLL（参数已保留，无需重配） */
+    __HAL_RCC_PLL_ENABLE();
+    while (__HAL_RCC_GET_FLAG(RCC_FLAG_PLLRDY) == 0U) {}
+
+    /* 80MHz 需要 4 个 Flash 等待周期 */
+    __HAL_FLASH_SET_LATENCY(FLASH_LATENCY_4);
+    while (__HAL_FLASH_GET_LATENCY() != FLASH_LATENCY_4) {}
+
+    /* 切换系统时钟到 PLL */
+    __HAL_RCC_SYSCLK_CONFIG(RCC_SYSCLKSOURCE_PLLCLK);
+    while (__HAL_RCC_GET_SYSCLK_SOURCE() != RCC_SYSCLKSOURCE_STATUS_PLLCLK) {}
+
+    /* 更新 SystemCoreClock 和 SysTick */
+    SystemCoreClockUpdate();
+    HAL_InitTick(TICK_INT_PRIORITY);
+
+    /* 重新初始化外设 */
     LP_PeriphReinit_Callback();
 
-    /* 步骤3：清除 STOP2 唤醒标志 */
+    /* 清除 STOP2 唤醒标志 */
     LP_ClearStop2WakeupFlag();
 }
 
@@ -147,30 +176,52 @@ void LP_ExitStop2(void)
  * @param  seconds  唤醒周期（秒）
  * @note   使用 RTC_WAKEUPCLOCK_CK_SPRE_16BITS（1Hz），最大 131072 秒
  */
-void LP_ConfigRtcWakeupSeconds(uint32_t seconds)
+HAL_StatusTypeDef LP_ConfigRtcWakeupSeconds(uint32_t seconds)
 {
-    HAL_RTCEx_DeactivateWakeUpTimer(&hrtc);
-    HAL_RTCEx_SetWakeUpTimer_IT(&hrtc, seconds - 1u,
-                                RTC_WAKEUPCLOCK_CK_SPRE_16BITS);
+    HAL_StatusTypeDef ret;
+
+    if (seconds == 0u) {
+        return HAL_ERROR;
+    }
+
+    HAL_PWR_EnableBkUpAccess();
+
+    ret = HAL_RTCEx_DeactivateWakeUpTimer(&hrtc);
+    if (ret != HAL_OK) {
+        HAL_PWR_DisableBkUpAccess();
+        return ret;
+    }
+
+    ret = HAL_RTCEx_SetWakeUpTimer_IT(&hrtc, seconds - 1u,
+                                      RTC_WAKEUPCLOCK_CK_SPRE_16BITS);
+    HAL_PWR_DisableBkUpAccess();
+    return ret;
 }
 
 /**
  * @brief  识别 STOP2 唤醒原因
  * @retval WakeupReason_t
+ * @note   EXTI 挂起位在 ISR 中已被 HAL_GPIO_EXTI_IRQHandler() 清除，
+ *         因此此处改为读取 volatile 标志位（由 HAL_GPIO_EXTI_Callback 置位）。
+ *         RTC WakeUp Timer 标志由硬件保持，可直接读取。
  */
 WakeupReason_t LP_IdentifyWakeupReason(void)
 {
-    /* 优先检查 RTC WakeUp Timer 标志 */
-    if (__HAL_RTC_WAKEUPTIMER_GET_FLAG(&hrtc, RTC_FLAG_WUTF) != 0) {
-        __HAL_RTC_WAKEUPTIMER_CLEAR_FLAG(&hrtc, RTC_FLAG_WUTF);
-        __HAL_RTC_WAKEUPTIMER_EXTI_CLEAR_FLAG();
+    if (g_lp_rtc_wakeup_flag != 0u) {
+        g_lp_rtc_wakeup_flag = 0u;
         return WAKEUP_REASON_RTC;
     }
 
-    /* 检查 LIS3DH INT1（PA8 = EXTI8） */
-    if (__HAL_GPIO_EXTI_GET_IT(ACC_INT1_Pin) != 0) {
-        __HAL_GPIO_EXTI_CLEAR_IT(ACC_INT1_Pin);
+    /* 检查 ACC 唤醒标志（由 HAL_GPIO_EXTI_Callback 置位） */
+    if (g_lp_acc_wakeup_flag != 0u) {
+        g_lp_acc_wakeup_flag = 0u;
         return WAKEUP_REASON_ACC;
+    }
+
+    /* 检查 HALL 唤醒标志 */
+    if (g_lp_hall_wakeup_flag != 0u) {
+        g_lp_hall_wakeup_flag = 0u;
+        return WAKEUP_REASON_HALL;
     }
 
     return WAKEUP_REASON_UNKNOWN;

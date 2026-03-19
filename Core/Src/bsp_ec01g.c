@@ -1,13 +1,13 @@
 /**
  * @file    bsp_ec01g.c
- * @brief   EC-01G NB-IoT 模块 AT 指令封装（HAL USART2）
+ * @brief   EC-01G NB-IoT 模块 AT 指令封装（ThingsCloud MQTT）
+ *
+ * 流程：复位 → AT → CPIN? → CGATT? → CSQ
+ *       → ECMTOPEN → ECMTCONN → ECMTSUB/ECMTPUB → ECMTDISC
  *
  * RX 机制：
  *   USART2_IRQHandler → BSP_EC01G_UART_RxCallback(byte)
  *   → 填入 g_rx_buf[]，SendCmd() 轮询 g_rx_buf 匹配期望字符串
- *
- * 注意事项：
- *   每次 STOP2 唤醒后需重新调用 BSP_EC01G_Init() 重开 RXNE 中断位。
  */
 
 #include "bsp_ec01g.h"
@@ -27,7 +27,6 @@
 /* ------------------------------------------------------------------ */
 static volatile char     g_rx_buf[EC01G_RX_BUF_SIZE];
 static volatile uint16_t g_rx_len = 0;
-static int8_t            g_socket_id = -1;
 
 extern UART_HandleTypeDef huart2;
 
@@ -62,20 +61,6 @@ static EC01G_Status_t SendCmd(const char *cmd, const char *expect,
     return EC01G_ERR_TIMEOUT;
 }
 
-/**
- * @brief 将字节数组转为大写 hex 字符串
- *        out 需至少 len*2+1 字节
- */
-static void BytesToHex(const uint8_t *in, uint16_t len, char *out)
-{
-    static const char hex[] = "0123456789ABCDEF";
-    for (uint16_t i = 0; i < len; i++) {
-        out[i * 2]     = hex[(in[i] >> 4) & 0x0Fu];
-        out[i * 2 + 1] = hex[in[i] & 0x0Fu];
-    }
-    out[len * 2] = '\0';
-}
-
 /* ------------------------------------------------------------------ */
 /* 公开函数                                                             */
 /* ------------------------------------------------------------------ */
@@ -88,110 +73,6 @@ void BSP_EC01G_UART_RxCallback(uint8_t byte)
     }
 }
 
-EC01G_Status_t BSP_EC01G_Init(void)
-{
-    g_socket_id = -1;
-    ClearRxBuf();
-
-    /* 使能 RXNE 中断（HAL_UART_Init 不会自动开启，NVIC 已在 MspInit 里使能） */
-    __HAL_UART_ENABLE_IT(&huart2, UART_IT_RXNE);
-
-    /* 最多重试 3 次，确认 AT 通信正常 */
-    for (int i = 0; i < 3; i++) {
-        if (SendCmd("AT\r\n", "OK", 2000) == EC01G_OK) {
-            BSP_Debug_Printf("[EC01G] Init OK\r\n");
-            return EC01G_OK;
-        }
-        HAL_Delay(500);
-    }
-    BSP_Debug_Printf("[EC01G] Init FAILED (no AT response)\r\n");
-    return EC01G_ERR_TIMEOUT;
-}
-
-EC01G_Status_t BSP_EC01G_CheckNetwork(void)
-{
-    uint32_t start = HAL_GetTick();
-    while ((HAL_GetTick() - start) < 60000u) {
-        ClearRxBuf();
-        HAL_UART_Transmit(&huart2, (uint8_t *)"AT+CEREG?\r\n", 11,
-                          EC01G_TX_TIMEOUT_MS);
-        HAL_Delay(1000);
-        /* 注册状态：,1 = 本地注册，,5 = 漫游注册 */
-        if (strstr((const char *)g_rx_buf, ",1") != NULL ||
-            strstr((const char *)g_rx_buf, ",5") != NULL) {
-            BSP_Debug_Printf("[EC01G] Network registered\r\n");
-            return EC01G_OK;
-        }
-        BSP_Debug_Printf("[EC01G] CEREG resp: %s\r\n", (const char *)g_rx_buf);
-    }
-    BSP_Debug_Printf("[EC01G] Network registration timeout\r\n");
-    return EC01G_ERR_NETWORK;
-}
-
-EC01G_Status_t BSP_EC01G_TCPOpen(const char *host, uint16_t port)
-{
-    char cmd[128];
-
-    /* 创建 TCP stream socket */
-    if (SendCmd("AT+NSOCR=\"STREAM\",6,0,1\r\n", "OK", 5000) != EC01G_OK) {
-        BSP_Debug_Printf("[EC01G] NSOCR failed\r\n");
-        return EC01G_ERR_SOCKET;
-    }
-    g_socket_id = 0;  /* EC01G 首次建 socket 返回 0 */
-
-    /* 连接到服务器 */
-    snprintf(cmd, sizeof(cmd), "AT+NSOCO=0,\"%s\",%u\r\n", host, port);
-    if (SendCmd(cmd, "OK", 10000) != EC01G_OK) {
-        BSP_Debug_Printf("[EC01G] NSOCO failed\r\n");
-        g_socket_id = -1;
-        return EC01G_ERR_SOCKET;
-    }
-
-    BSP_Debug_Printf("[EC01G] TCP connected to %s:%u\r\n", host, port);
-    return EC01G_OK;
-}
-
-EC01G_Status_t BSP_EC01G_TCPSend(const uint8_t *data, uint16_t len)
-{
-    if (g_socket_id < 0) return EC01G_ERR_SOCKET;
-    if (len == 0 || len > 256u) return EC01G_ERR_SOCKET;
-
-    /*
-     * 构建完整 AT 命令：AT+NSOSD=0,<len>,<HEX>\r\n
-     * 最大：前缀20 + 256*2 hex + 2 \r\n = 534 字节，用 600 缓冲安全
-     */
-    static char full_cmd[600];
-    int prefix_len = snprintf(full_cmd, sizeof(full_cmd),
-                              "AT+NSOSD=%d,%u,", g_socket_id, (unsigned)len);
-    if (prefix_len < 0 || (prefix_len + len * 2 + 3) >= (int)sizeof(full_cmd)) {
-        return EC01G_ERR_SOCKET;
-    }
-    BytesToHex(data, len, full_cmd + prefix_len);
-    int total = prefix_len + len * 2;
-    full_cmd[total++] = '\r';
-    full_cmd[total++] = '\n';
-    full_cmd[total]   = '\0';
-
-    return SendCmd(full_cmd, "OK", 5000);
-}
-
-EC01G_Status_t BSP_EC01G_TCPClose(void)
-{
-    if (g_socket_id < 0) return EC01G_OK;
-    char cmd[32];
-    snprintf(cmd, sizeof(cmd), "AT+NSOCL=%d\r\n", g_socket_id);
-    g_socket_id = -1;
-    /* 关闭失败不上报错误，避免影响主流程 */
-    SendCmd(cmd, "OK", 3000);
-    return EC01G_OK;
-}
-
-EC01G_Status_t BSP_EC01G_EnablePSM(void)
-{
-    /* TAU=00000001 (2s)，Active Time=00000000 (0s) → 立即进 PSM */
-    return SendCmd("AT+CPSMS=1,,,\"00000001\",\"00000000\"\r\n", "OK", 3000);
-}
-
 EC01G_Status_t BSP_EC01G_WaitResponse(const char *expect, uint32_t timeout_ms)
 {
     uint32_t start = HAL_GetTick();
@@ -200,6 +81,147 @@ EC01G_Status_t BSP_EC01G_WaitResponse(const char *expect, uint32_t timeout_ms)
             return EC01G_OK;
         }
     }
-    BSP_Debug_Printf("[EC01G] WaitResponse timeout, expect '%s'\r\n", expect);
+    BSP_Debug_Printf("[EC01G] WaitResponse timeout, expect '%s', got: [%s]\r\n",
+                     expect, (const char *)g_rx_buf);
     return EC01G_ERR_TIMEOUT;
+}
+
+EC01G_Status_t BSP_EC01G_Init(void)
+{
+    /* 使能 USART2 RXNE 中断 */
+    __HAL_UART_ENABLE_IT(&huart2, UART_IT_RXNE);
+
+    /* 复位模块：AT+ECRST */
+    if (SendCmd("AT+ECRST\r\n", "OK", 3000) != EC01G_OK) {
+        BSP_Debug_Printf("[EC01G] Reset failed\r\n");
+        return EC01G_ERR_TIMEOUT;
+    }
+    HAL_Delay(2000);  /* 等待模块重启 */
+
+    /* 验证 AT 通信：AT */
+    if (SendCmd("AT\r\n", "OK", 2000) != EC01G_OK) {
+        BSP_Debug_Printf("[EC01G] AT test failed\r\n");
+        return EC01G_ERR_TIMEOUT;
+    }
+
+    BSP_Debug_Printf("[EC01G] Init OK\r\n");
+    return EC01G_OK;
+}
+
+EC01G_Status_t BSP_EC01G_CheckSIM(void)
+{
+    /* AT+CPIN? 检查 SIM 卡状态 */
+    if (SendCmd("AT+CPIN?\r\n", "READY", 3000) != EC01G_OK) {
+        BSP_Debug_Printf("[EC01G] SIM card not ready\r\n");
+        return EC01G_ERR_NETWORK;
+    }
+
+    BSP_Debug_Printf("[EC01G] SIM card OK\r\n");
+    return EC01G_OK;
+}
+
+
+EC01G_Status_t BSP_EC01G_MQTTOpen(const char *host, uint16_t port)
+{
+    /* AT+ECMTOPEN=0,"bj-2-mqtt.iot-api.com",1883 */
+    char cmd[128];
+    snprintf(cmd, sizeof(cmd), "AT+ECMTOPEN=0,\"%s\",%u\r\n", host, port);
+
+    if (SendCmd(cmd, "OK", 10000) != EC01G_OK) {
+        BSP_Debug_Printf("[EC01G] MQTT open cmd failed\r\n");
+        return EC01G_ERR_MQTT;
+    }
+
+    /* +ECMTOPEN: 0,0 是异步 URC，MQTTConnect 发送前等待确认。 */
+    return EC01G_OK;
+}
+
+EC01G_Status_t BSP_EC01G_MQTTConnect(const char *client_id,
+                                      const char *username,
+                                      const char *password)
+{
+    /* 等待 +ECMTOPEN: 0,0 URC，确认 TCP 层建立后再发 CONN。
+     * 超时说明连接未建立，直接返回错误，不继续发 ECMTCONN。 */
+    if (BSP_EC01G_WaitResponse("+ECMTOPEN: 0,0", 30000) != EC01G_OK) {
+        BSP_Debug_Printf("[EC01G] +ECMTOPEN URC timeout, TCP not ready\r\n");
+        return EC01G_ERR_MQTT;
+    }
+
+    /* 清缓冲，防止前面积累的数据导致 +ECMTCONN URC 匹配时溢出截断 */
+    ClearRxBuf();
+
+    /* AT+ECMTCONN=0,"<client_id>","<username>","<password>" */
+    char cmd[256];
+    snprintf(cmd, sizeof(cmd),
+             "AT+ECMTCONN=0,\"%s\",\"%s\",\"%s\"\r\n",
+             client_id, username, password);
+
+    if (SendCmd(cmd, "OK", 8000) != EC01G_OK) {
+        BSP_Debug_Printf("[EC01G] MQTT connect cmd failed\r\n");
+        return EC01G_ERR_MQTT;
+    }
+
+    /* 等待 URC 确认 MQTT 握手成功：+ECMTCONN: 0,0,0（必须等） */
+    if (BSP_EC01G_WaitResponse("+ECMTCONN: 0,0,0", 15000) != EC01G_OK) {
+        BSP_Debug_Printf("[EC01G] MQTT auth timeout\r\n");
+        return EC01G_ERR_MQTT;
+    }
+
+    BSP_Debug_Printf("[EC01G] MQTT connected\r\n");
+    return EC01G_OK;
+}
+
+EC01G_Status_t BSP_EC01G_MQTTSubscribe(const char *topic, uint8_t qos)
+{
+    /* AT+ECMTSUB=0,1,"attributes/push",0 */
+    char cmd[256];
+    snprintf(cmd, sizeof(cmd),
+             "AT+ECMTSUB=0,1,\"%s\",%u\r\n", topic, qos);
+
+    if (SendCmd(cmd, "OK", 5000) != EC01G_OK) {
+        BSP_Debug_Printf("[EC01G] MQTT subscribe cmd failed\r\n");
+        return EC01G_ERR_MQTT;
+    }
+
+    /* 等待 URC 确认订阅成功：+ECMTSUB: 0,1,0
+     * 实际格式：+ECMTSUB: <client_idx>,<msgid>,<result>,<granted_qos>
+     * msgid=1（与发送命令中的固定值一致），result=0 表示成功 */
+    if (BSP_EC01G_WaitResponse("+ECMTSUB: 0,1,0", 5000) != EC01G_OK) {
+        BSP_Debug_Printf("[EC01G] MQTT subscribe timeout\r\n");
+        return EC01G_ERR_MQTT;
+    }
+
+    return EC01G_OK;
+}
+
+EC01G_Status_t BSP_EC01G_MQTTPublish(const char *topic, const char *payload)
+{
+    /* AT+ECMTPUB=0,1,0,0,"attributes","{"temperature":31.6}" */
+    char cmd[512];
+    snprintf(cmd, sizeof(cmd),
+             "AT+ECMTPUB=0,1,0,0,\"%s\",\"%s\"\r\n", topic, payload);
+
+    if (SendCmd(cmd, "OK", 5000) != EC01G_OK) {
+        BSP_Debug_Printf("[EC01G] MQTT publish cmd failed\r\n");
+        return EC01G_ERR_MQTT;
+    }
+
+    /* 等待 URC 确认发布成功：+ECMTPUB: 0,<msg_id>,<qos>（msg_id 随发布次数变化，仅匹配前缀） */
+    if (BSP_EC01G_WaitResponse("+ECMTPUB: 0,", 5000) != EC01G_OK) {
+        BSP_Debug_Printf("[EC01G] MQTT publish timeout\r\n");
+        return EC01G_ERR_MQTT;
+    }
+
+    return EC01G_OK;
+}
+
+EC01G_Status_t BSP_EC01G_MQTTDisconnect(void)
+{
+    /* AT+ECMTDISC=0 断开 MQTT 连接 */
+    SendCmd("AT+ECMTDISC=0\r\n", "OK", 3000);
+
+    /* 等待 URC 确认：+ECMTDISC: 0,0 */
+    BSP_EC01G_WaitResponse("+ECMTDISC: 0,0", 3000);
+
+    return EC01G_OK;
 }

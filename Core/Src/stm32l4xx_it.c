@@ -254,17 +254,22 @@ void USART1_IRQHandler(void)
 void USART2_IRQHandler(void)
 {
   /* USER CODE BEGIN USART2_IRQn 0 */
-  /* 先读字节填 EC01G 缓冲，再让 HAL 处理错误标志 */
   if (__HAL_UART_GET_FLAG(&huart2, UART_FLAG_RXNE)) {
       uint8_t byte = (uint8_t)(huart2.Instance->RDR & 0xFFu);
       BSP_EC01G_UART_RxCallback(byte);
   }
-  /* 清除溢出错误，防止 ORE 引起中断死循环 */
+  /* 清除错误标志 */
   if (__HAL_UART_GET_FLAG(&huart2, UART_FLAG_ORE)) {
       __HAL_UART_CLEAR_OREFLAG(&huart2);
   }
+  if (__HAL_UART_GET_FLAG(&huart2, UART_FLAG_NE)) {
+      __HAL_UART_CLEAR_NEFLAG(&huart2);
+  }
+  if (__HAL_UART_GET_FLAG(&huart2, UART_FLAG_FE)) {
+      __HAL_UART_CLEAR_FEFLAG(&huart2);
+  }
   /* USER CODE END USART2_IRQn 0 */
-  HAL_UART_IRQHandler(&huart2);
+  /* HAL_UART_IRQHandler 已移除：RDR 由上方手动读取，HAL 介入会关闭 RXNEIE */
   /* USER CODE BEGIN USART2_IRQn 1 */
 
   /* USER CODE END USART2_IRQn 1 */

@@ -545,13 +545,28 @@ void LP_PeriphReinit_Callback(void)
 {
     MX_USART1_UART_Init();
     MX_USART2_UART_Init();
+    /* 等待 USART2 线路稳定，丢弃唤醒瞬间的噪声帧 */
+    HAL_Delay(100);
+    /* 清除 USART2 错误标志和接收缓冲 */
+    __HAL_UART_CLEAR_FEFLAG(&huart2);
+    __HAL_UART_CLEAR_NEFLAG(&huart2);
+    __HAL_UART_CLEAR_OREFLAG(&huart2);
+    /* 读空 RDR，防止残留数据触发中断 */
+    volatile uint32_t dummy = USART2->RDR;
+    (void)dummy;
     HAL_Delay(10);
     MX_I2C1_Init();
     HAL_Delay(10);
+    MX_TIM2_Init();
+    HAL_TIM_Base_Start(&htim2);
 }
 
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
+  // ACC INT1 唤醒标志（EXTI 挂起位已被 HAL ISR 清除，用软件标志记录）
+  if (GPIO_Pin == ACC_INT1_Pin) {
+    g_lp_acc_wakeup_flag = 1u;
+  }
   // 转发给雷达模块
   BSP_Radar_EXTI_Callback(GPIO_Pin);
 }

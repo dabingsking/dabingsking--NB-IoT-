@@ -1,10 +1,13 @@
 /**
  * @file    service_nb.c
- * @brief   NB-IoT 服务层 - 巴法云 TCP 8344 上报实现
+ * @brief   NB-IoT 服务层 - ThingsCloud MQTT 上报实现
  *
- * 巴法云 TCP 协议（key-value 格式）：
- *   鉴权：cmd=1&uid=<uid>&topic=<topic>\r\n  → 服务器回复 cmd=1&res=1\r\n
- *   发布：cmd=2&uid=<uid>&topic=<topic>&msg=<msg>\r\n
+ * ThingsCloud MQTT 协议：
+ *   服务器：bj-2-mqtt.iot-api.com:1883
+ *   认证：clientId="thingscloud", username=<AccessToken>, password=<ProjectKey>
+ *   发布主题：attributes
+ *   订阅主题：attributes/push (接收响应)
+ *   JSON格式：{"temperature":31.6} 或 {"level":85.5,"concentration":12.3}
  */
 
 #include "service_nb.h"
@@ -12,15 +15,14 @@
 #include "bsp_debug.h"
 #include <stdio.h>
 #include <string.h>
-#include "stm32l4xx_hal.h"
 
 /* ------------------------------------------------------------------ */
-/* 巴法云接入参数                                                        */
+/* ThingsCloud 接入参数（从流程文档）                                    */
 /* ------------------------------------------------------------------ */
-#define BEMFA_UID    "dff51e3cf58147c687884a86b88b72ea"
-#define BEMFA_TOPIC  "AKRPL60J0004"
-#define BEMFA_HOST   "bemfa.com"
-#define BEMFA_PORT   8344u
+#define THINGSCLOUD_HOST   "bj-2-mqtt.iot-api.com"
+#define THINGSCLOUD_PORT   1883u
+#define THINGSCLOUD_TOKEN  "saax9ry2ytlahvmp"  /* AccessToken */
+#define THINGSCLOUD_KEY    "HpXvAsqbPE"        /* ProjectKey */
 
 /* ------------------------------------------------------------------ */
 /* 公开函数                                                             */
@@ -30,78 +32,88 @@ NB_Status_t NB_ReportData(const SensorData_t *data)
 {
     EC01G_Status_t ec_ret;
 
-    /* ---- Step 1: AT 通信验证 ---- */
+    /* ---- Step 1: 初始化（复位 + AT 验证） ---- */
     ec_ret = BSP_EC01G_Init();
     if (ec_ret != EC01G_OK) {
         BSP_Debug_Printf("[NB] EC01G init failed: %d\r\n", (int)ec_ret);
         return NB_ERR_NETWORK;
     }
 
-    /* ---- Step 2: 网络注册检查 ---- */
-    ec_ret = BSP_EC01G_CheckNetwork();
+    /* ---- Step 2: 检查 SIM 卡 ---- */
+    ec_ret = BSP_EC01G_CheckSIM();
     if (ec_ret != EC01G_OK) {
-        BSP_Debug_Printf("[NB] Network not registered\r\n");
+        BSP_Debug_Printf("[NB] SIM check failed\r\n");
         return NB_ERR_NETWORK;
     }
 
-    /* ---- Step 3: TCP 连接 ---- */
-    ec_ret = BSP_EC01G_TCPOpen(BEMFA_HOST, BEMFA_PORT);
+    /* ---- Step 2.5: 等待网络注册完成 (+CREG: 6) ---- */
+    /* EC01G 必须收到 +CREG: 6（NB-IoT 附着成功）后才能建立 TCP 连接，
+     * 否则 AT+ECMTOPEN 返回 +CME ERROR: 3（操作不允许）。
+     * WaitResponse 不清缓冲，直接轮询已有数据及后续 URC。 */
+    ec_ret = BSP_EC01G_WaitResponse("+CREG: 6", 60000);
     if (ec_ret != EC01G_OK) {
-        BSP_Debug_Printf("[NB] TCP connect failed: %d\r\n", (int)ec_ret);
+        BSP_Debug_Printf("[NB] Network registration timeout (+CREG: 6 not seen)\r\n");
+        return NB_ERR_NETWORK;
+    }
+    BSP_Debug_Printf("[NB] Network registered\r\n");
+
+    /* ---- Step 3: 建立 MQTT TCP 连接 ---- */
+    ec_ret = BSP_EC01G_MQTTOpen(THINGSCLOUD_HOST, THINGSCLOUD_PORT);
+    if (ec_ret != EC01G_OK) {
+        BSP_Debug_Printf("[NB] MQTT open failed\r\n");
         return NB_ERR_CONNECT;
     }
 
-    /* ---- Step 4: 鉴权（订阅） ---- */
-    char auth_msg[96];
-    snprintf(auth_msg, sizeof(auth_msg),
-             "cmd=1&uid=" BEMFA_UID "&topic=" BEMFA_TOPIC "\r\n");
-    ec_ret = BSP_EC01G_TCPSend((uint8_t *)auth_msg, (uint16_t)strlen(auth_msg));
+    /* ---- Step 4: MQTT 认证连接 ---- */
+    ec_ret = BSP_EC01G_MQTTConnect("thingscloud",
+                                    THINGSCLOUD_TOKEN,
+                                    THINGSCLOUD_KEY);
     if (ec_ret != EC01G_OK) {
-        BSP_Debug_Printf("[NB] Auth send failed\r\n");
-        BSP_EC01G_TCPClose();
-        return NB_ERR_SEND;
-    }
-    /*
-     * 等待服务器鉴权响应：
-     * EC-01G 下行数据以 +NSODR:<socket>,<len>,<HEX> 格式上报，
-     * 检测到 +NSODR: 即表示服务器已回复（cmd=1&res=1 的 hex 编码形式）。
-     */
-    if (BSP_EC01G_WaitResponse("+NSODR:", 5000) != EC01G_OK) {
-        BSP_Debug_Printf("[NB] Auth response timeout\r\n");
-        BSP_EC01G_TCPClose();
+        BSP_Debug_Printf("[NB] MQTT connect failed\r\n");
+        BSP_EC01G_MQTTDisconnect();
         return NB_ERR_CONNECT;
     }
 
-    /* ---- Step 5: 组装 JSON 并发布 ---- */
-    char json_buf[160];
-    snprintf(json_buf, sizeof(json_buf),
-             "{\"gas\":%u,\"water\":%u,\"hall\":%u,"
-             "\"acc_alarm\":%u,\"anomaly\":%u}",
-             (unsigned)data->gas_ppm,
-             (unsigned)data->water_cm,
-             (unsigned)data->hall_state,
-             (unsigned)data->acc_alarm,
-             (unsigned)data->anomaly);
-
-    char pub_msg[300];
-    snprintf(pub_msg, sizeof(pub_msg),
-             "cmd=2&uid=" BEMFA_UID "&topic=" BEMFA_TOPIC "&msg=%s\r\n", json_buf);
-
-    ec_ret = BSP_EC01G_TCPSend((uint8_t *)pub_msg, (uint16_t)strlen(pub_msg));
+    /* ---- Step 5: 订阅响应主题 ---- */
+    ec_ret = BSP_EC01G_MQTTSubscribe("attributes/push", 0);
     if (ec_ret != EC01G_OK) {
-        BSP_Debug_Printf("[NB] Data send failed\r\n");
-        BSP_EC01G_TCPClose();
+        BSP_Debug_Printf("[NB] MQTT subscribe failed\r\n");
+        BSP_EC01G_MQTTDisconnect();
         return NB_ERR_SEND;
     }
-    /* 等待 modem 发送完成（+NSODR: 或 500ms 超时均可继续） */
-    BSP_EC01G_WaitResponse("+NSODR:", 500);
 
-    /* ---- Step 6: 关闭 TCP ---- */
-    BSP_EC01G_TCPClose();
+    /* ---- Step 6: 组装 JSON 并发布到 attributes 主题 ---- */
+    /* water_cm == 0xFFFF 表示雷达无效，上报 -1 让云平台识别 */
+    char json_buf[256];
+    if (data->water_cm == 0xFFFFu) {
+        snprintf(json_buf, sizeof(json_buf),
+                 "{\"water_level\":-1,\"gas_ppm\":%u,\"hall_state\":%u,"
+                 "\"acc_alarm\":%u,\"anomaly\":%u}",
+                 (unsigned)data->gas_ppm,
+                 (unsigned)data->hall_state,
+                 (unsigned)data->acc_alarm,
+                 (unsigned)data->anomaly);
+    } else {
+        snprintf(json_buf, sizeof(json_buf),
+                 "{\"water_level\":%u,\"gas_ppm\":%u,\"hall_state\":%u,"
+                 "\"acc_alarm\":%u,\"anomaly\":%u}",
+                 (unsigned)data->water_cm,
+                 (unsigned)data->gas_ppm,
+                 (unsigned)data->hall_state,
+                 (unsigned)data->acc_alarm,
+                 (unsigned)data->anomaly);
+    }
 
-    /* ---- Step 7: PSM ---- */
-    BSP_EC01G_EnablePSM();
+    ec_ret = BSP_EC01G_MQTTPublish("attributes", json_buf);
+    if (ec_ret != EC01G_OK) {
+        BSP_Debug_Printf("[NB] MQTT publish failed\r\n");
+        BSP_EC01G_MQTTDisconnect();
+        return NB_ERR_SEND;
+    }
 
-    BSP_Debug_Printf("[NB] Report OK: %s\r\n", json_buf);
+    /* ---- Step 7: 断开 MQTT 连接 ---- */
+    BSP_EC01G_MQTTDisconnect();
+
+    BSP_Debug_Printf("[NB] ThingsCloud report OK: %s\r\n", json_buf);
     return NB_OK;
 }

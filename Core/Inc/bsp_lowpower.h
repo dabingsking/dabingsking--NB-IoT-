@@ -29,7 +29,7 @@ typedef enum {
  * @brief  配置 RTC WakeUp Timer
  * @param  seconds  唤醒周期（秒），最大 131072
  */
-void LP_ConfigRtcWakeupSeconds(uint32_t seconds);
+HAL_StatusTypeDef LP_ConfigRtcWakeupSeconds(uint32_t seconds);
 
 /**
  * @brief  STOP2 唤醒后识别唤醒原因
@@ -78,6 +78,13 @@ void LP_ClearStop2WakeupFlag(void);
  * @retval None
  */
 void LP_SetStop2WakeupFlag(void);
+
+/* 唤醒源软件标志（在 HAL_GPIO_EXTI_Callback 中由对应 BSP 模块置位）
+ * 因为 HAL_GPIO_EXTI_IRQHandler() 在 ISR 中已清除 EXTI 挂起位，
+ * LP_IdentifyWakeupReason() 无法再读 EXTI->PR1，改用这两个标志。 */
+extern volatile uint8_t g_lp_acc_wakeup_flag;
+extern volatile uint8_t g_lp_rtc_wakeup_flag;
+extern volatile uint8_t g_lp_hall_wakeup_flag;
 
 #ifdef __cplusplus
 }
